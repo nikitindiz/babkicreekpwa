@@ -1,0 +1,51 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  color: var(--source-color);
+  min-width: 150px;
+}
+
+.editButton {
+  cursor: pointer;
+  font-size: 14px;
+  display: block;
+  text-align: center;
+  position: relative;
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  padding: 1em;
+}
+
+.value {
+  font-size: 1.2em;
+  margin-bottom: 0.5em;
+}
+
+.arrow {
+  position: relative;
+  width: 12px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-bottom: 23px;
+}
+
+.arrowPath {
+  margin: 0 auto;
+  background-color: var(--source-color);
+  height: 100%;
+  width: 2px;
+}
+
+.arrowTip {
+  width: 100%;
+  position: absolute;
+  bottom: -22px;
+
+  polygon {
+    fill: var(--source-color);
+  }
+}

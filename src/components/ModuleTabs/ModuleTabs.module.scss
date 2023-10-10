@@ -1,0 +1,23 @@
+.container {
+  width: 100%;
+}
+
+.tabs {
+  display: flex;
+  gap: 1em;
+}
+
+.singleTab {
+  border: none;
+  padding: 0.5em 0.5em;
+  border-radius: 0.5em;
+  width: 50%;
+  cursor: pointer;
+  &_active {
+    background-color: var(--active-tab);
+  }
+}
+
+.content {
+  padding: 1em 0 0;
+}

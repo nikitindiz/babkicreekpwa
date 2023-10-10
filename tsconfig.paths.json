@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "types": ["src/types"],
+      "types/*": ["src/types/*"],
+      "models": ["src/models"],
+      "models/*": ["src/models/*"],
+      "context": ["src/context"],
+      "context/*": ["src/context/*"],
+      "store": ["src/store"],
+      "store/*": ["src/store/*"],
+      "utils": ["src/utils"],
+      "utils/*": ["src/utils/*"],
+      "components": ["src/components"],
+      "components/*": ["src/components/*"],
+      "containers": ["src/containers"],
+      "containers/*": ["src/containers/*"],
+    }
+  }
+}

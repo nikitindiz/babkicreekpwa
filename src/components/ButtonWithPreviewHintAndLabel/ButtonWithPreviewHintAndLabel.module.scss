@@ -1,0 +1,29 @@
+.container {
+  border: none;
+  background-color: transparent;
+  margin-bottom: var(--font-size-button-children);
+  text-align: left;
+  cursor: pointer;
+  padding: 0;
+
+  &:hover:not(&_disabled) {
+    opacity: 0.5;
+  }
+
+  &_disabled {
+    color: inherit;
+  }
+}
+
+.label,
+.children {
+  display: block;
+}
+
+.children {
+  font-size: var(--font-size-button-children);
+}
+
+.hint {
+  display: none;
+}

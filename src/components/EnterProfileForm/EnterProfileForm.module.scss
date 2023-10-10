@@ -1,0 +1,54 @@
+.header {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  margin: 1em 0;
+}
+
+.label {
+  margin: 0 40px 0 0;
+  width: 100%;
+}
+
+.hint {
+  font-size: 0.8em;
+  opacity: 0.8;
+  margin: 0 0 2em;
+}
+
+.fields {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.backButton {
+  width: 40px;
+  background-color: transparent;
+  padding: 0.5em 0.8em;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.fieldLabel {
+  font-size: 0.8em;
+  flex-shrink: 0;
+  margin: 0 auto 1em 0;
+}
+
+.password {
+  margin-bottom: 0.8em;
+}
+
+.enterButton {
+  text-align: center;
+}
+
+.enterButton,
+.password {
+  width: 100%;
+  font-size: 1.5em;
+}

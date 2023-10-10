@@ -1,3 +1,54 @@
+:root {
+  --drain-color: #dc2525;
+  --source-color: #407340;
+
+  --neutral-dark-color: #3a3a3a;
+  --neutral-light-color: #a6a6a6;
+  --light-grey: #eeeeee;
+
+  --timestamp-size: 27px;
+
+  --top-nav-size: 35px;
+
+  --w-spacing: 40px;
+  --h-spacing: 40px;
+
+  --modal-header-height: 40px;
+  --modal-footer-height: 60px;
+
+  --active-tab: #69a7e0;
+  --main-trigger: #184b73;
+  --alt-trigger: #435b73;
+
+  --font-size-base: 18px;
+  --font-size-button-children: 2em;
+  --font-size-label: 0.8em;
+
+  --day-chart-background: rgba(71, 107, 225, 0.2);
+  --day-chart-right-border: black;
+
+  --baseline-color: rgba(0,0,0,0.1);
+
+  --lock-screen-gradient: linear-gradient(white 0%, white 100%),
+                          linear-gradient(177deg, #091f00 20%, white 100%),
+                          linear-gradient(31deg, #1b2f00 20%, #abff40 100%),
+                          linear-gradient(-23deg, #2f0019 28%, #ff346c 100%);
+
+  --lock-scree-input-label-size: 0.7em;
+}
+
+.rdp {
+  --rdp-cell-size: 2.9em; /* Size of the day cells. */
+  --rdp-caption-font-size: 1.4em; /* Font size for the caption labels. */
+  --rdp-accent-color: var(--main-trigger); /* Accent color for the background of selected days. */
+  --rdp-background-color: #e7edff; /* Background color for the hovered/focused elements. */
+  --rdp-accent-color-dark: #3003e1; /* Accent color for the background of selected days (to use in dark-mode). */
+  --rdp-background-color-dark: #180270; /* Background color for the hovered/focused elements (to use in dark-mode). */
+  --rdp-outline: 2px solid var(--rdp-accent-color); /* Outline border for focused elements */
+  --rdp-outline-selected: 3px solid var(--rdp-accent-color); /* Outline border for focused _and_ selected elements */
+  --rdp-selected-color: #fff; /* Color of selected day text */
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +56,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: black;
+}
+
+body * {
+  box-sizing: border-box;
+  font-size: var(--font-size-base);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+

@@ -1,0 +1,16 @@
+.container {
+  display: block;
+  margin: 0 auto 0.7em;
+  text-align: left;
+}
+
+.caption {
+  display: block;
+  font-size: var(--lock-scree-input-label-size);
+}
+
+.input {
+  display: block;
+  width: 100%;
+  padding: 0.2em;
+}

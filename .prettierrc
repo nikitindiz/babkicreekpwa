@@ -1,0 +1,23 @@
+{
+  "arrowParens": "always",
+  "bracketSpacing": true,
+  "endOfLine": "auto",
+  "htmlWhitespaceSensitivity": "css",
+  "jsxBracketSameLine": true,
+  "jsxSingleQuote": false,
+  "printWidth": 100,
+  "proseWrap": "preserve",
+  "quoteProps": "as-needed",
+  "semi": true,
+  "singleQuote": true,
+  "stylelintIntegration": false,
+  "tabWidth": 2,
+  "trailingComma": "all",
+  "useTabs": false,
+  "importOrder": [
+    "(^(api|data|locales|modules|shared|store)/(.*)$)|api|data|locales|modules|shared|store",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
+}

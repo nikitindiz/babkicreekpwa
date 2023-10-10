@@ -1,0 +1,1974 @@
+{
+  "days": [
+    {
+      "id": 1,
+      "createdAt": "2023-10-13T11:53:36.693Z",
+      "updatedAt": "2023-10-13T11:53:36.693Z",
+      "date": "2023-10-12T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": null,
+      "drains": [],
+      "sources": []
+    },
+    {
+      "id": 2,
+      "createdAt": "2023-10-13T11:53:36.900Z",
+      "updatedAt": "2023-10-13T11:53:37.496Z",
+      "date": "2023-10-13T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 2000,
+      "drains": [],
+      "sources": [
+        {
+          "id": 1,
+          "createdAt": "2023-10-13T11:53:36.491Z",
+          "updatedAt": "2023-10-13T11:53:36.491Z",
+          "commentary": "Остаток",
+          "incomes": 2000,
+          "otherDaySettings": {
+            "id": 1,
+            "repeatable": false,
+            "repeatableType": "monthly",
+            "schedule": {
+              "id": 1,
+              "monday": false,
+              "tuesday": false,
+              "wednesday": false,
+              "thursday": false,
+              "friday": false,
+              "saturday": false,
+              "sunday": false
+            }
+          },
+          "sourceScheduleMeta": [
+            {
+              "id": 1,
+              "createdAt": "2023-10-13T11:53:36.603Z",
+              "updatedAt": "2023-10-13T11:53:36.603Z",
+              "repeat_start": 1697227200,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "createdAt": "2023-10-13T11:53:37.878Z",
+      "updatedAt": "2023-10-13T11:54:02.523Z",
+      "date": "2023-10-14T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 1850,
+      "drains": [
+        {
+          "id": 1,
+          "createdAt": "2023-10-13T11:54:02.257Z",
+          "updatedAt": "2023-10-13T11:54:02.257Z",
+          "commentary": "Покупка ",
+          "expenses": 150,
+          "otherDaySettings": {
+            "id": 1,
+            "repeatable": false,
+            "repeatableType": "monthly",
+            "schedule": {
+              "id": 1,
+              "monday": false,
+              "tuesday": false,
+              "wednesday": false,
+              "thursday": false,
+              "friday": false,
+              "saturday": false,
+              "sunday": false
+            }
+          },
+          "drainScheduleMeta": [
+            {
+              "id": 1,
+              "createdAt": "2023-10-13T11:54:02.334Z",
+              "updatedAt": "2023-10-13T11:54:02.334Z",
+              "repeat_start": 1697313600,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": null
+            }
+          ]
+        }
+      ],
+      "sources": []
+    },
+    {
+      "id": 4,
+      "createdAt": "2023-10-13T11:53:37.960Z",
+      "updatedAt": "2023-10-13T11:54:57.395Z",
+      "date": "2023-10-15T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 7800,
+      "drains": [
+        {
+          "id": 2,
+          "createdAt": "2023-10-13T11:54:56.028Z",
+          "updatedAt": "2023-10-13T11:54:56.028Z",
+          "commentary": "Расход еженедельно ",
+          "expenses": 50,
+          "otherDaySettings": {
+            "id": 2,
+            "repeatable": true,
+            "repeatableType": "weekly",
+            "schedule": {
+              "id": 2,
+              "monday": true,
+              "tuesday": true,
+              "wednesday": false,
+              "thursday": true,
+              "friday": true,
+              "saturday": false,
+              "sunday": false
+            }
+          },
+          "drainScheduleMeta": [
+            {
+              "id": 2,
+              "createdAt": "2023-10-13T11:54:56.143Z",
+              "updatedAt": "2023-10-13T11:54:56.143Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": null
+            },
+            {
+              "id": 3,
+              "createdAt": "2023-10-13T11:54:56.203Z",
+              "updatedAt": "2023-10-13T11:54:56.203Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 1
+            },
+            {
+              "id": 4,
+              "createdAt": "2023-10-13T11:54:56.258Z",
+              "updatedAt": "2023-10-13T11:54:56.258Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 2
+            },
+            {
+              "id": 5,
+              "createdAt": "2023-10-13T11:54:56.314Z",
+              "updatedAt": "2023-10-13T11:54:56.314Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 4
+            },
+            {
+              "id": 6,
+              "createdAt": "2023-10-13T11:54:56.558Z",
+              "updatedAt": "2023-10-13T11:54:56.558Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 5
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": 2,
+          "createdAt": "2023-10-13T11:54:26.314Z",
+          "updatedAt": "2023-10-13T11:54:26.314Z",
+          "commentary": "Зп",
+          "incomes": 6000,
+          "otherDaySettings": {
+            "id": 2,
+            "repeatable": true,
+            "repeatableType": "monthly",
+            "schedule": {
+              "id": 2,
+              "monday": false,
+              "tuesday": false,
+              "wednesday": false,
+              "thursday": false,
+              "friday": false,
+              "saturday": false,
+              "sunday": false
+            }
+          },
+          "sourceScheduleMeta": [
+            {
+              "id": 2,
+              "createdAt": "2023-10-13T11:54:26.404Z",
+              "updatedAt": "2023-10-13T11:54:26.404Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": null
+            },
+            {
+              "id": 3,
+              "createdAt": "2023-10-13T11:54:26.464Z",
+              "updatedAt": "2023-10-13T11:54:26.464Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": 16,
+              "repeat_weekday": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "createdAt": "2023-10-13T11:53:38.069Z",
+      "updatedAt": "2023-10-13T11:54:57.523Z",
+      "date": "2023-10-16T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 7750,
+      "drains": [
+        {
+          "id": 2,
+          "createdAt": "2023-10-13T11:54:56.028Z",
+          "updatedAt": "2023-10-13T11:54:56.028Z",
+          "commentary": "Расход еженедельно ",
+          "expenses": 50,
+          "otherDaySettings": {
+            "id": 2,
+            "repeatable": true,
+            "repeatableType": "weekly",
+            "schedule": {
+              "id": 2,
+              "monday": true,
+              "tuesday": true,
+              "wednesday": false,
+              "thursday": true,
+              "friday": true,
+              "saturday": false,
+              "sunday": false
+            }
+          },
+          "drainScheduleMeta": [
+            {
+              "id": 2,
+              "createdAt": "2023-10-13T11:54:56.143Z",
+              "updatedAt": "2023-10-13T11:54:56.143Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": null
+            },
+            {
+              "id": 3,
+              "createdAt": "2023-10-13T11:54:56.203Z",
+              "updatedAt": "2023-10-13T11:54:56.203Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 1
+            },
+            {
+              "id": 4,
+              "createdAt": "2023-10-13T11:54:56.258Z",
+              "updatedAt": "2023-10-13T11:54:56.258Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 2
+            },
+            {
+              "id": 5,
+              "createdAt": "2023-10-13T11:54:56.314Z",
+              "updatedAt": "2023-10-13T11:54:56.314Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 4
+            },
+            {
+              "id": 6,
+              "createdAt": "2023-10-13T11:54:56.558Z",
+              "updatedAt": "2023-10-13T11:54:56.558Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 5
+            }
+          ]
+        }
+      ],
+      "sources": []
+    },
+    {
+      "id": 6,
+      "createdAt": "2023-10-13T11:53:38.171Z",
+      "updatedAt": "2023-10-13T11:54:57.606Z",
+      "date": "2023-10-17T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 7750,
+      "drains": [],
+      "sources": []
+    },
+    {
+      "id": 7,
+      "createdAt": "2023-10-13T11:53:38.267Z",
+      "updatedAt": "2023-10-13T11:54:57.689Z",
+      "date": "2023-10-18T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 7700,
+      "drains": [
+        {
+          "id": 2,
+          "createdAt": "2023-10-13T11:54:56.028Z",
+          "updatedAt": "2023-10-13T11:54:56.028Z",
+          "commentary": "Расход еженедельно ",
+          "expenses": 50,
+          "otherDaySettings": {
+            "id": 2,
+            "repeatable": true,
+            "repeatableType": "weekly",
+            "schedule": {
+              "id": 2,
+              "monday": true,
+              "tuesday": true,
+              "wednesday": false,
+              "thursday": true,
+              "friday": true,
+              "saturday": false,
+              "sunday": false
+            }
+          },
+          "drainScheduleMeta": [
+            {
+              "id": 2,
+              "createdAt": "2023-10-13T11:54:56.143Z",
+              "updatedAt": "2023-10-13T11:54:56.143Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": null
+            },
+            {
+              "id": 3,
+              "createdAt": "2023-10-13T11:54:56.203Z",
+              "updatedAt": "2023-10-13T11:54:56.203Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 1
+            },
+            {
+              "id": 4,
+              "createdAt": "2023-10-13T11:54:56.258Z",
+              "updatedAt": "2023-10-13T11:54:56.258Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 2
+            },
+            {
+              "id": 5,
+              "createdAt": "2023-10-13T11:54:56.314Z",
+              "updatedAt": "2023-10-13T11:54:56.314Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 4
+            },
+            {
+              "id": 6,
+              "createdAt": "2023-10-13T11:54:56.558Z",
+              "updatedAt": "2023-10-13T11:54:56.558Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 5
+            }
+          ]
+        }
+      ],
+      "sources": []
+    },
+    {
+      "id": 8,
+      "createdAt": "2023-10-13T11:53:38.341Z",
+      "updatedAt": "2023-10-13T11:54:57.810Z",
+      "date": "2023-10-19T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 7650,
+      "drains": [
+        {
+          "id": 2,
+          "createdAt": "2023-10-13T11:54:56.028Z",
+          "updatedAt": "2023-10-13T11:54:56.028Z",
+          "commentary": "Расход еженедельно ",
+          "expenses": 50,
+          "otherDaySettings": {
+            "id": 2,
+            "repeatable": true,
+            "repeatableType": "weekly",
+            "schedule": {
+              "id": 2,
+              "monday": true,
+              "tuesday": true,
+              "wednesday": false,
+              "thursday": true,
+              "friday": true,
+              "saturday": false,
+              "sunday": false
+            }
+          },
+          "drainScheduleMeta": [
+            {
+              "id": 2,
+              "createdAt": "2023-10-13T11:54:56.143Z",
+              "updatedAt": "2023-10-13T11:54:56.143Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": null
+            },
+            {
+              "id": 3,
+              "createdAt": "2023-10-13T11:54:56.203Z",
+              "updatedAt": "2023-10-13T11:54:56.203Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 1
+            },
+            {
+              "id": 4,
+              "createdAt": "2023-10-13T11:54:56.258Z",
+              "updatedAt": "2023-10-13T11:54:56.258Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 2
+            },
+            {
+              "id": 5,
+              "createdAt": "2023-10-13T11:54:56.314Z",
+              "updatedAt": "2023-10-13T11:54:56.314Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 4
+            },
+            {
+              "id": 6,
+              "createdAt": "2023-10-13T11:54:56.558Z",
+              "updatedAt": "2023-10-13T11:54:56.558Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 5
+            }
+          ]
+        }
+      ],
+      "sources": []
+    },
+    {
+      "id": 9,
+      "createdAt": "2023-10-13T11:53:38.448Z",
+      "updatedAt": "2023-10-13T11:55:24.114Z",
+      "date": "2023-10-20T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 4650,
+      "drains": [
+        {
+          "id": 3,
+          "createdAt": "2023-10-13T11:55:23.558Z",
+          "updatedAt": "2023-10-13T11:55:23.558Z",
+          "commentary": "Расход ежемесячно ",
+          "expenses": 3000,
+          "otherDaySettings": {
+            "id": 3,
+            "repeatable": true,
+            "repeatableType": "monthly",
+            "schedule": {
+              "id": 3,
+              "monday": false,
+              "tuesday": false,
+              "wednesday": false,
+              "thursday": false,
+              "friday": false,
+              "saturday": false,
+              "sunday": false
+            }
+          },
+          "drainScheduleMeta": [
+            {
+              "id": 7,
+              "createdAt": "2023-10-13T11:55:23.636Z",
+              "updatedAt": "2023-10-13T11:55:23.636Z",
+              "repeat_start": 1697832000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": null
+            },
+            {
+              "id": 8,
+              "createdAt": "2023-10-13T11:55:23.699Z",
+              "updatedAt": "2023-10-13T11:55:23.699Z",
+              "repeat_start": 1697832000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": 21,
+              "repeat_weekday": null
+            }
+          ]
+        }
+      ],
+      "sources": []
+    },
+    {
+      "id": 10,
+      "createdAt": "2023-10-13T11:53:38.553Z",
+      "updatedAt": "2023-10-13T11:55:24.630Z",
+      "date": "2023-10-21T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 4650,
+      "drains": [],
+      "sources": []
+    },
+    {
+      "id": 11,
+      "createdAt": "2023-10-13T11:53:38.654Z",
+      "updatedAt": "2023-10-13T11:55:24.935Z",
+      "date": "2023-10-22T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 4600,
+      "drains": [
+        {
+          "id": 2,
+          "createdAt": "2023-10-13T11:54:56.028Z",
+          "updatedAt": "2023-10-13T11:54:56.028Z",
+          "commentary": "Расход еженедельно ",
+          "expenses": 50,
+          "otherDaySettings": {
+            "id": 2,
+            "repeatable": true,
+            "repeatableType": "weekly",
+            "schedule": {
+              "id": 2,
+              "monday": true,
+              "tuesday": true,
+              "wednesday": false,
+              "thursday": true,
+              "friday": true,
+              "saturday": false,
+              "sunday": false
+            }
+          },
+          "drainScheduleMeta": [
+            {
+              "id": 2,
+              "createdAt": "2023-10-13T11:54:56.143Z",
+              "updatedAt": "2023-10-13T11:54:56.143Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": null
+            },
+            {
+              "id": 3,
+              "createdAt": "2023-10-13T11:54:56.203Z",
+              "updatedAt": "2023-10-13T11:54:56.203Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 1
+            },
+            {
+              "id": 4,
+              "createdAt": "2023-10-13T11:54:56.258Z",
+              "updatedAt": "2023-10-13T11:54:56.258Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 2
+            },
+            {
+              "id": 5,
+              "createdAt": "2023-10-13T11:54:56.314Z",
+              "updatedAt": "2023-10-13T11:54:56.314Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 4
+            },
+            {
+              "id": 6,
+              "createdAt": "2023-10-13T11:54:56.558Z",
+              "updatedAt": "2023-10-13T11:54:56.558Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 5
+            }
+          ]
+        }
+      ],
+      "sources": []
+    },
+    {
+      "id": 12,
+      "createdAt": "2023-10-13T11:53:38.744Z",
+      "updatedAt": "2023-10-13T11:55:25.023Z",
+      "date": "2023-10-23T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 4550,
+      "drains": [
+        {
+          "id": 2,
+          "createdAt": "2023-10-13T11:54:56.028Z",
+          "updatedAt": "2023-10-13T11:54:56.028Z",
+          "commentary": "Расход еженедельно ",
+          "expenses": 50,
+          "otherDaySettings": {
+            "id": 2,
+            "repeatable": true,
+            "repeatableType": "weekly",
+            "schedule": {
+              "id": 2,
+              "monday": true,
+              "tuesday": true,
+              "wednesday": false,
+              "thursday": true,
+              "friday": true,
+              "saturday": false,
+              "sunday": false
+            }
+          },
+          "drainScheduleMeta": [
+            {
+              "id": 2,
+              "createdAt": "2023-10-13T11:54:56.143Z",
+              "updatedAt": "2023-10-13T11:54:56.143Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": null
+            },
+            {
+              "id": 3,
+              "createdAt": "2023-10-13T11:54:56.203Z",
+              "updatedAt": "2023-10-13T11:54:56.203Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 1
+            },
+            {
+              "id": 4,
+              "createdAt": "2023-10-13T11:54:56.258Z",
+              "updatedAt": "2023-10-13T11:54:56.258Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 2
+            },
+            {
+              "id": 5,
+              "createdAt": "2023-10-13T11:54:56.314Z",
+              "updatedAt": "2023-10-13T11:54:56.314Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 4
+            },
+            {
+              "id": 6,
+              "createdAt": "2023-10-13T11:54:56.558Z",
+              "updatedAt": "2023-10-13T11:54:56.558Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 5
+            }
+          ]
+        }
+      ],
+      "sources": []
+    },
+    {
+      "id": 13,
+      "createdAt": "2023-10-13T11:53:38.856Z",
+      "updatedAt": "2023-10-13T11:55:25.095Z",
+      "date": "2023-10-24T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 4550,
+      "drains": [],
+      "sources": []
+    },
+    {
+      "id": 14,
+      "createdAt": "2023-10-13T11:53:38.950Z",
+      "updatedAt": "2023-10-13T11:55:25.205Z",
+      "date": "2023-10-25T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 4500,
+      "drains": [
+        {
+          "id": 2,
+          "createdAt": "2023-10-13T11:54:56.028Z",
+          "updatedAt": "2023-10-13T11:54:56.028Z",
+          "commentary": "Расход еженедельно ",
+          "expenses": 50,
+          "otherDaySettings": {
+            "id": 2,
+            "repeatable": true,
+            "repeatableType": "weekly",
+            "schedule": {
+              "id": 2,
+              "monday": true,
+              "tuesday": true,
+              "wednesday": false,
+              "thursday": true,
+              "friday": true,
+              "saturday": false,
+              "sunday": false
+            }
+          },
+          "drainScheduleMeta": [
+            {
+              "id": 2,
+              "createdAt": "2023-10-13T11:54:56.143Z",
+              "updatedAt": "2023-10-13T11:54:56.143Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": null
+            },
+            {
+              "id": 3,
+              "createdAt": "2023-10-13T11:54:56.203Z",
+              "updatedAt": "2023-10-13T11:54:56.203Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 1
+            },
+            {
+              "id": 4,
+              "createdAt": "2023-10-13T11:54:56.258Z",
+              "updatedAt": "2023-10-13T11:54:56.258Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 2
+            },
+            {
+              "id": 5,
+              "createdAt": "2023-10-13T11:54:56.314Z",
+              "updatedAt": "2023-10-13T11:54:56.314Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 4
+            },
+            {
+              "id": 6,
+              "createdAt": "2023-10-13T11:54:56.558Z",
+              "updatedAt": "2023-10-13T11:54:56.558Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 5
+            }
+          ]
+        }
+      ],
+      "sources": []
+    },
+    {
+      "id": 15,
+      "createdAt": "2023-10-13T11:53:39.052Z",
+      "updatedAt": "2023-10-13T11:55:25.321Z",
+      "date": "2023-10-26T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 4450,
+      "drains": [
+        {
+          "id": 2,
+          "createdAt": "2023-10-13T11:54:56.028Z",
+          "updatedAt": "2023-10-13T11:54:56.028Z",
+          "commentary": "Расход еженедельно ",
+          "expenses": 50,
+          "otherDaySettings": {
+            "id": 2,
+            "repeatable": true,
+            "repeatableType": "weekly",
+            "schedule": {
+              "id": 2,
+              "monday": true,
+              "tuesday": true,
+              "wednesday": false,
+              "thursday": true,
+              "friday": true,
+              "saturday": false,
+              "sunday": false
+            }
+          },
+          "drainScheduleMeta": [
+            {
+              "id": 2,
+              "createdAt": "2023-10-13T11:54:56.143Z",
+              "updatedAt": "2023-10-13T11:54:56.143Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": null
+            },
+            {
+              "id": 3,
+              "createdAt": "2023-10-13T11:54:56.203Z",
+              "updatedAt": "2023-10-13T11:54:56.203Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 1
+            },
+            {
+              "id": 4,
+              "createdAt": "2023-10-13T11:54:56.258Z",
+              "updatedAt": "2023-10-13T11:54:56.258Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 2
+            },
+            {
+              "id": 5,
+              "createdAt": "2023-10-13T11:54:56.314Z",
+              "updatedAt": "2023-10-13T11:54:56.314Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 4
+            },
+            {
+              "id": 6,
+              "createdAt": "2023-10-13T11:54:56.558Z",
+              "updatedAt": "2023-10-13T11:54:56.558Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 5
+            }
+          ]
+        }
+      ],
+      "sources": []
+    },
+    {
+      "id": 16,
+      "createdAt": "2023-10-13T11:53:39.165Z",
+      "updatedAt": "2023-10-13T11:55:25.404Z",
+      "date": "2023-10-27T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 4450,
+      "drains": [],
+      "sources": []
+    },
+    {
+      "id": 17,
+      "createdAt": "2023-10-13T11:53:39.287Z",
+      "updatedAt": "2023-10-13T11:55:25.480Z",
+      "date": "2023-10-28T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 4450,
+      "drains": [],
+      "sources": []
+    },
+    {
+      "id": 18,
+      "createdAt": "2023-10-13T11:53:39.405Z",
+      "updatedAt": "2023-10-13T11:55:25.555Z",
+      "date": "2023-10-29T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 4400,
+      "drains": [
+        {
+          "id": 2,
+          "createdAt": "2023-10-13T11:54:56.028Z",
+          "updatedAt": "2023-10-13T11:54:56.028Z",
+          "commentary": "Расход еженедельно ",
+          "expenses": 50,
+          "otherDaySettings": {
+            "id": 2,
+            "repeatable": true,
+            "repeatableType": "weekly",
+            "schedule": {
+              "id": 2,
+              "monday": true,
+              "tuesday": true,
+              "wednesday": false,
+              "thursday": true,
+              "friday": true,
+              "saturday": false,
+              "sunday": false
+            }
+          },
+          "drainScheduleMeta": [
+            {
+              "id": 2,
+              "createdAt": "2023-10-13T11:54:56.143Z",
+              "updatedAt": "2023-10-13T11:54:56.143Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": null
+            },
+            {
+              "id": 3,
+              "createdAt": "2023-10-13T11:54:56.203Z",
+              "updatedAt": "2023-10-13T11:54:56.203Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 1
+            },
+            {
+              "id": 4,
+              "createdAt": "2023-10-13T11:54:56.258Z",
+              "updatedAt": "2023-10-13T11:54:56.258Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 2
+            },
+            {
+              "id": 5,
+              "createdAt": "2023-10-13T11:54:56.314Z",
+              "updatedAt": "2023-10-13T11:54:56.314Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 4
+            },
+            {
+              "id": 6,
+              "createdAt": "2023-10-13T11:54:56.558Z",
+              "updatedAt": "2023-10-13T11:54:56.558Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 5
+            }
+          ]
+        }
+      ],
+      "sources": []
+    },
+    {
+      "id": 19,
+      "createdAt": "2023-10-13T11:53:39.521Z",
+      "updatedAt": "2023-10-13T11:55:25.636Z",
+      "date": "2023-10-30T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 4350,
+      "drains": [
+        {
+          "id": 2,
+          "createdAt": "2023-10-13T11:54:56.028Z",
+          "updatedAt": "2023-10-13T11:54:56.028Z",
+          "commentary": "Расход еженедельно ",
+          "expenses": 50,
+          "otherDaySettings": {
+            "id": 2,
+            "repeatable": true,
+            "repeatableType": "weekly",
+            "schedule": {
+              "id": 2,
+              "monday": true,
+              "tuesday": true,
+              "wednesday": false,
+              "thursday": true,
+              "friday": true,
+              "saturday": false,
+              "sunday": false
+            }
+          },
+          "drainScheduleMeta": [
+            {
+              "id": 2,
+              "createdAt": "2023-10-13T11:54:56.143Z",
+              "updatedAt": "2023-10-13T11:54:56.143Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": null
+            },
+            {
+              "id": 3,
+              "createdAt": "2023-10-13T11:54:56.203Z",
+              "updatedAt": "2023-10-13T11:54:56.203Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 1
+            },
+            {
+              "id": 4,
+              "createdAt": "2023-10-13T11:54:56.258Z",
+              "updatedAt": "2023-10-13T11:54:56.258Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 2
+            },
+            {
+              "id": 5,
+              "createdAt": "2023-10-13T11:54:56.314Z",
+              "updatedAt": "2023-10-13T11:54:56.314Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 4
+            },
+            {
+              "id": 6,
+              "createdAt": "2023-10-13T11:54:56.558Z",
+              "updatedAt": "2023-10-13T11:54:56.558Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 5
+            }
+          ]
+        }
+      ],
+      "sources": []
+    },
+    {
+      "id": 20,
+      "createdAt": "2023-10-13T11:53:39.620Z",
+      "updatedAt": "2023-10-13T11:55:25.702Z",
+      "date": "2023-10-31T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 4350,
+      "drains": [],
+      "sources": []
+    },
+    {
+      "id": 21,
+      "createdAt": "2023-10-13T11:53:39.814Z",
+      "updatedAt": "2023-10-13T11:55:25.811Z",
+      "date": "2023-11-01T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 4300,
+      "drains": [
+        {
+          "id": 2,
+          "createdAt": "2023-10-13T11:54:56.028Z",
+          "updatedAt": "2023-10-13T11:54:56.028Z",
+          "commentary": "Расход еженедельно ",
+          "expenses": 50,
+          "otherDaySettings": {
+            "id": 2,
+            "repeatable": true,
+            "repeatableType": "weekly",
+            "schedule": {
+              "id": 2,
+              "monday": true,
+              "tuesday": true,
+              "wednesday": false,
+              "thursday": true,
+              "friday": true,
+              "saturday": false,
+              "sunday": false
+            }
+          },
+          "drainScheduleMeta": [
+            {
+              "id": 2,
+              "createdAt": "2023-10-13T11:54:56.143Z",
+              "updatedAt": "2023-10-13T11:54:56.143Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": null
+            },
+            {
+              "id": 3,
+              "createdAt": "2023-10-13T11:54:56.203Z",
+              "updatedAt": "2023-10-13T11:54:56.203Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 1
+            },
+            {
+              "id": 4,
+              "createdAt": "2023-10-13T11:54:56.258Z",
+              "updatedAt": "2023-10-13T11:54:56.258Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 2
+            },
+            {
+              "id": 5,
+              "createdAt": "2023-10-13T11:54:56.314Z",
+              "updatedAt": "2023-10-13T11:54:56.314Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 4
+            },
+            {
+              "id": 6,
+              "createdAt": "2023-10-13T11:54:56.558Z",
+              "updatedAt": "2023-10-13T11:54:56.558Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 5
+            }
+          ]
+        }
+      ],
+      "sources": []
+    },
+    {
+      "id": 22,
+      "createdAt": "2023-10-13T11:53:39.914Z",
+      "updatedAt": "2023-10-13T11:55:25.928Z",
+      "date": "2023-11-02T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 4250,
+      "drains": [
+        {
+          "id": 2,
+          "createdAt": "2023-10-13T11:54:56.028Z",
+          "updatedAt": "2023-10-13T11:54:56.028Z",
+          "commentary": "Расход еженедельно ",
+          "expenses": 50,
+          "otherDaySettings": {
+            "id": 2,
+            "repeatable": true,
+            "repeatableType": "weekly",
+            "schedule": {
+              "id": 2,
+              "monday": true,
+              "tuesday": true,
+              "wednesday": false,
+              "thursday": true,
+              "friday": true,
+              "saturday": false,
+              "sunday": false
+            }
+          },
+          "drainScheduleMeta": [
+            {
+              "id": 2,
+              "createdAt": "2023-10-13T11:54:56.143Z",
+              "updatedAt": "2023-10-13T11:54:56.143Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": null
+            },
+            {
+              "id": 3,
+              "createdAt": "2023-10-13T11:54:56.203Z",
+              "updatedAt": "2023-10-13T11:54:56.203Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 1
+            },
+            {
+              "id": 4,
+              "createdAt": "2023-10-13T11:54:56.258Z",
+              "updatedAt": "2023-10-13T11:54:56.258Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 2
+            },
+            {
+              "id": 5,
+              "createdAt": "2023-10-13T11:54:56.314Z",
+              "updatedAt": "2023-10-13T11:54:56.314Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 4
+            },
+            {
+              "id": 6,
+              "createdAt": "2023-10-13T11:54:56.558Z",
+              "updatedAt": "2023-10-13T11:54:56.558Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 5
+            }
+          ]
+        }
+      ],
+      "sources": []
+    },
+    {
+      "id": 23,
+      "createdAt": "2023-10-13T11:53:40.009Z",
+      "updatedAt": "2023-10-13T11:55:25.999Z",
+      "date": "2023-11-03T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 4250,
+      "drains": [],
+      "sources": []
+    },
+    {
+      "id": 24,
+      "createdAt": "2023-10-13T11:53:40.072Z",
+      "updatedAt": "2023-10-13T11:55:26.078Z",
+      "date": "2023-11-04T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 4250,
+      "drains": [],
+      "sources": []
+    },
+    {
+      "id": 25,
+      "createdAt": "2023-10-13T11:53:40.135Z",
+      "updatedAt": "2023-10-13T11:55:26.187Z",
+      "date": "2023-11-05T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 4200,
+      "drains": [
+        {
+          "id": 2,
+          "createdAt": "2023-10-13T11:54:56.028Z",
+          "updatedAt": "2023-10-13T11:54:56.028Z",
+          "commentary": "Расход еженедельно ",
+          "expenses": 50,
+          "otherDaySettings": {
+            "id": 2,
+            "repeatable": true,
+            "repeatableType": "weekly",
+            "schedule": {
+              "id": 2,
+              "monday": true,
+              "tuesday": true,
+              "wednesday": false,
+              "thursday": true,
+              "friday": true,
+              "saturday": false,
+              "sunday": false
+            }
+          },
+          "drainScheduleMeta": [
+            {
+              "id": 2,
+              "createdAt": "2023-10-13T11:54:56.143Z",
+              "updatedAt": "2023-10-13T11:54:56.143Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": null
+            },
+            {
+              "id": 3,
+              "createdAt": "2023-10-13T11:54:56.203Z",
+              "updatedAt": "2023-10-13T11:54:56.203Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 1
+            },
+            {
+              "id": 4,
+              "createdAt": "2023-10-13T11:54:56.258Z",
+              "updatedAt": "2023-10-13T11:54:56.258Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 2
+            },
+            {
+              "id": 5,
+              "createdAt": "2023-10-13T11:54:56.314Z",
+              "updatedAt": "2023-10-13T11:54:56.314Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 4
+            },
+            {
+              "id": 6,
+              "createdAt": "2023-10-13T11:54:56.558Z",
+              "updatedAt": "2023-10-13T11:54:56.558Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 5
+            }
+          ]
+        }
+      ],
+      "sources": []
+    },
+    {
+      "id": 26,
+      "createdAt": "2023-10-13T11:53:40.192Z",
+      "updatedAt": "2023-10-13T11:55:26.297Z",
+      "date": "2023-11-06T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 4150,
+      "drains": [
+        {
+          "id": 2,
+          "createdAt": "2023-10-13T11:54:56.028Z",
+          "updatedAt": "2023-10-13T11:54:56.028Z",
+          "commentary": "Расход еженедельно ",
+          "expenses": 50,
+          "otherDaySettings": {
+            "id": 2,
+            "repeatable": true,
+            "repeatableType": "weekly",
+            "schedule": {
+              "id": 2,
+              "monday": true,
+              "tuesday": true,
+              "wednesday": false,
+              "thursday": true,
+              "friday": true,
+              "saturday": false,
+              "sunday": false
+            }
+          },
+          "drainScheduleMeta": [
+            {
+              "id": 2,
+              "createdAt": "2023-10-13T11:54:56.143Z",
+              "updatedAt": "2023-10-13T11:54:56.143Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": null
+            },
+            {
+              "id": 3,
+              "createdAt": "2023-10-13T11:54:56.203Z",
+              "updatedAt": "2023-10-13T11:54:56.203Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 1
+            },
+            {
+              "id": 4,
+              "createdAt": "2023-10-13T11:54:56.258Z",
+              "updatedAt": "2023-10-13T11:54:56.258Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 2
+            },
+            {
+              "id": 5,
+              "createdAt": "2023-10-13T11:54:56.314Z",
+              "updatedAt": "2023-10-13T11:54:56.314Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 4
+            },
+            {
+              "id": 6,
+              "createdAt": "2023-10-13T11:54:56.558Z",
+              "updatedAt": "2023-10-13T11:54:56.558Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 5
+            }
+          ]
+        }
+      ],
+      "sources": []
+    },
+    {
+      "id": 27,
+      "createdAt": "2023-10-13T11:53:40.249Z",
+      "updatedAt": "2023-10-13T11:55:26.364Z",
+      "date": "2023-11-07T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 4150,
+      "drains": [],
+      "sources": []
+    },
+    {
+      "id": 28,
+      "createdAt": "2023-10-13T11:53:40.336Z",
+      "updatedAt": "2023-10-13T11:55:26.488Z",
+      "date": "2023-11-08T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 4100,
+      "drains": [
+        {
+          "id": 2,
+          "createdAt": "2023-10-13T11:54:56.028Z",
+          "updatedAt": "2023-10-13T11:54:56.028Z",
+          "commentary": "Расход еженедельно ",
+          "expenses": 50,
+          "otherDaySettings": {
+            "id": 2,
+            "repeatable": true,
+            "repeatableType": "weekly",
+            "schedule": {
+              "id": 2,
+              "monday": true,
+              "tuesday": true,
+              "wednesday": false,
+              "thursday": true,
+              "friday": true,
+              "saturday": false,
+              "sunday": false
+            }
+          },
+          "drainScheduleMeta": [
+            {
+              "id": 2,
+              "createdAt": "2023-10-13T11:54:56.143Z",
+              "updatedAt": "2023-10-13T11:54:56.143Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": null
+            },
+            {
+              "id": 3,
+              "createdAt": "2023-10-13T11:54:56.203Z",
+              "updatedAt": "2023-10-13T11:54:56.203Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 1
+            },
+            {
+              "id": 4,
+              "createdAt": "2023-10-13T11:54:56.258Z",
+              "updatedAt": "2023-10-13T11:54:56.258Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 2
+            },
+            {
+              "id": 5,
+              "createdAt": "2023-10-13T11:54:56.314Z",
+              "updatedAt": "2023-10-13T11:54:56.314Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 4
+            },
+            {
+              "id": 6,
+              "createdAt": "2023-10-13T11:54:56.558Z",
+              "updatedAt": "2023-10-13T11:54:56.558Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 5
+            }
+          ]
+        }
+      ],
+      "sources": []
+    },
+    {
+      "id": 29,
+      "createdAt": "2023-10-13T11:53:40.442Z",
+      "updatedAt": "2023-10-13T11:55:26.591Z",
+      "date": "2023-11-09T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 4050,
+      "drains": [
+        {
+          "id": 2,
+          "createdAt": "2023-10-13T11:54:56.028Z",
+          "updatedAt": "2023-10-13T11:54:56.028Z",
+          "commentary": "Расход еженедельно ",
+          "expenses": 50,
+          "otherDaySettings": {
+            "id": 2,
+            "repeatable": true,
+            "repeatableType": "weekly",
+            "schedule": {
+              "id": 2,
+              "monday": true,
+              "tuesday": true,
+              "wednesday": false,
+              "thursday": true,
+              "friday": true,
+              "saturday": false,
+              "sunday": false
+            }
+          },
+          "drainScheduleMeta": [
+            {
+              "id": 2,
+              "createdAt": "2023-10-13T11:54:56.143Z",
+              "updatedAt": "2023-10-13T11:54:56.143Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": null
+            },
+            {
+              "id": 3,
+              "createdAt": "2023-10-13T11:54:56.203Z",
+              "updatedAt": "2023-10-13T11:54:56.203Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 1
+            },
+            {
+              "id": 4,
+              "createdAt": "2023-10-13T11:54:56.258Z",
+              "updatedAt": "2023-10-13T11:54:56.258Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 2
+            },
+            {
+              "id": 5,
+              "createdAt": "2023-10-13T11:54:56.314Z",
+              "updatedAt": "2023-10-13T11:54:56.314Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 4
+            },
+            {
+              "id": 6,
+              "createdAt": "2023-10-13T11:54:56.558Z",
+              "updatedAt": "2023-10-13T11:54:56.558Z",
+              "repeat_start": 1697400000,
+              "repeat_interval": null,
+              "repeat_year": null,
+              "repeat_month": null,
+              "repeat_day": null,
+              "repeat_weekday": 5
+            }
+          ]
+        }
+      ],
+      "sources": []
+    },
+    {
+      "id": 30,
+      "createdAt": "2023-10-13T11:53:40.517Z",
+      "updatedAt": "2023-10-13T11:55:26.672Z",
+      "date": "2023-11-10T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 4050,
+      "drains": [],
+      "sources": []
+    },
+    {
+      "id": 31,
+      "createdAt": "2023-10-13T11:53:40.620Z",
+      "updatedAt": "2023-10-13T11:55:26.734Z",
+      "date": "2023-11-11T20:00:00.000Z",
+      "moneyByTheEndOfTheDay": 4050,
+      "drains": [],
+      "sources": []
+    }
+  ],
+  "drains": [
+    {
+      "id": 1,
+      "createdAt": "2023-10-13T11:54:02.257Z",
+      "updatedAt": "2023-10-13T11:54:02.257Z",
+      "commentary": "Покупка ",
+      "expenses": 150,
+      "otherDaySettings": {
+        "id": 1,
+        "repeatable": false,
+        "repeatableType": "monthly",
+        "schedule": {
+          "id": 1,
+          "monday": false,
+          "tuesday": false,
+          "wednesday": false,
+          "thursday": false,
+          "friday": false,
+          "saturday": false,
+          "sunday": false
+        }
+      },
+      "drainScheduleMeta": [
+        {
+          "id": 1,
+          "createdAt": "2023-10-13T11:54:02.334Z",
+          "updatedAt": "2023-10-13T11:54:02.334Z",
+          "repeat_start": 1697313600,
+          "repeat_interval": null,
+          "repeat_year": null,
+          "repeat_month": null,
+          "repeat_day": null,
+          "repeat_weekday": null
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "createdAt": "2023-10-13T11:54:56.028Z",
+      "updatedAt": "2023-10-13T11:54:56.028Z",
+      "commentary": "Расход еженедельно ",
+      "expenses": 50,
+      "otherDaySettings": {
+        "id": 2,
+        "repeatable": true,
+        "repeatableType": "weekly",
+        "schedule": {
+          "id": 2,
+          "monday": true,
+          "tuesday": true,
+          "wednesday": false,
+          "thursday": true,
+          "friday": true,
+          "saturday": false,
+          "sunday": false
+        }
+      },
+      "drainScheduleMeta": [
+        {
+          "id": 2,
+          "createdAt": "2023-10-13T11:54:56.143Z",
+          "updatedAt": "2023-10-13T11:54:56.143Z",
+          "repeat_start": 1697400000,
+          "repeat_interval": null,
+          "repeat_year": null,
+          "repeat_month": null,
+          "repeat_day": null,
+          "repeat_weekday": null
+        },
+        {
+          "id": 3,
+          "createdAt": "2023-10-13T11:54:56.203Z",
+          "updatedAt": "2023-10-13T11:54:56.203Z",
+          "repeat_start": 1697400000,
+          "repeat_interval": null,
+          "repeat_year": null,
+          "repeat_month": null,
+          "repeat_day": null,
+          "repeat_weekday": 1
+        },
+        {
+          "id": 4,
+          "createdAt": "2023-10-13T11:54:56.258Z",
+          "updatedAt": "2023-10-13T11:54:56.258Z",
+          "repeat_start": 1697400000,
+          "repeat_interval": null,
+          "repeat_year": null,
+          "repeat_month": null,
+          "repeat_day": null,
+          "repeat_weekday": 2
+        },
+        {
+          "id": 5,
+          "createdAt": "2023-10-13T11:54:56.314Z",
+          "updatedAt": "2023-10-13T11:54:56.314Z",
+          "repeat_start": 1697400000,
+          "repeat_interval": null,
+          "repeat_year": null,
+          "repeat_month": null,
+          "repeat_day": null,
+          "repeat_weekday": 4
+        },
+        {
+          "id": 6,
+          "createdAt": "2023-10-13T11:54:56.558Z",
+          "updatedAt": "2023-10-13T11:54:56.558Z",
+          "repeat_start": 1697400000,
+          "repeat_interval": null,
+          "repeat_year": null,
+          "repeat_month": null,
+          "repeat_day": null,
+          "repeat_weekday": 5
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "createdAt": "2023-10-13T11:55:23.558Z",
+      "updatedAt": "2023-10-13T11:55:23.558Z",
+      "commentary": "Расход ежемесячно ",
+      "expenses": 3000,
+      "otherDaySettings": {
+        "id": 3,
+        "repeatable": true,
+        "repeatableType": "monthly",
+        "schedule": {
+          "id": 3,
+          "monday": false,
+          "tuesday": false,
+          "wednesday": false,
+          "thursday": false,
+          "friday": false,
+          "saturday": false,
+          "sunday": false
+        }
+      },
+      "drainScheduleMeta": [
+        {
+          "id": 7,
+          "createdAt": "2023-10-13T11:55:23.636Z",
+          "updatedAt": "2023-10-13T11:55:23.636Z",
+          "repeat_start": 1697832000,
+          "repeat_interval": null,
+          "repeat_year": null,
+          "repeat_month": null,
+          "repeat_day": null,
+          "repeat_weekday": null
+        },
+        {
+          "id": 8,
+          "createdAt": "2023-10-13T11:55:23.699Z",
+          "updatedAt": "2023-10-13T11:55:23.699Z",
+          "repeat_start": 1697832000,
+          "repeat_interval": null,
+          "repeat_year": null,
+          "repeat_month": null,
+          "repeat_day": 21,
+          "repeat_weekday": null
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": 1,
+      "createdAt": "2023-10-13T11:53:36.491Z",
+      "updatedAt": "2023-10-13T11:53:36.491Z",
+      "commentary": "Остаток",
+      "incomes": 2000,
+      "otherDaySettings": {
+        "id": 1,
+        "repeatable": false,
+        "repeatableType": "monthly",
+        "schedule": {
+          "id": 1,
+          "monday": false,
+          "tuesday": false,
+          "wednesday": false,
+          "thursday": false,
+          "friday": false,
+          "saturday": false,
+          "sunday": false
+        }
+      },
+      "sourceScheduleMeta": [
+        {
+          "id": 1,
+          "createdAt": "2023-10-13T11:53:36.603Z",
+          "updatedAt": "2023-10-13T11:53:36.603Z",
+          "repeat_start": 1697227200,
+          "repeat_interval": null,
+          "repeat_year": null,
+          "repeat_month": null,
+          "repeat_day": null,
+          "repeat_weekday": null
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "createdAt": "2023-10-13T11:54:26.314Z",
+      "updatedAt": "2023-10-13T11:54:26.314Z",
+      "commentary": "Зп",
+      "incomes": 6000,
+      "otherDaySettings": {
+        "id": 2,
+        "repeatable": true,
+        "repeatableType": "monthly",
+        "schedule": {
+          "id": 2,
+          "monday": false,
+          "tuesday": false,
+          "wednesday": false,
+          "thursday": false,
+          "friday": false,
+          "saturday": false,
+          "sunday": false
+        }
+      },
+      "sourceScheduleMeta": [
+        {
+          "id": 2,
+          "createdAt": "2023-10-13T11:54:26.404Z",
+          "updatedAt": "2023-10-13T11:54:26.404Z",
+          "repeat_start": 1697400000,
+          "repeat_interval": null,
+          "repeat_year": null,
+          "repeat_month": null,
+          "repeat_day": null,
+          "repeat_weekday": null
+        },
+        {
+          "id": 3,
+          "createdAt": "2023-10-13T11:54:26.464Z",
+          "updatedAt": "2023-10-13T11:54:26.464Z",
+          "repeat_start": 1697400000,
+          "repeat_interval": null,
+          "repeat_year": null,
+          "repeat_month": null,
+          "repeat_day": 16,
+          "repeat_weekday": null
+        }
+      ]
+    }
+  ]
+}

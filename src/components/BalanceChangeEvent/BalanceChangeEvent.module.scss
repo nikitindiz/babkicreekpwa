@@ -1,0 +1,24 @@
+.container {
+  min-width: var(--timestamp-size);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+
+  &:first-child {
+    margin-left: calc(var(--timestamp-size) * -1);
+  }
+}
+
+
+.drain,
+.source {
+  height: 100%;
+  overflow: hidden;
+}
+
+.chartLine {
+  width: 100%;
+  height: 50px;
+  background-color: var(--source-color);
+}

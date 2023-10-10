@@ -1,0 +1,38 @@
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  display: flex;
+  background-color: white;
+
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .5);
+    box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+  }
+}
+
+.navigation {
+  position: fixed;
+  background-color: #232323;
+  color: white;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: var(--top-nav-size);
+  padding: 5px;
+}
+
+.chart {
+  margin-top: var(--top-nav-size);
+  display: flex;
+}

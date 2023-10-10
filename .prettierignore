@@ -1,0 +1,5 @@
+# locales
+src/locales/*.json
+
+# RootApp file - custom import order is important
+src/RootApp.tsx

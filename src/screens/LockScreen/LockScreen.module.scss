@@ -1,0 +1,14 @@
+.createButton {
+  margin-bottom: 0.5em;
+  min-width: 200px;
+  background-color: rgba(255, 0, 8, 0.1);
+  color: white;
+  border: none;
+  padding: 0.8em 0.5em;
+  cursor: pointer;
+  transition: 0.5s all;
+
+  &:hover {
+    background-color: rgba(255, 0, 8, 0.2);
+  }
+}

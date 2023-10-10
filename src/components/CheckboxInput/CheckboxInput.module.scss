@@ -1,0 +1,22 @@
+.container {
+  margin-bottom: var(--font-size-label);
+  font-size: 1.5em;
+  display: flex;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  text-align: left;
+  cursor: pointer;
+  width: fit-content;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+.checkbox {
+  margin-right: 0.75em;
+  transform: scale(1.5) translateX(25%);
+}
+
+.children {}

@@ -1,0 +1,13 @@
+.Navigation {
+  display: flex;
+  justify-content: space-between;
+
+  &__button {
+    background-color: transparent;
+    border-color: transparent;
+    display: block;
+    width: 25px;
+    color: white;
+    padding: 0;
+  }
+}

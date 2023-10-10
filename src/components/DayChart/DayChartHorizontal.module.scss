@@ -1,0 +1,57 @@
+.container {
+  position: relative;
+  border-right: 1px solid var(--day-chart-right-border);
+  background-color: var(--day-chart-background);
+  display: flex;
+  padding-left: var(--timestamp-size);
+
+  &_emptyDay {
+    min-width: var(--timestamp-size);
+  }
+
+  &_today {
+    background-color: yellow;
+  }
+}
+
+.timestamp {
+  text-align: right;
+  top: 0;
+  left: 0;
+  position: absolute;
+  transform-origin: top left;
+  transform: rotateZ(-90deg) translateX(-100%);
+  padding: 0 5px;
+  font-size: 0.7em;
+  opacity: 0.5;
+  height: var(--timestamp-size);
+}
+
+.baseLine {
+  width: 100%;
+  border-bottom: 1px dashed var(--baseline-color);
+  position: absolute;
+  top: calc(50% - 0.5px);
+  margin-left: calc(var(--timestamp-size) * -1);
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--timestamp-size) * 1.5);
+  height: calc(var(--timestamp-size) * 1.5);
+  font-size: calc(var(--timestamp-size));
+  background-color: rgba(0,0,0,0.5);
+  border: none;
+  color: white;
+  z-index: 500;
+
+  &_source {
+    background-color: var(--source-color);
+  }
+
+  &_drain {
+    background-color: var(--drain-color);
+  }
+}

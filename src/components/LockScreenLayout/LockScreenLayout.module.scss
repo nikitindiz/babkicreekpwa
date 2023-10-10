@@ -1,0 +1,27 @@
+.container {
+  align-items: center;
+  background-blend-mode: darken;
+  background: var(--lock-screen-gradient);
+  bottom: 0;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  justify-content: center;
+  left: 0;
+  margin-bottom: 0;
+  max-height: 100%;
+  overflow-y: auto;
+  padding: 1em;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.body {
+  text-align: center;
+  max-width: 400px;
+  height: 200px;
+  width: 100%;
+  margin-bottom: 2em;
+}
