@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/babkicreekpwa/static/css/main.087df336.css",
+    "main.js": "/babkicreekpwa/static/js/main.eff7fb03.js",
+    "static/js/787.d08801f9.chunk.js": "/babkicreekpwa/static/js/787.d08801f9.chunk.js",
+    "service-worker.js": "/babkicreekpwa/service-worker.js",
+    "index.html": "/babkicreekpwa/index.html",
+    "main.087df336.css.map": "/babkicreekpwa/static/css/main.087df336.css.map",
+    "main.eff7fb03.js.map": "/babkicreekpwa/static/js/main.eff7fb03.js.map",
+    "787.d08801f9.chunk.js.map": "/babkicreekpwa/static/js/787.d08801f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.087df336.css",
+    "static/js/main.eff7fb03.js"
+  ]
+}
