@@ -44,7 +44,7 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "craco build",
+    "build": "BUILD_PATH='./docs' craco build",
     "test": "craco test",
     "eject": "craco eject",
     "format": "prettier --write src/**/*.ts{,x}",
