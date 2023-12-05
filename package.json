@@ -2,6 +2,7 @@
   "name": "babki-creek-2",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://nikitindiz.github.io/babkicreekpwa",
   "dependencies": {
     "@craco/craco": "^7.1.0",
     "@reduxjs/toolkit": "^1.9.7",
@@ -44,7 +45,8 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "BUILD_PATH='./docs' craco build",
+    "predeploy": "craco build",
+    "deploy": "gh-pages -d build",
     "test": "craco test",
     "eject": "craco eject",
     "format": "prettier --write src/**/*.ts{,x}",
@@ -79,6 +81,7 @@
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "gh-pages": "^6.1.0",
     "prettier": "^3.0.3",
     "sass": "^1.69.3"
   }
