@@ -3,7 +3,7 @@ import moment from 'moment/moment';
 import { useSelector } from 'react-redux';
 
 import { Day, ModalsList } from 'types';
-import { modals, sourceEditor, thicknessMap, useAppDispatch } from 'store';
+import { drainEditor, modals, sourceEditor, thicknessMap, useAppDispatch } from 'store';
 
 interface UseDayChartContainerArgs {
   day: Day;
@@ -22,7 +22,8 @@ export const useDayChartContainer = ({ day }: UseDayChartContainerArgs) => {
 
   const openAddDrain = useCallback(() => {
     dispatch(modals.actions.show(ModalsList.newDrain));
-  }, [dispatch]);
+    dispatch(drainEditor.actions.select({ date: day.date, drainId: 'new' }));
+  }, [day.date, dispatch]);
 
   const noSourcesOrDrains = !day.sources.length && !day.drains.length;
 

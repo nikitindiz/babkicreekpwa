@@ -59,6 +59,28 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
           })}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}>
+          <FloatingAddButton
+            className={cn(classes.addButton, classes.addButton_source)}
+            visible={addButtonsVisible}
+            onClick={openAddSource}
+            position={mobile ? 'left' : 'top'}>
+            +
+          </FloatingAddButton>
+
+          <FloatingAddButton
+            className={cn(classes.addButton, classes.addButton_drain)}
+            position={mobile ? 'right' : 'bottom'}
+            visible={addButtonsVisible}
+            onClick={openAddDrain}>
+            +
+          </FloatingAddButton>
+
+          <div className={cn(classes.baseLine, { [classes.baseLine_mobile]: mobile })} />
+
+          <div className={cn(classes.timestamp, { [classes.timestamp_mobile]: mobile })}>
+            <DateAndWeekContainer date={formatDate(moment.unix(day.date))} />
+          </div>
+
           <BalanceChangeEvent
             flowThickness={thicknessMapByDate[isoDate]?.beginningOfTheDayThickness}
           />
@@ -81,27 +103,6 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
           ))}
 
           <BalanceChangeEvent flowThickness={thicknessMapByDate[isoDate]?.endOfTheDayThickness} />
-
-          <FloatingAddButton
-            className={cn(classes.addButton, classes.addButton_source)}
-            visible={addButtonsVisible}
-            onClick={openAddSource}>
-            +
-          </FloatingAddButton>
-
-          <FloatingAddButton
-            className={cn(classes.addButton, classes.addButton_drain)}
-            position="bottom"
-            visible={addButtonsVisible}
-            onClick={openAddDrain}>
-            +
-          </FloatingAddButton>
-
-          <div className={cn(classes.baseLine, { [classes.baseLine_mobile]: mobile })} />
-
-          <div className={cn(classes.timestamp, { [classes.timestamp_mobile]: mobile })}>
-            <DateAndWeekContainer date={formatDate(moment.unix(day.date))} />
-          </div>
         </div>
       </DayContextProvider>
     );

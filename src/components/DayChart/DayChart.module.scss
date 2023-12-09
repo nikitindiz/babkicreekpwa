@@ -3,7 +3,7 @@
   border-right: 1px solid var(--day-chart-right-border);
   background-color: var(--day-chart-background);
   display: flex;
-  padding-left: var(--timestamp-size);
+  z-index: 0;
 
   &_emptyDay {
     min-width: var(--timestamp-size);
@@ -19,13 +19,12 @@
     border-bottom: 1px solid var(--day-chart-right-border);
     display: initial;
     padding-left: initial;
-    padding-top: var(--timestamp-size);
     min-width: initial;
   }
 
   &_mobile.container_emptyDay {
     min-width: initial;
-    min-height: var(--timestamp-size);
+    min-height: calc(var(--timestamp-size) * 2);
   }
 }
 
@@ -33,6 +32,7 @@
   text-align: right;
   top: 0;
   left: 0;
+  bottom: 0;
   position: absolute;
   transform-origin: top left;
   transform: rotateZ(-90deg) translateX(-100%);
@@ -40,16 +40,18 @@
   font-size: 0.7em;
   opacity: 0.5;
   height: var(--timestamp-size);
+  width: calc(100vh - var(--top-nav-size) - 7px - 10px);
 
   &_mobile {
     text-align: initial;
     top: 0;
     left: 0;
+    right: 0;
     transform-origin: initial;
     transform: initial;
-    padding: initial;
     opacity: initial;
     height: initial;
+    width: initial;
   }
 }
 

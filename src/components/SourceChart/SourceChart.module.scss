@@ -10,7 +10,6 @@
     flex-direction: column;
     align-items: initial;
     height: initial;
-    color: initial;
     min-width: initial;
   }
 }
@@ -27,15 +26,8 @@
   padding: 1em;
 
   &_mobile {
-    cursor: initial;
-    font-size: initial;
     display: initial;
-    text-align: initial;
-    position: initial;
-    background-color: initial;
-    border: initial;
-    color: initial;
-    padding: initial;
+    text-align: left;
     margin-bottom: -1em;
   }
 }

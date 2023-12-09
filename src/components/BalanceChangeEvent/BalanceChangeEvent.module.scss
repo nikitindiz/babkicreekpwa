@@ -16,7 +16,7 @@
 
   &_mobile {
     min-width: initial;
-    height: initial;
+    height: auto;
     flex-direction: row;
     justify-content: initial;
     margin-left: initial;
@@ -42,12 +42,12 @@
 
 .chartLine {
   width: 100%;
-  height: 50px;
+  height: 0;
   background-color: var(--source-color);
 
   &_mobile {
-    width: 50px;
-    min-height: 23px;
+    width: 0;
+    min-height: var(--timestamp-size);
     height: auto;
   }
 }

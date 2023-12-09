@@ -20,11 +20,11 @@ export const SourceChart: FC<SourceChartVerticalProps> = ({ displayValue, header
       <button
         className={cn(classes.editButton, { [classes.editButton_mobile]: mobile })}
         onClick={openEdit}>
-        <div className={cn(classes.value, { [classes.value_mobile]: mobile })}>{displayValue}</div>
-
         <div className={cn(classes.commentary, { [classes.commenary_mobile]: mobile })}>
           {header}
         </div>
+
+        <div className={cn(classes.value, { [classes.value_mobile]: mobile })}>{displayValue}</div>
       </button>
 
       <div className={cn(classes.arrow, { [classes.arrow_mobile]: mobile })}>
