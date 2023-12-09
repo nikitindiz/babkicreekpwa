@@ -17,6 +17,7 @@
     "date-fns": "^2.30.0",
     "dexie": "^3.2.4",
     "dexie-react-hooks": "^1.1.7",
+    "is-mobile": "^4.0.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
     "normalize.css": "^8.0.1",
@@ -44,7 +45,7 @@
     "workbox-streams": "^6.4.2"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "cross-env HTTPS=true craco start",
     "predeploy": "craco build",
     "deploy": "gh-pages -d build",
     "test": "craco test",
@@ -71,6 +72,7 @@
     "@formatjs/cli": "^6.2.3",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
     "@typescript-eslint/parser": "^6.7.5",
+    "cross-env": "^7.0.3",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-airbnb-typescript": "^17.1.0",

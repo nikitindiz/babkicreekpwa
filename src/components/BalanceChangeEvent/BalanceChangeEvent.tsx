@@ -1,4 +1,5 @@
 import React, { CSSProperties, FC, HTMLAttributes, ReactNode } from 'react';
+import isMobile from 'is-mobile';
 import cn from 'classnames';
 
 import classes from './BalanceChangeEvent.module.scss';
@@ -18,13 +19,24 @@ export const BalanceChangeEvent: FC<BalanceChangeEventProps> = ({
   sourceNode,
   ...restProps
 }) => {
+  const mobile = isMobile();
+
+  const lineStyle = mobile
+    ? { ...lineStyles, width: flowThickness }
+    : { height: flowThickness, ...lineStyles };
+
   return (
-    <div className={cn(classes.container, className)} {...restProps}>
-      <div className={cn(classes.source)}>{sourceNode}</div>
+    <div
+      className={cn(classes.container, className, { [classes.container_mobile]: mobile })}
+      {...restProps}>
+      <div className={cn(classes.source, { [classes.source_mobile]: mobile })}>{sourceNode}</div>
 
-      <div className={cn(classes.chartLine)} style={{ height: flowThickness, ...lineStyles }} />
+      <div
+        className={cn(classes.chartLine, { [classes.chartLine_mobile]: mobile })}
+        style={lineStyle}
+      />
 
-      <div className={cn(classes.drain)}>{drainNode}</div>
+      <div className={cn(classes.drain, { [classes.drain_mobile]: mobile })}>{drainNode}</div>
     </div>
   );
 };

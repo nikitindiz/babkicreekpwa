@@ -5,6 +5,14 @@
   height: 100%;
   color: var(--drain-color);
   min-width: 150px;
+
+  &_mobile {
+    flex-direction: column;
+    align-items: initial;
+    height: initial;
+    color: initial;
+    min-width: initial;
+  }
 }
 
 .editButton {
@@ -17,11 +25,30 @@
   border: none;
   color: inherit;
   padding: 1em;
+
+  &_mobile {
+    cursor: initial;
+    font-size: initial;
+    display: initial;
+    text-align: initial;
+    position: initial;
+    background-color: initial;
+    border: initial;
+    color: initial;
+    padding: initial;
+    margin-bottom: -1em;
+  }
 }
 
+.commentary,
 .value {
   font-size: 1.2em;
   margin-bottom: 0.5em;
+
+  &_mobile {
+    font-size: initial;
+    margin-bottom: initial;
+  }
 }
 
 .arrow {
@@ -31,6 +58,15 @@
   flex-direction: column;
   height: 100%;
   margin-bottom: 23px;
+
+  &_mobile {
+    width: 100%;
+    margin-right: 23px;
+    flex-direction: row;
+    height: initial;
+    margin-bottom: initial;
+    align-items: center;
+  }
 }
 
 .arrowPath {
@@ -38,12 +74,29 @@
   background-color: var(--drain-color);
   height: 100%;
   width: 2px;
+
+  &_mobile {
+    margin: initial;
+    height: 2px;
+    width: 100%;
+  }
 }
 
 .arrowTip {
   width: 100%;
   position: absolute;
   bottom: -22px;
+
+  &_mobile {
+    width: 23px;
+    height: 23px;
+    position: initial;
+    bottom: initial;
+
+    transform: rotate(-90deg);
+    transform-origin: center;
+    transform-box: fill-box;
+  }
 
   polygon {
     fill: var(--drain-color);

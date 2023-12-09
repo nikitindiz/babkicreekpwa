@@ -8,6 +8,23 @@
   &:first-child {
     margin-left: calc(var(--timestamp-size) * -1);
   }
+
+  &_mobile:first-child {
+    margin-left: initial;
+    margin-top: calc(var(--timestamp-size) * -1);
+  }
+
+  &_mobile {
+    min-width: initial;
+    height: initial;
+    flex-direction: row;
+    justify-content: initial;
+    margin-left: initial;
+
+    &:first-child {
+      margin-left: initial;
+    }
+  }
 }
 
 
@@ -15,10 +32,22 @@
 .source {
   height: 100%;
   overflow: hidden;
+
+  &_mobile {
+    height: initial;
+    width: 100%;
+    overflow: initial;
+  }
 }
 
 .chartLine {
   width: 100%;
   height: 50px;
   background-color: var(--source-color);
+
+  &_mobile {
+    width: 50px;
+    min-height: 23px;
+    height: auto;
+  }
 }

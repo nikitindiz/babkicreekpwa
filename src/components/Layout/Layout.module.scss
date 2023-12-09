@@ -9,6 +9,11 @@
   display: flex;
   background-color: white;
 
+  &_mobile {
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
   &::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 7px;
@@ -35,4 +40,9 @@
 .chart {
   margin-top: var(--top-nav-size);
   display: flex;
+
+  &_mobile {
+    flex-direction: column;
+    width: 100%;
+  }
 }

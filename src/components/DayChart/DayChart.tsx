@@ -1,8 +1,9 @@
 import React, { forwardRef, HTMLAttributes } from 'react';
 import cn from 'classnames';
+import isMobile from 'is-mobile';
 import moment from 'moment';
 
-import classes from './DayChartHorizontal.module.scss';
+import classes from './DayChart.module.scss';
 
 import { DateAndWeekContainer, DrainChartContainer, SourceChartContainer } from 'containers';
 import { Day } from 'types';
@@ -45,6 +46,8 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
     },
     ref,
   ) => {
+    const mobile = isMobile();
+
     return (
       <DayContextProvider date={day.date}>
         <div
@@ -52,6 +55,7 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
           className={cn(className, classes.container, {
             [classes.container_emptyDay]: noSourcesOrDrains,
             [classes.container_today]: day.date === buildDate().unix(),
+            [classes.container_mobile]: mobile,
           })}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}>
@@ -93,9 +97,9 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
             +
           </FloatingAddButton>
 
-          <div className={cn(classes.baseLine)} />
+          <div className={cn(classes.baseLine, { [classes.baseLine_mobile]: mobile })} />
 
-          <div className={cn(classes.timestamp)}>
+          <div className={cn(classes.timestamp, { [classes.timestamp_mobile]: mobile })}>
             <DateAndWeekContainer date={formatDate(moment.unix(day.date))} />
           </div>
         </div>

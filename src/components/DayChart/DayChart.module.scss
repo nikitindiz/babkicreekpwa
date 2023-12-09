@@ -12,6 +12,21 @@
   &_today {
     background-color: yellow;
   }
+
+  &_mobile {
+    flex-direction: column;
+    border-right: initial;
+    border-bottom: 1px solid var(--day-chart-right-border);
+    display: initial;
+    padding-left: initial;
+    padding-top: var(--timestamp-size);
+    min-width: initial;
+  }
+
+  &_mobile.container_emptyDay {
+    min-width: initial;
+    min-height: var(--timestamp-size);
+  }
 }
 
 .timestamp {
@@ -25,6 +40,17 @@
   font-size: 0.7em;
   opacity: 0.5;
   height: var(--timestamp-size);
+
+  &_mobile {
+    text-align: initial;
+    top: 0;
+    left: 0;
+    transform-origin: initial;
+    transform: initial;
+    padding: initial;
+    opacity: initial;
+    height: initial;
+  }
 }
 
 .baseLine {
@@ -33,6 +59,16 @@
   position: absolute;
   top: calc(50% - 0.5px);
   margin-left: calc(var(--timestamp-size) * -1);
+
+  &_mobile {
+    height: 100%;
+    left: 50%;
+    width: initial;
+    border-bottom: initial;
+    border-right: 1px dashed var(--baseline-color);
+    top: 0;
+    margin-left: initial;
+  }
 }
 
 .addButton {

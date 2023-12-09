@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useStore } from 'react-redux';
 
 import { buildDate } from 'utils';
-import { days, drains, settings, sources, thicknessMap, useAppDispatch } from 'store';
+import { days, drains, RootState, settings, sources, thicknessMap, useAppDispatch } from 'store';
 import { loadSettings } from 'store/slices/settings/thunkActions';
-import { Drain, Source } from 'types';
-import { tr } from 'date-fns/locale';
+import { Drain, LoadableEntity, Source } from 'types';
 
 export const useMoneyFlowChartContainer = () => {
   const daysByDate = useSelector(days.selectors.byDate)!;
@@ -36,12 +35,103 @@ export const useMoneyFlowChartContainer = () => {
   >(null);
 
   const datesParsingStarted = useRef(false);
+  const balanceChangesRequested = useRef(false);
+
+  const [requiredSourcesIds, setRequiredSourcesIds] = useState<Set<number>>(new Set());
+  const [requiredDrainsIds, setRequiredDrainsIds] = useState<Set<number>>(new Set());
+
+  const requiredSources = useMemo(
+    () =>
+      Array.from(requiredSourcesIds).reduce(
+        (acc, next) => {
+          acc[next] = sourcesById[next];
+
+          return acc;
+        },
+        {} as Record<number, LoadableEntity<Source> | undefined>,
+      ),
+    [requiredSourcesIds, sourcesById],
+  );
+
+  const requiredDrains = useMemo(
+    () =>
+      Array.from(requiredDrainsIds).reduce(
+        (acc, next) => {
+          acc[next] = drainsById[next];
+
+          return acc;
+        },
+        {} as Record<number, LoadableEntity<Drain> | undefined>,
+      ),
+    [requiredDrainsIds, drainsById],
+  );
+
+  const requiredSourcesLoadingEnded = useMemo(() => {
+    return Object.values(requiredSources).every((source) => source?.loadingEnded);
+  }, [requiredSources]);
+
+  const requiredDrainsLoadingEnded = useMemo(() => {
+    return Object.values(requiredDrains).every((drain) => drain?.loadingEnded);
+  }, [requiredDrains]);
+
+  const hasRequiredSources = useMemo(
+    () => Object.keys(requiredSources).length > 0,
+    [requiredSources],
+  );
+
+  const hasRequiredDrains = useMemo(() => Object.keys(requiredDrains).length > 0, [requiredDrains]);
 
   useEffect(() => {
-    if (daysByDateLoadingEnded && !datesParsingStarted.current) {
+    if (
+      hasRequiredSources &&
+      hasRequiredDrains &&
+      requiredSourcesLoadingEnded &&
+      requiredDrainsLoadingEnded &&
+      !datesParsingStarted.current
+    ) {
       datesParsingStarted.current = true;
+
       Promise.all(
-        dates.map(async (day) => {
+        dates.map(async (day, idx) => {
+          const {
+            sources: sourceIds = [],
+            drains: drainIds = [],
+            moneyByTheEndOfTheDay,
+          } = daysByDate[day];
+
+          return {
+            date: day,
+            moneyByTheEndOfTheDay: moneyByTheEndOfTheDay || 0,
+            drains: drainIds.map((drainId) => drainsById[drainId]?.data!),
+            sources: sourceIds.map((sourceId) => sourcesById[sourceId]?.data!),
+          };
+        }),
+      )
+        .then((stats) => {
+          console.log('stats', stats);
+
+          setDaysStats(stats);
+        })
+        .catch(console.error);
+    }
+  }, [
+    dates,
+    daysByDate,
+    drainsById,
+    hasRequiredDrains,
+    hasRequiredSources,
+    requiredDrainsLoadingEnded,
+    requiredSourcesLoadingEnded,
+    sourcesById,
+  ]);
+
+  useEffect(() => {
+    if (daysByDateLoadingEnded && !balanceChangesRequested.current) {
+      balanceChangesRequested.current = true;
+      datesParsingStarted.current = false;
+
+      Promise.all(
+        dates.map(async (day, idx) => {
           const {
             sources: sourceIds = [],
             drains: drainIds = [],
@@ -60,77 +150,12 @@ export const useMoneyFlowChartContainer = () => {
 
           await Promise.all(balanceChanges);
 
-          return {
-            date: day,
-            moneyByTheEndOfTheDay: moneyByTheEndOfTheDay || 0,
-            drains: drainIds.map((drainId) => drainsById[drainId]?.data!),
-            sources: sourceIds.map((sourceId) => sourcesById[sourceId]?.data!),
-          };
+          setRequiredSourcesIds((prevState) => new Set([...prevState, ...sourceIds]));
+          setRequiredDrainsIds((prevState) => new Set([...prevState, ...drainIds]));
         }),
-      )
-        .then((stats) => {
-          setDaysStats(stats);
-        })
-        .catch(console.error);
-
-      // for (const day of dates) {
-      //   const {
-      //     sources: sourceIds = [],
-      //     drains: drainIds = [],
-      //     moneyByTheEndOfTheDay,
-      //   } = daysByDate[day];
-      //
-      //   const balanceChanges: Promise<any>[] = [];
-      //
-      //   for (const drainId of drainIds) {
-      //     balanceChanges.push(dispatch(drains.thunk.loadDrain({ drainId: drainId })));
-      //   }
-      //
-      //   for (const sourceId of sourceIds) {
-      //     balanceChanges.push(dispatch(sources.thunk.loadSource({ sourceId: sourceId })));
-      //   }
-      //
-      //   Promise.all(balanceChanges)
-      //     .then(() => {
-      //       setDaysStats({
-      //         date: day,
-      //         moneyByTheEndOfTheDay: moneyByTheEndOfTheDay || 0,
-      //         drains: drainIds.map((drainId) => drainsById[drainId]?.data!),
-      //         sources: sourceIds.map((sourceId) => sourcesById[sourceId]?.data!),
-      //       });
-      //     })
-      //     .catch(console.error);
-      // }
+      ).catch(console.error);
     }
   }, [dates, daysByDate, daysByDateLoadingEnded, dispatch, drainsById, sourcesById]);
-
-  // const daysStats = useMemo(
-  //   () =>
-  //     dates.map((day) => {
-  //       const { sources = [], drains = [], moneyByTheEndOfTheDay } = daysByDate[day];
-  //
-  //       const a:  = {
-  //         date: day,
-  //         moneyByTheEndOfTheDay: moneyByTheEndOfTheDay || 0,
-  //         drains: drains.map((drainId) => {
-  //           debugger;
-  //           return drainsById[drainId]?.data!;
-  //         }),
-  //         sources: sources.map((sourceId) => sourcesById[sourceId]?.data!),
-  //       };
-  //
-  //       return {
-  //         date: day,
-  //         moneyByTheEndOfTheDay: moneyByTheEndOfTheDay || 0,
-  //         drains: drains.map((drainId) => {
-  //           debugger;
-  //           return drainsById[drainId]?.data!;
-  //         }),
-  //         sources: sources.map((sourceId) => sourcesById[sourceId]?.data!),
-  //       };
-  //     }),
-  //   [dates, daysByDate, drainsById, sourcesById],
-  // );
 
   const loadDays = useCallback(
     () => dispatch(days.thunk.loadDaysData(displayRange)),
@@ -138,13 +163,29 @@ export const useMoneyFlowChartContainer = () => {
   );
 
   const loadThicknessMap = useCallback(() => {
-    if (daysStats)
+    if (daysStats && requiredSourcesLoadingEnded && requiredDrainsLoadingEnded) {
+      console.log(
+        'loadThicknessMap',
+        requiredSourcesLoadingEnded,
+        requiredDrainsLoadingEnded,
+        requiredSources,
+        requiredDrains,
+        daysStats,
+      );
       dispatch(
         thicknessMap.thunk.loadThicknessMapData({
           daysStats,
         }),
       );
-  }, [daysStats, dispatch]);
+    }
+  }, [
+    daysStats,
+    dispatch,
+    requiredDrains,
+    requiredDrainsLoadingEnded,
+    requiredSources,
+    requiredSourcesLoadingEnded,
+  ]);
 
   useEffect(() => {
     loadDays();
