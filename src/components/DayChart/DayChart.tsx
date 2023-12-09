@@ -1,6 +1,5 @@
 import React, { forwardRef, HTMLAttributes } from 'react';
 import cn from 'classnames';
-import isMobile from 'is-mobile';
 import moment from 'moment';
 
 import classes from './DayChart.module.scss';
@@ -10,6 +9,7 @@ import { Day } from 'types';
 import { DayContextProvider } from 'context';
 import { FloatingAddButton, BalanceChangeEvent } from 'components';
 import { buildDate, formatDate } from 'utils';
+import { useIsMobile } from 'utils/hooks/useIsMobile';
 
 interface DayChartProps extends HTMLAttributes<HTMLDivElement> {
   addButtonsVisible: boolean;
@@ -46,7 +46,7 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
     },
     ref,
   ) => {
-    const mobile = isMobile();
+    const mobile = useIsMobile();
 
     return (
       <DayContextProvider date={day.date}>

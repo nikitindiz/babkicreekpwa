@@ -1,8 +1,8 @@
 import React, { CSSProperties, FC, HTMLAttributes, ReactNode } from 'react';
-import isMobile from 'is-mobile';
 import cn from 'classnames';
 
 import classes from './BalanceChangeEvent.module.scss';
+import { useIsMobile } from 'utils/hooks/useIsMobile';
 
 interface BalanceChangeEventProps extends HTMLAttributes<HTMLDivElement> {
   drainNode?: ReactNode;
@@ -19,7 +19,7 @@ export const BalanceChangeEvent: FC<BalanceChangeEventProps> = ({
   sourceNode,
   ...restProps
 }) => {
-  const mobile = isMobile();
+  const mobile = useIsMobile();
 
   const lineStyle = mobile
     ? { ...lineStyles, width: flowThickness }

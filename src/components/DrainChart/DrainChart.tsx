@@ -1,10 +1,10 @@
 import React, { FC, ReactNode } from 'react';
 import cn from 'classnames';
-import isMobile from 'is-mobile';
 
 import classes from './DrainChart.module.scss';
 
 import { ArrowDownIcon } from 'components';
+import { useIsMobile } from 'utils/hooks/useIsMobile';
 
 interface DrainChartVerticalProps {
   displayValue: string;
@@ -13,7 +13,7 @@ interface DrainChartVerticalProps {
 }
 
 export const DrainChart: FC<DrainChartVerticalProps> = ({ displayValue, header, openEdit }) => {
-  const mobile = isMobile();
+  const mobile = useIsMobile();
 
   return (
     <div className={cn(classes.container, { [classes.container_mobile]: mobile })}>

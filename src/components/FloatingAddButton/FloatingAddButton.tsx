@@ -2,7 +2,7 @@ import React, { FC, HTMLAttributes } from 'react';
 import cn from 'classnames';
 
 import classes from './FloatingAddButton.module.scss';
-import isMobile from 'is-mobile';
+import { useIsMobile } from 'utils/hooks/useIsMobile';
 
 interface FloatingAddButtonProps extends HTMLAttributes<HTMLButtonElement> {
   position?: 'top' | 'bottom' | 'left' | 'right';
@@ -16,7 +16,7 @@ export const FloatingAddButton: FC<FloatingAddButtonProps> = ({
   visible = false,
   ...restProps
 }) => {
-  const mobile = isMobile();
+  const mobile = useIsMobile();
 
   return (
     <div

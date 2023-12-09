@@ -13,6 +13,7 @@ import {
 } from 'containers';
 import { NewSourceModalContainer } from 'src/containers/NewSourceModalContainer';
 import { SettingsModal } from 'components';
+import { useIsMobile } from 'utils/hooks/useIsMobile';
 
 interface LayoutProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
@@ -21,7 +22,7 @@ interface LayoutProps extends HTMLAttributes<HTMLDivElement> {
 
 export const Layout = forwardRef<HTMLDivElement, LayoutProps>(
   ({ className, children, navigation, ...restProps }, ref) => {
-    const mobile = isMobile();
+    const mobile = useIsMobile();
 
     return (
       <div

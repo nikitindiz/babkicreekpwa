@@ -5,6 +5,7 @@ import isMobile from 'is-mobile';
 import classes from './SourceChart.module.scss';
 
 import { ArrowDownIcon } from 'components';
+import { useIsMobile } from 'utils/hooks/useIsMobile';
 
 interface SourceChartVerticalProps {
   displayValue: string;
@@ -13,7 +14,7 @@ interface SourceChartVerticalProps {
 }
 
 export const SourceChart: FC<SourceChartVerticalProps> = ({ displayValue, header, openEdit }) => {
-  const mobile = isMobile();
+  const mobile = useIsMobile();
 
   return (
     <div className={cn(classes.container, { [classes.container_mobile]: mobile })}>
