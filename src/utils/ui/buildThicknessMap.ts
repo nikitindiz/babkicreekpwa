@@ -15,6 +15,8 @@ export const buildThicknessMap = ({ daysStats, maxMoneyValue }: BuildThicknessMa
     endOfTheDayThickness: number;
   }[];
 
+  console.log('buildThicknessMap dayStats', daysStats);
+
   if (!daysStats) {
     return undefined;
   }
@@ -79,6 +81,8 @@ export const buildThicknessMap = ({ daysStats, maxMoneyValue }: BuildThicknessMa
 
     thicknessMap.push(map);
   });
+
+  console.log('thicknessMap', thicknessMap);
 
   return thicknessMap;
 };
