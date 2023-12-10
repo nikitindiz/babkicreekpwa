@@ -1,6 +1,8 @@
 .Navigation {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  font-size: 0.8em;
 
   &__button {
     background-color: transparent;

@@ -20,5 +20,7 @@
   "modal.caption.edit-source": "Править доход",
   "modal.caption.new-drain": "Новый расход",
   "modal.caption.new-source": "Новый доход",
-  "modal.caption.sync-modal": "Варианты синхронизвации"
+  "modal.caption.sync-modal": "Варианты синхронизвации",
+  "loading-backdrop.loading-label": "Загрузка",
+  "navigation.header": "График финансов"
 }

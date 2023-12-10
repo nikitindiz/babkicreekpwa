@@ -11,6 +11,7 @@
   "comment-editor.placeholder": "Enter comment",
   "currency-editor.expenses.label": "Expenses",
   "currency-editor.income.label": "Income",
+  "loading-backdrop.loading-label": "Loading",
   "lock-screen.button.create.caption": "Create profile",
   "modal.button.cancel": "Cancel",
   "modal.button.delete": "Delete",
@@ -19,5 +20,6 @@
   "modal.caption.edit-source": "Edit Source",
   "modal.caption.new-drain": "New Drain",
   "modal.caption.new-source": "New Source",
-  "modal.caption.sync-modal": "Sync options"
+  "modal.caption.sync-modal": "Sync options",
+  "navigation.header": "Finances Chart"
 }
