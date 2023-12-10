@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useDebouncedCallback } from 'use-debounce';
 
 import { Drain, LoadableEntity, Source } from 'types';
 import { buildDate } from 'utils';
@@ -74,7 +75,18 @@ export const useMoneyFlowChartContainer = () => {
     datesParsingStarted.current = false;
   }, [hasRequiredDrains, hasRequiredDrains]);
 
+  const debouncedLoadThicknessMapData = useDebouncedCallback((stats: typeof daysStats) => {
+    dispatch(
+      thicknessMap.thunk.loadThicknessMapData({
+        daysStats: stats!,
+      }),
+    );
+  }, 300);
+
   useEffect(() => {
+    let notFoundDrainIds: number[] = [];
+    let notFoundSourceIds: number[] = [];
+
     const stats = dates.map((day) => {
       const {
         sources: sourceIds = [],
@@ -85,13 +97,33 @@ export const useMoneyFlowChartContainer = () => {
       return {
         date: day,
         moneyByTheEndOfTheDay: moneyByTheEndOfTheDay || 0,
-        drains: drainIds.map((drainId) => requiredDrains[drainId]?.data!),
-        sources: sourceIds.map((sourceId) => requiredSources[sourceId]?.data!),
+        drains: drainIds.map((drainId) => {
+          if (!requiredDrains[drainId]?.data) {
+            notFoundDrainIds.push(drainId);
+          }
+
+          return requiredDrains[drainId]?.data!;
+        }),
+        sources: sourceIds.map((sourceId) => {
+          if (!requiredSources[sourceId]?.data) {
+            notFoundSourceIds.push(sourceId);
+          }
+
+          return requiredSources[sourceId]?.data!;
+        }),
       };
     });
 
-    setDaysStats(stats);
-  }, [dates, daysByDate, requiredDrains, requiredSources]);
+    if (notFoundDrainIds.length === 0 && notFoundSourceIds.length === 0) {
+      setDaysStats(stats);
+      debouncedLoadThicknessMapData(stats);
+      return;
+    }
+
+    balanceChangesRequested.current = false;
+    setRequiredDrainsIds((prevState) => new Set([...prevState, ...notFoundDrainIds]));
+    setRequiredSourcesIds((prevState) => new Set([...prevState, ...notFoundSourceIds]));
+  }, [dates, daysByDate, debouncedLoadThicknessMapData, dispatch, requiredDrains, requiredSources]);
 
   useEffect(() => {
     if (daysByDateLoadingEnded && !balanceChangesRequested.current) {
@@ -126,25 +158,30 @@ export const useMoneyFlowChartContainer = () => {
     [dispatch, displayRange],
   );
 
-  const loadThicknessMap = useCallback(() => {
-    if (daysStats?.length) {
-      dispatch(
-        thicknessMap.thunk.loadThicknessMapData({
-          daysStats,
-        }),
-      );
-    }
-  }, [daysStats, dispatch]);
-
+  // const handleLoadThicknessMapData = useCallback(() => {
+  //   if (daysStats)
+  //     dispatch(
+  //       thicknessMap.thunk.loadThicknessMapData({
+  //         daysStats,
+  //       }),
+  //     );
+  // }, [daysStats, dispatch]);
+  //
+  // const loadThicknessMap = useCallback(() => {
+  //   if (daysStats?.length) {
+  //     handleLoadThicknessMapData();
+  //   }
+  // }, [daysStats?.length, handleLoadThicknessMapData]);
+  //
   useEffect(() => {
     loadDays();
-  }, [loadDays, loadThicknessMap]);
-
-  useEffect(() => {
-    if (daysByDateLoadingEnded) {
-      loadThicknessMap();
-    }
-  }, [daysByDateLoadingEnded, loadThicknessMap]);
+  }, [loadDays]);
+  //
+  // useEffect(() => {
+  //   if (daysByDateLoadingEnded) {
+  //     loadThicknessMap();
+  //   }
+  // }, [daysByDateLoadingEnded, loadThicknessMap]);
 
   const currentDayNodeRef = useRef<HTMLDivElement | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);

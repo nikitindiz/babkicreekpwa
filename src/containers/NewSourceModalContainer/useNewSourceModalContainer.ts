@@ -4,10 +4,11 @@ import { useSelector } from 'react-redux';
 
 import { ModalsList, Source } from 'types';
 import { formatDate } from 'utils';
-import { modals, sourceEditor, sources, useAppDispatch } from 'store';
+import { days, modals, sourceEditor, sources, useAppDispatch } from 'store';
 
 export const useNewSourceModalContainer = () => {
   const date = useSelector(sourceEditor.selectors.date);
+  const displayRange = useSelector(days.selectors.displayRange);
   const sourceId = useSelector(sourceEditor.selectors.sourceId);
   const dispatch = useAppDispatch();
   const [updatedSource, setUpdatedSource] = useState<Partial<Omit<Source, 'sourceScheduleMeta'>>>(
@@ -46,10 +47,28 @@ export const useNewSourceModalContainer = () => {
           repeatableType: repeatableType,
         },
         date: newDate,
+        onDone: () => {
+          dispatch(
+            days.thunk.checkUpdatesDaysData({
+              startDate: formatDate(moment.unix(date!)),
+              endDate: displayRange.endDate,
+            }),
+          );
+        },
       }),
     );
     closeModal();
-  }, [closeModal, dispatch, newDate, repeatable, repeatableType, selectedWeekDays, updatedSource]);
+  }, [
+    closeModal,
+    date,
+    dispatch,
+    displayRange.endDate,
+    newDate,
+    repeatable,
+    repeatableType,
+    selectedWeekDays,
+    updatedSource,
+  ]);
 
   const onChangeForm = useCallback(
     ({

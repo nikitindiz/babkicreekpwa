@@ -29,12 +29,13 @@ interface SaveSourceArgs {
       sunday: boolean;
     };
   } | null;
+  onDone?: () => void;
 }
 
 export const saveSource = createAsyncThunk(
   `sources/save`,
   async (
-    { date, otherDaySettings, source, sourceId }: SaveSourceArgs,
+    { date, otherDaySettings, source, sourceId, onDone }: SaveSourceArgs,
     { rejectWithValue, getState },
   ) => {
     const byId = selectors.byId(getState() as RootState);
@@ -112,6 +113,8 @@ export const saveSource = createAsyncThunk(
       profileId,
       passwordHash,
     });
+
+    onDone?.();
 
     return result;
   },

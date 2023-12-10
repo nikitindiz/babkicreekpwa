@@ -29,12 +29,13 @@ interface SaveDrainArgs {
       sunday: boolean;
     };
   } | null;
+  onDone?: () => void;
 }
 
 export const saveDrain = createAsyncThunk(
   `drains/save`,
   async (
-    { date, otherDaySettings, drain, drainId }: SaveDrainArgs,
+    { date, otherDaySettings, drain, drainId, onDone }: SaveDrainArgs,
     { rejectWithValue, getState },
   ) => {
     const byId = selectors.byId(getState() as RootState);
@@ -112,6 +113,8 @@ export const saveDrain = createAsyncThunk(
       profileId,
       passwordHash,
     });
+
+    onDone?.();
 
     return result;
   },

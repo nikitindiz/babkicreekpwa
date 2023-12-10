@@ -1,7 +1,12 @@
 import { ActionReducerMapBuilder, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { DaysState } from './DaysState';
-import { loadDaysData, loadDaysDataExtraReducers } from './thunkActions';
+import {
+  checkUpdatesDaysData,
+  checkUpdatesDaysDataReducers,
+  loadDaysData,
+  loadDaysDataExtraReducers,
+} from './thunkActions';
 import { selectors } from './selectors';
 import { buildDate, formatDate } from 'utils';
 
@@ -33,6 +38,7 @@ const { reducer, actions } = createSlice({
 
   extraReducers: (builder: ActionReducerMapBuilder<DaysState>) => {
     loadDaysDataExtraReducers(builder);
+    checkUpdatesDaysDataReducers(builder);
   },
 });
 
@@ -40,6 +46,7 @@ interface DaysSlice {
   actions: typeof actions;
   thunk: {
     loadDaysData: typeof loadDaysData;
+    checkUpdatesDaysData: typeof checkUpdatesDaysData;
   };
   reducer: typeof reducer;
   selectors: typeof selectors;
@@ -49,6 +56,7 @@ export const days: DaysSlice = {
   actions,
   thunk: {
     loadDaysData,
+    checkUpdatesDaysData,
   },
   reducer,
   selectors,

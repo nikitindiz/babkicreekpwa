@@ -21,11 +21,12 @@ interface CreateDrainArgs {
       sunday: boolean;
     };
   } | null;
+  onDone?: () => void;
 }
 
 export const createDrain = createAsyncThunk(
   `drains/create`,
-  async ({ date, otherDaySettings, drain }: CreateDrainArgs, { getState, dispatch }) => {
+  async ({ date, otherDaySettings, drain, onDone }: CreateDrainArgs, { getState, dispatch }) => {
     let drainScheduleMeta: number[] = [];
     const passwordHash = settings.selectors.passwordHash(getState() as RootState)!;
     const profileId = settings.selectors.activeProfile(getState() as RootState)!;
@@ -75,8 +76,6 @@ export const createDrain = createAsyncThunk(
 
     await db.drains.update(createdDrainId, changes);
 
-    dispatch(days.actions.reset());
-
     dispatch(days.thunk.loadDaysData(displayRange));
 
     await buildMoneyByTheEndOfTheDay({
@@ -85,6 +84,8 @@ export const createDrain = createAsyncThunk(
       profileId,
       passwordHash,
     });
+
+    onDone?.();
 
     return changes;
   },

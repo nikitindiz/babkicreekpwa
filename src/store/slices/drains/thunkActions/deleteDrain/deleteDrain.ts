@@ -8,11 +8,12 @@ import { selectors } from '../../selectors';
 
 interface DeleteDrainArgs {
   drainId: number;
+  onDone?: () => void;
 }
 
 export const deleteDrain = createAsyncThunk(
   `drains/delete`,
-  async ({ drainId }: DeleteDrainArgs, { rejectWithValue, getState, dispatch }) => {
+  async ({ drainId, onDone }: DeleteDrainArgs, { rejectWithValue, getState, dispatch }) => {
     const byId = selectors.byId(getState() as RootState);
     let drainScheduleMeta = byId[drainId]?.data?.drainScheduleMeta || [];
     const passwordHash = settings.selectors.passwordHash(getState() as RootState)!;
@@ -33,13 +34,15 @@ export const deleteDrain = createAsyncThunk(
     await Promise.all(drainScheduleMeta?.map(db.deleteDrainScheduleMeta));
     await db.drains.delete(drainId);
 
-    dispatch(days.actions.reset());
     dispatch(days.thunk.loadDaysData(displayRange));
+
     await buildMoneyByTheEndOfTheDay({
       starting: formatDate(moment.unix(earliest)),
       days: 61,
       profileId,
       passwordHash,
     });
+
+    onDone?.();
   },
 );

@@ -21,11 +21,12 @@ interface CreateSourceArgs {
       sunday: boolean;
     };
   } | null;
+  onDone?: () => void;
 }
 
 export const createSource = createAsyncThunk(
   `sources/create`,
-  async ({ date, otherDaySettings, source }: CreateSourceArgs, { getState, dispatch }) => {
+  async ({ date, otherDaySettings, source, onDone }: CreateSourceArgs, { getState, dispatch }) => {
     let sourceScheduleMeta: number[] = [];
     const passwordHash = settings.selectors.passwordHash(getState() as RootState)!;
     const profileId = settings.selectors.activeProfile(getState() as RootState)!;
@@ -75,8 +76,6 @@ export const createSource = createAsyncThunk(
 
     await db.sources.update(createdSourceId, changes);
 
-    dispatch(days.actions.reset());
-
     dispatch(days.thunk.loadDaysData(displayRange));
 
     await buildMoneyByTheEndOfTheDay({
@@ -85,6 +84,8 @@ export const createSource = createAsyncThunk(
       profileId,
       passwordHash,
     });
+
+    onDone?.();
 
     return {
       id: changes.id,
