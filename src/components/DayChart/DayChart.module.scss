@@ -56,6 +56,10 @@
     height: initial;
     width: initial;
   }
+
+  &_isWeekend {
+    color: var(--day-chart-weekend-timestamp);
+  }
 }
 
 .container_today .timestamp {

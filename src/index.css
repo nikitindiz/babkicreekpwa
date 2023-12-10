@@ -24,6 +24,7 @@
   --font-size-button-children: 2em;
   --font-size-label: 0.8em;
 
+  --day-chart-weekend-timestamp: #561c00;
   --day-chart-background: #eee;
   --day-chart-weekend-background: rgba(255,26,26,0.13);
   --day-chart-today-background: rgba(240, 0, 255, 0.16);

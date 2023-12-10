@@ -51,7 +51,7 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
   ) => {
     const mobile = useIsMobile();
     const isWeekend =
-      moment.unix(day.date).weekday() === 5 || moment.unix(day.date).weekday() === 6;
+      moment.unix(day.date).isoWeekday() === 7 || moment.unix(day.date).isoWeekday() === 6;
 
     return (
       <DayContextProvider date={day.date}>
@@ -83,7 +83,11 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
 
           <div className={cn(classes.baseLine, { [classes.baseLine_mobile]: mobile })} />
 
-          <div className={cn(classes.timestamp, { [classes.timestamp_mobile]: mobile })}>
+          <div
+            className={cn(classes.timestamp, {
+              [classes.timestamp_mobile]: mobile,
+              [classes.timestamp_isWeekend]: isWeekend,
+            })}>
             <DateAndWeekContainer date={formatDate(moment.unix(day.date))} />
           </div>
 
