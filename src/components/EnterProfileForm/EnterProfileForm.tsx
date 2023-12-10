@@ -24,7 +24,7 @@ export const EnterProfileForm: FC<EnterProfileFormProps> = ({
   if (!profile) return <div>Loading...</div>;
 
   return (
-    <form onSubmit={handleEnter}>
+    <form onSubmit={handleEnter} className={classes.container}>
       <div className={classes.header}>
         <button type="button" className={classes.backButton} onClick={goBack}>
           <ArrowLeftIcon />
