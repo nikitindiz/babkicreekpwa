@@ -21,7 +21,7 @@ interface CreateSourceArgs {
       sunday: boolean;
     };
   } | null;
-  onDone?: () => void;
+  onDone?: (newSourceId: number) => void;
 }
 
 export const createSource = createAsyncThunk(
@@ -85,7 +85,7 @@ export const createSource = createAsyncThunk(
       passwordHash,
     });
 
-    onDone?.();
+    onDone?.(createdSourceId);
 
     return {
       id: changes.id,

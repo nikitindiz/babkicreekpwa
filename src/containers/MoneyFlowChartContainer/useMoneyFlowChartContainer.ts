@@ -98,14 +98,22 @@ export const useMoneyFlowChartContainer = () => {
         date: day,
         moneyByTheEndOfTheDay: moneyByTheEndOfTheDay || 0,
         drains: drainIds.map((drainId) => {
-          if (!requiredDrains[drainId]?.data) {
+          if (
+            !requiredDrains[drainId]?.data &&
+            !requiredDrains[drainId]?.loadingError &&
+            !requiredDrainsIds.has(drainId)
+          ) {
             notFoundDrainIds.push(drainId);
           }
 
           return requiredDrains[drainId]?.data!;
         }),
         sources: sourceIds.map((sourceId) => {
-          if (!requiredSources[sourceId]?.data) {
+          if (
+            !requiredSources[sourceId]?.data &&
+            !requiredSources[sourceId]?.loadingError &&
+            !requiredSourcesIds.has(sourceId)
+          ) {
             notFoundSourceIds.push(sourceId);
           }
 
@@ -158,30 +166,9 @@ export const useMoneyFlowChartContainer = () => {
     [dispatch, displayRange],
   );
 
-  // const handleLoadThicknessMapData = useCallback(() => {
-  //   if (daysStats)
-  //     dispatch(
-  //       thicknessMap.thunk.loadThicknessMapData({
-  //         daysStats,
-  //       }),
-  //     );
-  // }, [daysStats, dispatch]);
-  //
-  // const loadThicknessMap = useCallback(() => {
-  //   if (daysStats?.length) {
-  //     handleLoadThicknessMapData();
-  //   }
-  // }, [daysStats?.length, handleLoadThicknessMapData]);
-  //
   useEffect(() => {
     loadDays();
   }, [loadDays]);
-  //
-  // useEffect(() => {
-  //   if (daysByDateLoadingEnded) {
-  //     loadThicknessMap();
-  //   }
-  // }, [daysByDateLoadingEnded, loadThicknessMap]);
 
   const currentDayNodeRef = useRef<HTMLDivElement | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -209,5 +196,6 @@ export const useMoneyFlowChartContainer = () => {
     today,
     currentDayNodeRef,
     daysByDate,
+    isLoading: !daysByDateLoadingEnded,
   };
 };

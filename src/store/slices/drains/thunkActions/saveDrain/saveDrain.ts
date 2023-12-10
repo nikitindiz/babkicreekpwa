@@ -29,7 +29,7 @@ interface SaveDrainArgs {
       sunday: boolean;
     };
   } | null;
-  onDone?: () => void;
+  onDone?: (drainId: number) => void;
 }
 
 export const saveDrain = createAsyncThunk(
@@ -114,7 +114,7 @@ export const saveDrain = createAsyncThunk(
       passwordHash,
     });
 
-    onDone?.();
+    onDone?.(drainId);
 
     return result;
   },

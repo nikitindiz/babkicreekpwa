@@ -29,7 +29,7 @@ interface SaveSourceArgs {
       sunday: boolean;
     };
   } | null;
-  onDone?: () => void;
+  onDone?: (sourceId: number) => void;
 }
 
 export const saveSource = createAsyncThunk(
@@ -114,7 +114,7 @@ export const saveSource = createAsyncThunk(
       passwordHash,
     });
 
-    onDone?.();
+    onDone?.(sourceId);
 
     return result;
   },

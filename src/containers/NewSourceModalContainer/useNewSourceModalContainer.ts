@@ -47,11 +47,18 @@ export const useNewSourceModalContainer = () => {
           repeatableType: repeatableType,
         },
         date: newDate,
-        onDone: () => {
+        onDone: (sourceId) => {
           dispatch(
-            days.thunk.checkUpdatesDaysData({
-              startDate: formatDate(moment.unix(date!)),
-              endDate: displayRange.endDate,
+            sources.thunk.loadSource({
+              sourceId: sourceId,
+              onDone: () => {
+                dispatch(
+                  days.thunk.checkUpdatesDaysData({
+                    startDate: formatDate(moment.unix(date!)),
+                    endDate: displayRange.endDate,
+                  }),
+                );
+              },
             }),
           );
         },

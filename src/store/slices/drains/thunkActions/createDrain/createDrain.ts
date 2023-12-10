@@ -21,7 +21,7 @@ interface CreateDrainArgs {
       sunday: boolean;
     };
   } | null;
-  onDone?: () => void;
+  onDone?: (newDrainId: number) => void;
 }
 
 export const createDrain = createAsyncThunk(
@@ -85,8 +85,13 @@ export const createDrain = createAsyncThunk(
       passwordHash,
     });
 
-    onDone?.();
+    onDone?.(createdDrainId);
 
-    return changes;
+    return {
+      id: changes.id,
+      expenses: drain.expenses,
+      commentary: drain.commentary,
+      updatedAt: changes.updatedAt,
+    };
   },
 );

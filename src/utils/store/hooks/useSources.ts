@@ -1,7 +1,5 @@
 import { useCallback } from 'react';
 import { days, sources, useAppDispatch } from 'store';
-import { formatDate } from 'utils';
-import moment from 'moment/moment';
 import { useSelector } from 'react-redux';
 
 export const useSources = () => {
@@ -13,18 +11,24 @@ export const useSources = () => {
       dispatch(
         sources.thunk.saveSource({
           ...args,
-          onDone: () => {
+          onDone: (sourceId) => {
+            console.log('source save done');
             dispatch(
-              days.thunk.checkUpdatesDaysData({
-                startDate: displayRange.startDate,
-                endDate: displayRange.endDate,
+              sources.thunk.loadSource({
+                sourceId: sourceId,
+                reFetch: true,
+                onDone: () => {
+                  console.log('source load done');
+                  console.log('source checking updated days');
+                  dispatch(days.thunk.checkUpdatesDaysData(displayRange));
+                },
               }),
             );
           },
         }),
       );
     },
-    [dispatch, displayRange.endDate],
+    [dispatch, displayRange],
   );
 
   const deleteSource = useCallback(
@@ -33,17 +37,12 @@ export const useSources = () => {
         sources.thunk.deleteSource({
           sourceId,
           onDone: () => {
-            dispatch(
-              days.thunk.checkUpdatesDaysData({
-                startDate: displayRange.startDate,
-                endDate: displayRange.endDate,
-              }),
-            );
+            dispatch(days.thunk.checkUpdatesDaysData(displayRange));
           },
         }),
       );
     },
-    [dispatch],
+    [dispatch, displayRange],
   );
 
   return {

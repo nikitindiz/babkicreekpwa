@@ -1,0 +1,39 @@
+@keyframes fadeEffect {
+  0% {
+    opacity: 0.2;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.2;
+  }
+}
+
+.container {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  color: white;
+  animation: fadeEffect 10s infinite;
+}
+
+.logo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
+.logoImage {
+  width: 100%;
+  max-width: 200px;
+}

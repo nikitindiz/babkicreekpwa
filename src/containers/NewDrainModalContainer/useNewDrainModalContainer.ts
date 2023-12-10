@@ -4,10 +4,11 @@ import { useSelector } from 'react-redux';
 
 import { ModalsList, Drain } from 'types';
 import { formatDate } from 'utils';
-import { modals, drainEditor, drains, useAppDispatch } from 'store';
+import { modals, drainEditor, drains, useAppDispatch, sources, days } from 'store';
 
 export const useNewDrainModalContainer = () => {
   const date = useSelector(drainEditor.selectors.date);
+  const displayRange = useSelector(days.selectors.displayRange);
   const drainId = useSelector(drainEditor.selectors.drainId);
   const dispatch = useAppDispatch();
   const [updatedDrain, setUpdatedDrain] = useState<Partial<Omit<Drain, 'drainScheduleMeta'>>>({});
@@ -44,10 +45,35 @@ export const useNewDrainModalContainer = () => {
           repeatableType: repeatableType,
         },
         date: newDate,
+        onDone: (newDrainId) => {
+          dispatch(
+            drains.thunk.loadDrain({
+              drainId: newDrainId,
+              onDone: () => {
+                dispatch(
+                  days.thunk.checkUpdatesDaysData({
+                    startDate: formatDate(moment.unix(date!)),
+                    endDate: displayRange.endDate,
+                  }),
+                );
+              },
+            }),
+          );
+        },
       }),
     );
     closeModal();
-  }, [closeModal, dispatch, newDate, repeatable, repeatableType, selectedWeekDays, updatedDrain]);
+  }, [
+    closeModal,
+    date,
+    dispatch,
+    displayRange.endDate,
+    newDate,
+    repeatable,
+    repeatableType,
+    selectedWeekDays,
+    updatedDrain,
+  ]);
 
   const onChangeForm = useCallback(
     ({
