@@ -68,9 +68,6 @@ const loadThicknessMapData = createAsyncThunk(
 
     return Promise.resolve(data).catch(rejectWithValue);
   },
-  {
-    condition: (payload, { getState }) => !selectors.loadingStarted(getState() as RootState),
-  },
 );
 
 const selectors = {

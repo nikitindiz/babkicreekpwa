@@ -96,6 +96,7 @@ export const buildMoneyByTheEndOfTheDay = async ({
   for (const date of dates) {
     const isoDate = buildDate(date).toISOString();
     const currentSources = sources[isoDate] || [];
+    const currentDrains = drains[isoDate] || [];
     let currentDaysData: Day;
 
     if (daysHash[isoDate]) {
@@ -120,7 +121,21 @@ export const buildMoneyByTheEndOfTheDay = async ({
       sumIncomes += incomeAsNumber;
     }
 
-    const sumExpenses = 0;
+    let sumExpenses = 0;
+
+    const drainsData = await db.drains.bulkGet(currentDrains);
+
+    for (const drain of drainsData) {
+      const dataEncryptor = new DataEncryptor({ iv: drain?.iv, salt: drain?.salt });
+      await dataEncryptor.generateKey(passwordHash);
+
+      const expenseAsText = await dataEncryptor.decodeText(drain?.expenses!);
+      let expenseAsNumber = expenseAsText ? parseFloat(expenseAsText) : 0;
+
+      if (isNaN(expenseAsNumber)) expenseAsNumber = 0;
+
+      sumExpenses += expenseAsNumber;
+    }
 
     lastKnownMoneyByTheEndOfTheDay += parseFloat(sumIncomes as any);
     lastKnownMoneyByTheEndOfTheDay -= parseFloat(sumExpenses as any);

@@ -38,6 +38,8 @@ export const buildThicknessMap = ({ daysStats, maxMoneyValue }: BuildThicknessMa
     const beginningOfTheDayValue =
       parseFloat(moneyByTheEndOfTheDay as any) - totalFromSources + totalLossFromDrains;
 
+    // if (beginningOfTheDayValue > 0) debugger;
+
     console.log('beginningOfTheDayValue', beginningOfTheDayValue);
     console.log('moneyByTheEndOfTheDay', moneyByTheEndOfTheDay);
 
