@@ -3,7 +3,7 @@ import moment from 'moment/moment';
 import { useSelector } from 'react-redux';
 
 import { Day, ModalsList } from 'types';
-import { drainEditor, modals, sourceEditor, thicknessMap, useAppDispatch } from 'store';
+import { drainEditor, modals, settings, sourceEditor, thicknessMap, useAppDispatch } from 'store';
 
 interface UseDayChartContainerArgs {
   day: Day;
@@ -11,6 +11,7 @@ interface UseDayChartContainerArgs {
 
 export const useDayChartContainer = ({ day }: UseDayChartContainerArgs) => {
   const thicknessMapByDate = useSelector(thicknessMap.selectors.byDate);
+  const currency = useSelector(settings.selectors.currency);
   const [addButtonsVisible, setAddButtonsVisible] = useState(false);
 
   const dispatch = useAppDispatch();
@@ -39,6 +40,7 @@ export const useDayChartContainer = ({ day }: UseDayChartContainerArgs) => {
 
   return {
     addButtonsVisible,
+    currency,
     isoDate,
     noSourcesOrDrains,
     onMouseEnter,

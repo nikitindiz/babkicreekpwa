@@ -3,6 +3,7 @@ import { ActionReducerMapBuilder, createSlice, PayloadAction } from '@reduxjs/to
 import { DaysState } from './DaysState';
 import { loadDaysData, loadDaysDataExtraReducers } from './thunkActions';
 import { selectors } from './selectors';
+import { buildDate, formatDate } from 'utils';
 
 const initialState: DaysState = {
   loadingEnded: false,
@@ -10,8 +11,8 @@ const initialState: DaysState = {
   loadingStarted: false,
 
   displayRange: {
-    startDate: '13.10.2023',
-    endDate: '13.12.2023',
+    startDate: formatDate(buildDate().subtract(2, 'month')),
+    endDate: formatDate(buildDate().add(2, 'month')),
   },
 
   byDate: {},

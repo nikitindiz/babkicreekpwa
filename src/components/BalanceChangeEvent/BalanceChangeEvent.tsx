@@ -5,18 +5,18 @@ import classes from './BalanceChangeEvent.module.scss';
 import { useIsMobile } from 'utils/hooks/useIsMobile';
 
 interface BalanceChangeEventProps extends HTMLAttributes<HTMLDivElement> {
-  drainNode?: ReactNode;
+  expensesSection?: ReactNode;
   flowThickness?: number;
+  incomesSection?: ReactNode;
   lineStyles?: CSSProperties;
-  sourceNode?: ReactNode;
 }
 
 export const BalanceChangeEvent: FC<BalanceChangeEventProps> = ({
   className,
-  drainNode,
+  expensesSection,
   flowThickness,
+  incomesSection,
   lineStyles = {},
-  sourceNode,
   ...restProps
 }) => {
   const mobile = useIsMobile();
@@ -29,14 +29,16 @@ export const BalanceChangeEvent: FC<BalanceChangeEventProps> = ({
     <div
       className={cn(classes.container, className, { [classes.container_mobile]: mobile })}
       {...restProps}>
-      <div className={cn(classes.source, { [classes.source_mobile]: mobile })}>{sourceNode}</div>
+      <div className={cn(classes.source, { [classes.source_mobile]: mobile })}>
+        {incomesSection}
+      </div>
 
       <div
         className={cn(classes.chartLine, { [classes.chartLine_mobile]: mobile })}
         style={lineStyle}
       />
 
-      <div className={cn(classes.drain, { [classes.drain_mobile]: mobile })}>{drainNode}</div>
+      <div className={cn(classes.drain, { [classes.drain_mobile]: mobile })}>{expensesSection}</div>
     </div>
   );
 };

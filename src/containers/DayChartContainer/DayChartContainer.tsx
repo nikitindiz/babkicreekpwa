@@ -19,11 +19,13 @@ export const DayChartContainer = forwardRef<HTMLDivElement, DayChartContainerPro
       openAddDrain,
       openAddSource,
       thicknessMapByDate,
+      currency,
     } = useDayChartContainer({ day });
 
     return (
       <DayChart
         addButtonsVisible={addButtonsVisible}
+        currency={currency}
         day={day}
         isoDate={isoDate}
         noSourcesOrDrains={noSourcesOrDrains}

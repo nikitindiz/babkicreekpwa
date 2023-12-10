@@ -1,6 +1,7 @@
 import React, { forwardRef, HTMLAttributes } from 'react';
 import cn from 'classnames';
 import moment from 'moment';
+import { FormattedNumber } from 'react-intl';
 
 import classes from './DayChart.module.scss';
 
@@ -12,6 +13,7 @@ import { buildDate, formatDate } from 'utils';
 import { useIsMobile } from 'utils/hooks/useIsMobile';
 
 interface DayChartProps extends HTMLAttributes<HTMLDivElement> {
+  currency: string;
   addButtonsVisible: boolean;
   day: Day;
   isoDate: string;
@@ -42,17 +44,21 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
       openAddDrain,
       openAddSource,
       thicknessMapByDate,
+      currency,
       ...restProps
     },
     ref,
   ) => {
     const mobile = useIsMobile();
+    const isWeekend =
+      moment.unix(day.date).weekday() === 5 || moment.unix(day.date).weekday() === 6;
 
     return (
       <DayContextProvider date={day.date}>
         <div
           ref={ref}
           className={cn(className, classes.container, {
+            [classes.container_weekend]: isWeekend,
             [classes.container_emptyDay]: noSourcesOrDrains,
             [classes.container_today]: day.date === buildDate().unix(),
             [classes.container_mobile]: mobile,
@@ -89,7 +95,7 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
             <BalanceChangeEvent
               key={sourceId}
               flowThickness={thicknessMapByDate[isoDate]?.sources[idx]}
-              sourceNode={<SourceChartContainer sourceId={sourceId} />}
+              incomesSection={<SourceChartContainer sourceId={sourceId} />}
             />
           ))}
 
@@ -97,12 +103,24 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
             <BalanceChangeEvent
               key={drainId}
               flowThickness={thicknessMapByDate[isoDate]?.drains[idx]}
-              drainNode={<DrainChartContainer drainId={drainId} />}
+              expensesSection={<DrainChartContainer drainId={drainId} />}
               lineStyles={{ backgroundColor: 'var(--drain-color)' }}
             />
           ))}
 
-          <BalanceChangeEvent flowThickness={thicknessMapByDate[isoDate]?.endOfTheDayThickness} />
+          <BalanceChangeEvent
+            flowThickness={thicknessMapByDate[isoDate]?.endOfTheDayThickness}
+            incomesSection={<div />}
+            expensesSection={
+              <div className={cn(classes.total, { [classes.total_mobile]: mobile })}>
+                <FormattedNumber
+                  value={day.moneyByTheEndOfTheDay || 0}
+                  style="currency"
+                  currency={currency}
+                />
+              </div>
+            }
+          />
         </div>
       </DayContextProvider>
     );

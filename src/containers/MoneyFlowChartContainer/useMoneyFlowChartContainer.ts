@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useSelector, useStore } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import { buildDate } from 'utils';
-import { days, drains, RootState, settings, sources, thicknessMap, useAppDispatch } from 'store';
-import { loadSettings } from 'store/slices/settings/thunkActions';
 import { Drain, LoadableEntity, Source } from 'types';
+import { buildDate } from 'utils';
+import { days, drains, settings, sources, thicknessMap, useAppDispatch } from 'store';
+import { loadSettings } from 'store/slices/settings/thunkActions';
+import { useIsMobile } from 'utils/hooks/useIsMobile';
 
 export const useMoneyFlowChartContainer = () => {
   const daysByDate = useSelector(days.selectors.byDate)!;
@@ -15,6 +16,7 @@ export const useMoneyFlowChartContainer = () => {
   const { data: profileSettings } = useSelector(settings.selectors.profileSettings);
   const activeProfile = useSelector(settings.selectors.activeProfile);
   const dates = useMemo(() => Object.keys(daysByDate).sort(), [daysByDate]);
+  const mobile = useIsMobile();
 
   const dispatch = useAppDispatch();
 
@@ -33,8 +35,6 @@ export const useMoneyFlowChartContainer = () => {
       }[]
     | null
   >(null);
-
-  // console.log('daysStats', daysStats);
 
   const datesParsingStarted = useRef(false);
   const balanceChangesRequested = useRef(false);
@@ -68,47 +68,19 @@ export const useMoneyFlowChartContainer = () => {
     [requiredDrainsIds, drainsById],
   );
 
-  const requiredSourcesLoadingEnded = useMemo(() => {
-    return Object.values(requiredSources).every((source) => source?.loadingEnded);
-  }, [requiredSources]);
-
-  const requiredDrainsLoadingEnded = useMemo(() => {
-    return Object.values(requiredDrains).every((drain) => drain?.loadingEnded);
-  }, [requiredDrains]);
-
-  const hasRequiredSources = useMemo(
-    () => Object.keys(requiredSources).length > 0,
-    [requiredSources],
-  );
-
   const hasRequiredDrains = useMemo(() => Object.keys(requiredDrains).length > 0, [requiredDrains]);
-
-  // console.log('requiredSources', requiredSources);
-  // console.log('requiredDrains', requiredDrains);
 
   useEffect(() => {
     datesParsingStarted.current = false;
   }, [hasRequiredDrains, hasRequiredDrains]);
 
   useEffect(() => {
-    // const hasNoSources = !hasRequiredSources;
-    // const hasSourcesAndDoneLoading = hasRequiredSources && requiredSourcesLoadingEnded;
-    // const hasNoDrains = !hasRequiredDrains;
-    // const hasSourcesAndDoneLoading = hasRequiredDrains && requiredDrainsLoadingEnded;
-
-    const stats = dates.map((day, idx) => {
+    const stats = dates.map((day) => {
       const {
         sources: sourceIds = [],
         drains: drainIds = [],
         moneyByTheEndOfTheDay,
       } = daysByDate[day];
-
-      // console.log(
-      //   'requiredDrains',
-      //   requiredDrains,
-      //   drainIds,
-      //   drainIds.map((drainId) => requiredDrains[drainId]?.data!),
-      // );
 
       return {
         date: day,
@@ -127,7 +99,7 @@ export const useMoneyFlowChartContainer = () => {
       datesParsingStarted.current = false;
 
       Promise.all(
-        dates.map(async (day, idx) => {
+        dates.map(async (day) => {
           const { sources: sourceIds = [], drains: drainIds = [] } = daysByDate[day];
 
           const balanceChanges: Promise<any>[] = [];
@@ -154,32 +126,8 @@ export const useMoneyFlowChartContainer = () => {
     [dispatch, displayRange],
   );
 
-  // console.log('daysStats', daysStats);
-  // console.log('hasRequiredSources', hasRequiredSources);
-  // console.log('requiredSourcesLoadingEnded', requiredSourcesLoadingEnded);
-  // console.log('hasRequiredDrains', hasRequiredDrains);
-  // console.log('requiredDrainsLoadingEnded', requiredDrainsLoadingEnded);
-  // console.log(
-  //   '(!hasRequiredSources || requiredSourcesLoadingEnded)',
-  //   !hasRequiredSources || requiredSourcesLoadingEnded,
-  // );
-  // console.log(
-  //   '(!hasRequiredDrains || requiredDrainsLoadingEnded)',
-  //   !hasRequiredDrains || requiredDrainsLoadingEnded,
-  // );
-
   const loadThicknessMap = useCallback(() => {
-    // console.log('daysStats?.length', daysStats?.length);
-
     if (daysStats?.length) {
-      // console.log(
-      //   'loadThicknessMap',
-      //   requiredSourcesLoadingEnded,
-      //   requiredDrainsLoadingEnded,
-      //   requiredSources,
-      //   requiredDrains,
-      //   daysStats,
-      // );
       dispatch(
         thicknessMap.thunk.loadThicknessMapData({
           daysStats,
@@ -209,10 +157,14 @@ export const useMoneyFlowChartContainer = () => {
   useEffect(() => {
     if (currentScrollable === null || currentTarget === null || scrolled.current) return;
 
-    currentScrollable.scrollLeft = currentTarget.getBoundingClientRect().left!;
+    if (!mobile) {
+      currentScrollable.scrollLeft = currentTarget.getBoundingClientRect().left!;
+    } else {
+      currentScrollable.scrollTop = currentTarget.getBoundingClientRect().top!;
+    }
 
     scrolled.current = true;
-  }, [currentScrollable, currentTarget]);
+  }, [currentScrollable, currentTarget, mobile]);
 
   return {
     scrollRef,

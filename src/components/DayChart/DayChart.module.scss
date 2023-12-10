@@ -5,12 +5,16 @@
   display: flex;
   z-index: 0;
 
+  &_weekend {
+    background-color: var(--day-chart-weekend-background);
+  }
+
   &_emptyDay {
     min-width: var(--timestamp-size);
   }
 
   &_today {
-    background-color: yellow;
+    background-color: var(--day-chart-today-background);
   }
 
   &_mobile {
@@ -36,7 +40,7 @@
   position: absolute;
   transform-origin: top left;
   transform: rotateZ(-90deg) translateX(-100%);
-  padding: 0 5px;
+  padding: 5px;
   font-size: 0.7em;
   opacity: 0.5;
   height: var(--timestamp-size);
@@ -49,10 +53,13 @@
     right: 0;
     transform-origin: initial;
     transform: initial;
-    opacity: initial;
     height: initial;
     width: initial;
   }
+}
+
+.container_today .timestamp {
+  font-weight: bold;
 }
 
 .baseLine {
@@ -91,5 +98,16 @@
 
   &_drain {
     background-color: var(--drain-color);
+  }
+}
+
+.total {
+  font-size: 0.6em;
+  padding: 0.2em 0.5em;
+  opacity: 0.4;
+  font-weight: 700;
+
+  &_mobile {
+    padding: 0 0.5em;
   }
 }

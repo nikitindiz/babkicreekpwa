@@ -81,7 +81,7 @@ export const createDrain = createAsyncThunk(
 
     await buildMoneyByTheEndOfTheDay({
       starting: formatDate(buildDate(date).subtract(1, 'days')),
-      days: 61,
+      days: 31 * 4,
       profileId,
       passwordHash,
     });

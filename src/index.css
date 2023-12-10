@@ -1,6 +1,6 @@
 :root {
-  --drain-color: #dc2525;
-  --source-color: #407340;
+  --drain-color: #961e1e;
+  --source-color: #688c39;
 
   --neutral-dark-color: #3a3a3a;
   --neutral-light-color: #a6a6a6;
@@ -24,7 +24,9 @@
   --font-size-button-children: 2em;
   --font-size-label: 0.8em;
 
-  --day-chart-background: rgba(71, 107, 225, 0.2);
+  --day-chart-background: #eee;
+  --day-chart-weekend-background: rgba(255,26,26,0.13);
+  --day-chart-today-background: rgba(240, 0, 255, 0.16);
   --day-chart-right-border: black;
 
   --baseline-color: rgba(0,0,0,0.1);
