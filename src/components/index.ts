@@ -31,6 +31,7 @@ export * from './Modals';
 export * from './ModuleTabs';
 export * from './MoneyFlowChart';
 export * from './Navigation';
+export * from './NavigationStatusMessage';
 export * from './ProfileSelector';
 export * from './Select';
 export * from './SettingsModal';

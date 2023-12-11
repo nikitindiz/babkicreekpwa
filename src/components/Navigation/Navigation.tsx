@@ -4,7 +4,7 @@ import cn from 'classnames';
 import classes from './Navigation.module.scss';
 
 import { LockIcon, SyncIcon } from 'components';
-import { FormattedMessage } from 'react-intl';
+import { NavigationStatusMessageContainer } from 'containers';
 
 interface NavigationProps extends HTMLAttributes<HTMLDivElement> {
   onLockClick?: MouseEventHandler<HTMLButtonElement>;
@@ -23,9 +23,7 @@ export const Navigation: FC<NavigationProps> = ({
         <SyncIcon />
       </button>
 
-      <div>
-        <FormattedMessage id="navigation.header" defaultMessage="Finances Chart" />
-      </div>
+      <NavigationStatusMessageContainer />
 
       <button className={classes.Navigation__button} onClick={onLockClick}>
         <LockIcon />

@@ -27,7 +27,6 @@ export const sourcesSlice = createSlice({
   },
   extraReducers: (builder: ActionReducerMapBuilder<SourcesState>) => {
     loadSourceExtraReducers(builder);
-
     saveSourceExtraReducers(builder);
     createSourceExtraReducers(builder);
     deleteSourceExtraReducers(builder);

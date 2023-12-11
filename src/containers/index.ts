@@ -12,6 +12,7 @@ export * from './FileExchangeContainer';
 export * from './ModalsContainer';
 export * from './MoneyFlowChartContainer';
 export * from './NavigationContainer';
+export * from './NavigationStatusMessageContainer';
 export * from './NewDrainModalContainer';
 export * from './NewSourceModalContainer';
 export * from './ProfileSelectorContainer';
