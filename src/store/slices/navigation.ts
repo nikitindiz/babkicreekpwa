@@ -12,8 +12,10 @@ const selectors = {
   currentScreen: (state: RootState) => state.navigation.currentScreen,
 };
 
-const activeProfile = parseInt(localStorage.getItem('profileId') || '0', 10) || null;
-const passwordHash = localStorage.getItem('passwordHash');
+const storage = process.env.NODE_ENV !== 'production' ? localStorage : sessionStorage;
+
+const activeProfile = parseInt(storage.getItem('profileId') || '0', 10) || null;
+const passwordHash = storage.getItem('passwordHash');
 
 const initialState: CounterState = {
   currentScreen: activeProfile && passwordHash ? ScreenEnum.chart : ScreenEnum.welcome,

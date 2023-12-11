@@ -11,8 +11,10 @@ export const useNavigationContainer = () => {
   const dispatch = useAppDispatch();
 
   const lockScreen = useCallback<MouseEventHandler<HTMLButtonElement>>(() => {
-    localStorage.removeItem('profileId');
-    localStorage.removeItem('passwordHash');
+    const storage = process.env.NODE_ENV !== 'production' ? localStorage : sessionStorage;
+
+    storage.removeItem('profileId');
+    storage.removeItem('passwordHash');
 
     dispatch(settingsSlice.actions.reset());
     dispatch(days.actions.reset());

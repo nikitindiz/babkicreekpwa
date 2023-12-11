@@ -98,8 +98,10 @@ export const useCreateProfileFormContainer = () => {
 
     const profileId = await db.profiles.add(profile as Profile);
 
-    localStorage.setItem('profileId', profileId.toString());
-    localStorage.setItem('passwordHash', passwordHash);
+    const storage = process.env.NODE_ENV !== 'production' ? localStorage : sessionStorage;
+
+    storage.setItem('profileId', profileId.toString());
+    storage.setItem('passwordHash', passwordHash);
 
     const dataEncryptor = new DataEncryptor();
 

@@ -28,8 +28,10 @@ export const useEnterProfileFormContainer = () => {
 
     const passwordHash = await DataEncryptor.buildPasswordHash({ plainPassword: password });
 
-    localStorage.setItem('profileId', `${profile?.id!}`);
-    localStorage.setItem('passwordHash', passwordHash);
+    const storage = process.env.NODE_ENV !== 'production' ? localStorage : sessionStorage;
+
+    storage.setItem('profileId', `${profile?.id!}`);
+    storage.setItem('passwordHash', passwordHash);
 
     dispatch(settings.actions.selectProfile({ activeProfile: profile?.id!, passwordHash }));
     goTo(ScreenEnum.chart);
