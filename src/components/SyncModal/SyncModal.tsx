@@ -6,7 +6,7 @@ import { SyncOptionsFormContainer } from 'containers';
 
 interface SyncModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   caption: ReactNode;
-  closeModal: () => void;
+  closeModal?: () => void;
   isLoading?: boolean;
 }
 
@@ -23,7 +23,10 @@ export const SyncModal: FC<SyncModalProps> = ({
       caption={caption}
       footer={
         <>
-          <button onClick={closeModal} disabled={isLoading}>
+          <button
+            onClick={closeModal}
+            disabled={isLoading}
+            style={{ opacity: isLoading ? 0.2 : 1 }}>
             <FormattedMessage id="modal.button.cancel" defaultMessage="Cancel" />
           </button>
         </>

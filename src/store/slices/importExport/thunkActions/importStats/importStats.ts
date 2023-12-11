@@ -5,9 +5,14 @@ import { db } from 'models';
 import { DataEncryptor } from 'utils';
 import { Day, Drain, DrainScheduleMeta, ExchangeDto, Source, SourceScheduleMeta } from 'types';
 
+interface ImportStatsArgs {
+  exchangeDto: ExchangeDto;
+  onDone?: () => void;
+}
+
 export const importStats = createAsyncThunk(
   `importExport/import`,
-  async (exchangeDto: ExchangeDto, { getState, rejectWithValue }) => {
+  async ({ exchangeDto, onDone }: ImportStatsArgs, { getState, rejectWithValue }) => {
     const profileId = settings.selectors.activeProfile(getState() as RootState)!;
     const passwordHash = settings.selectors.passwordHash(getState() as RootState)!;
 
@@ -171,6 +176,8 @@ export const importStats = createAsyncThunk(
         profileId,
       });
     }
+
+    onDone?.();
 
     return {};
   },

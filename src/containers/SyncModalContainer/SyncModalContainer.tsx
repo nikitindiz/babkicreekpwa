@@ -7,13 +7,14 @@ import { useSyncModalContainer } from './useSyncModalContainer';
 interface NewSyncModalContainerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {}
 
 export const SyncModalContainer: FC<NewSyncModalContainerProps> = ({ className, ...restProps }) => {
-  const { closeModal } = useSyncModalContainer();
+  const { closeModal, loading } = useSyncModalContainer();
 
   return (
     <SyncModal
       caption={<FormattedMessage id="modal.caption.sync-modal" defaultMessage="Sync options" />}
       className={className}
-      closeModal={closeModal}
+      closeModal={loading ? closeModal : undefined}
+      isLoading={loading}
       {...restProps}
     />
   );

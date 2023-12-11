@@ -1,10 +1,10 @@
 import React, { FC, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
-
-import { importExport, useAppDispatch } from 'store';
 import { useSelector } from 'react-redux';
-import { saveJsonAsFile } from 'utils';
-import { tr } from 'date-fns/locale';
+
 import { ExchangeDto } from 'types';
+import { days, drains, importExport, sources, useAppDispatch } from 'store';
+import { saveJsonAsFile } from 'utils';
+import { useModals } from 'utils/store/hooks';
 
 interface FileExchangeContainerProps {
   children?: ReactNode;
@@ -12,12 +12,19 @@ interface FileExchangeContainerProps {
 
 export const FileExchangeContainer: FC<FileExchangeContainerProps> = ({ children }) => {
   const dispatch = useAppDispatch();
+  const { hide } = useModals();
+  const displayRange = useSelector(days.selectors.displayRange);
   const {
     loadingStarted: dataToExportLoadingStarted,
     loadingEnded: dataToExportLoadingEnded,
     loadingError: dataToExportLoadingError,
     data: dataToExportData,
   } = useSelector(importExport.selectors.dataToExport);
+  const {
+    loadingStarted: dataToImportLoadingStarted,
+    loadingEnded: dataToImportLoadingEnded,
+    loadingError: dataToImportLoadingError,
+  } = useSelector(importExport.selectors.dataToImport);
 
   const exportTriggered = useRef(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -58,17 +65,29 @@ export const FileExchangeContainer: FC<FileExchangeContainerProps> = ({ children
             return;
           }
 
-          dispatch(importExport.thunk.importStats(parsedFile));
+          dispatch(
+            importExport.thunk.importStats({
+              exchangeDto: parsedFile,
+              onDone: () => {
+                hide();
+                dispatch(days.actions.reset());
+                dispatch(drains.actions.reset());
+                dispatch(sources.actions.reset());
+                dispatch(days.thunk.loadDaysData(displayRange));
+              },
+            }),
+          );
         };
 
         fr.readAsText(file);
       }
     },
-    [dispatch],
+    [dispatch, displayRange, hide],
   );
 
   const inProgress =
-    dataToExportLoadingStarted && !dataToExportLoadingEnded && !dataToExportLoadingError;
+    (dataToExportLoadingStarted && !dataToExportLoadingEnded && !dataToExportLoadingError) ||
+    (dataToImportLoadingStarted && !dataToImportLoadingEnded && !dataToImportLoadingError);
 
   const exportFile = useCallback(() => {
     exportTriggered.current = false;
@@ -77,7 +96,7 @@ export const FileExchangeContainer: FC<FileExchangeContainerProps> = ({ children
 
   useEffect(() => {
     if (dataToExportLoadingEnded && !exportTriggered.current) {
-      // saveJsonAsFile({ fileName: 'babki-creek-stats.json', dto: data });
+      saveJsonAsFile({ fileName: 'babki-creek-stats.json', dto: dataToExportData });
       exportTriggered.current = true;
     }
   }, [dataToExportData, dataToExportLoadingEnded]);
@@ -92,6 +111,12 @@ export const FileExchangeContainer: FC<FileExchangeContainerProps> = ({ children
 
     if (inputRef.current) inputRef.current.click();
   }, []);
+
+  useEffect(() => {
+    return () => {
+      dispatch(importExport.actions.reset());
+    };
+  }, [dispatch]);
 
   return (
     <>

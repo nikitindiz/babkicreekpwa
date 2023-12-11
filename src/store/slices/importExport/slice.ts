@@ -1,4 +1,4 @@
-import { ActionReducerMapBuilder, createSlice } from '@reduxjs/toolkit';
+import { ActionReducerMapBuilder, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { ImportExportState } from './ImportExportState';
 import { exportStats } from 'store/slices/importExport/thunkActions/exportStats/exportStats';
@@ -7,6 +7,7 @@ import { importStats } from 'store/slices/importExport/thunkActions/importStats/
 import { importStatsExtraReducers } from './thunkActions/importStats/importStatsExtraReducers';
 import { initLoadableEntity } from 'utils';
 import { selectors } from './selectors';
+import { ScreenEnum } from 'types';
 
 const initialState: ImportExportState = {
   dataToExport: initLoadableEntity(),
@@ -16,7 +17,11 @@ const initialState: ImportExportState = {
 export const importExportSlice = createSlice({
   name: 'importExport',
   initialState,
-  reducers: {},
+  reducers: {
+    reset: () => {
+      return initialState;
+    },
+  },
   extraReducers: (builder: ActionReducerMapBuilder<ImportExportState>) => {
     exportStatsExtraReducers(builder);
     importStatsExtraReducers(builder);

@@ -18,7 +18,11 @@ const initialState: DrainsState = {
 export const drainsSlice = createSlice({
   name: 'drains',
   initialState,
-  reducers: {},
+  reducers: {
+    reset: () => {
+      return initialState;
+    },
+  },
   extraReducers: (builder: ActionReducerMapBuilder<DrainsState>) => {
     loadDrainExtraReducers(builder);
 

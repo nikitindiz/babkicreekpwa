@@ -23,6 +23,9 @@ export const settingsSlice = createSlice({
   name: 'settings',
   initialState,
   reducers: {
+    reset: () => {
+      return initialState;
+    },
     selectProfile: (
       state,
       action: PayloadAction<{ activeProfile: number; passwordHash?: string }>,

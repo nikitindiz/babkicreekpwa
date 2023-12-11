@@ -20,7 +20,11 @@ const initialState: SourcesState = {
 export const sourcesSlice = createSlice({
   name: 'sources',
   initialState,
-  reducers: {},
+  reducers: {
+    reset: () => {
+      return initialState;
+    },
+  },
   extraReducers: (builder: ActionReducerMapBuilder<SourcesState>) => {
     loadSourceExtraReducers(builder);
 
