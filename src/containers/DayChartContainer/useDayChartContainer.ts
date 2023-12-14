@@ -26,7 +26,7 @@ export const useDayChartContainer = ({ day }: UseDayChartContainerArgs) => {
     dispatch(drainEditor.actions.select({ date: day.date, drainId: 'new' }));
   }, [day.date, dispatch]);
 
-  const noSourcesOrDrains = !day.sources.length && !day.drains.length;
+  const noSourcesOrDrains = !day.sources?.length && !day.drains?.length;
 
   const isoDate = moment.unix(day.date).toISOString();
 
