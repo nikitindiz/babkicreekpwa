@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useStore } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 import enMessages from './lang/en.json';
 import ruMessages from './lang/ru.json';
@@ -21,6 +21,9 @@ const localizations: Record<string, typeof enMessages> = {
 function App() {
   const activeProfile = useSelector(settings.selectors.activeProfile);
   const { goTo, currentScreen } = useScreens();
+  const { getState } = useStore();
+
+  console.log('getState', getState());
 
   useEffect(() => {
     if (activeProfile) {
