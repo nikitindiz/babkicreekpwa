@@ -1,11 +1,12 @@
 import { ChangeEventHandler, FormEventHandler, useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { DataEncryptor } from 'utils';
+import { buildDate, DataEncryptor } from 'utils';
 import { ScreenEnum } from 'types';
 import { db } from 'models';
 import { settings, useAppDispatch } from 'store';
 import { useScreens } from 'utils/store/hooks';
+import { ca } from 'date-fns/locale';
 
 export const useEnterProfileFormContainer = () => {
   const dispatch = useAppDispatch();
@@ -15,6 +16,7 @@ export const useEnterProfileFormContainer = () => {
   const { goTo } = useScreens();
 
   const [dirty, setDirty] = useState(false);
+  const [error, setError] = useState<unknown | null>(null);
   const [password, setPassword] = useState('');
   const [profile, setProfile] = useState<{ label?: string; hint?: string } | undefined>();
 
@@ -24,9 +26,30 @@ export const useEnterProfileFormContainer = () => {
   }, []);
 
   const enterProfile = async () => {
+    setError(null);
     const profile = await db.profiles.get(profileId)!;
 
     const passwordHash = await DataEncryptor.buildPasswordHash({ plainPassword: password });
+
+    const daysData = await db.days.where({ profileId }).last();
+
+    console.log('daysData', daysData);
+
+    if (daysData && daysData.moneyByTheEndOfTheDay !== null) {
+      const dataEncryptor = new DataEncryptor({ iv: daysData.iv, salt: daysData.salt });
+
+      try {
+        const result = await (
+          await dataEncryptor.generateKey(passwordHash!)
+        ).decodeText(daysData.moneyByTheEndOfTheDay);
+
+        console.log('encodedText', result);
+      } catch (_) {
+        console.log('Unable to decode text', _);
+        setError('Wrong Password');
+        return;
+      }
+    }
 
     const storage = process.env.NODE_ENV !== 'production' ? localStorage : sessionStorage;
 
@@ -55,6 +78,7 @@ export const useEnterProfileFormContainer = () => {
 
   return {
     dirty,
+    error,
     goBack,
     handleEnter,
     handlePasswordChange,

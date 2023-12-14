@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, FormEvent } from 'react';
+import React, { ChangeEvent, FC, FormEvent, ReactNode } from 'react';
 
 import classes from './EnterProfileForm.module.scss';
 
@@ -6,15 +6,17 @@ import { ArrowLeftIcon } from 'components';
 
 interface EnterProfileFormProps {
   dirty: boolean;
+  error?: ReactNode;
   goBack: () => void;
+  handleEnter: (event: FormEvent<HTMLFormElement>) => void;
   handlePasswordChange: (event: ChangeEvent<HTMLInputElement>) => void;
   password: string;
-  handleEnter: (event: FormEvent<HTMLFormElement>) => void;
   profile: { label?: string; hint?: string } | undefined;
 }
 
 export const EnterProfileForm: FC<EnterProfileFormProps> = ({
   dirty,
+  error,
   goBack,
   handleEnter,
   handlePasswordChange,
@@ -34,7 +36,6 @@ export const EnterProfileForm: FC<EnterProfileFormProps> = ({
       </div>
 
       <div className={classes.hint}>{profile?.hint}</div>
-
       <div className={classes.fields}>
         <div className={classes.fieldLabel}>Profile Key</div>
 
@@ -46,6 +47,8 @@ export const EnterProfileForm: FC<EnterProfileFormProps> = ({
           autoFocus
           onChange={handlePasswordChange}
         />
+
+        {error && <div className={classes.error}>{error}</div>}
 
         <button className={classes.enterButton} type="submit" disabled={!dirty}>
           Enter
