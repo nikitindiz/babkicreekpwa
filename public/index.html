@@ -9,12 +9,19 @@
 
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <title>Babki Creek - Personal Finanses</title>
+    <title>Babki Creek - Personal Finances</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
 
     <div id="inputs"></div>
+
+    <script>
+      navigator.serviceWorker.getRegistrations().then((registrationsArray) => {
+        console.log('registrationsArray', registrationsArray);
+        registrationsArray[0]?.update();
+      });
+    </script>
   </body>
 </html>
