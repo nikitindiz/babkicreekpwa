@@ -58,6 +58,17 @@
     "extract-translations": "formatjs extract 'src/**/*.ts*' --ignore='**/*.d.ts' --out-file src/lang/en-extracted.json --id-interpolation-pattern '[sha512:contenthash:base64:6]'",
     "compile-translations": "formatjs compile src/lang/en-extracted.json --out-file src/lang/en.json"
   },
+  "jest": {
+    "moduleNameMapper": {
+      "types/(.+)": "<rootDir>/src/$1",
+      "context/(.+)": "<rootDir>/src/context/$1",
+      "models/(.+)": "<rootDir>/src/models/$1",
+      "utils/(.+)": "<rootDir>/src/utils/$1",
+      "store/(.+)": "<rootDir>/src/store/$1",
+      "components/(.+)": "<rootDir>/src/components/$1",
+      "containers/(.+)": "<rootDir>/src/containers/$1"
+    }
+  },
   "browserslist": {
     "production": [
       ">0.2%",
