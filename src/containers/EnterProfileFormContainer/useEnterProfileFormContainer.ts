@@ -16,9 +16,20 @@ export const useEnterProfileFormContainer = () => {
   const { goTo } = useScreens();
 
   const [dirty, setDirty] = useState(false);
+  const [rememberProfile, setRememberProfile] = useState(
+    localStorage.getItem('rememberProfile') === 'true',
+  );
   const [error, setError] = useState<unknown | null>(null);
   const [password, setPassword] = useState('');
   const [profile, setProfile] = useState<{ label?: string; hint?: string } | undefined>();
+
+  const handleRememberProfileChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
+    ({ target }) => {
+      localStorage.setItem('rememberProfile', JSON.stringify(target.checked));
+      setRememberProfile(target.checked);
+    },
+    [],
+  );
 
   const handlePasswordChange = useCallback<ChangeEventHandler<HTMLInputElement>>(({ target }) => {
     setDirty(true);
@@ -33,25 +44,21 @@ export const useEnterProfileFormContainer = () => {
 
     const daysData = await db.days.where({ profileId }).last();
 
-    console.log('daysData', daysData);
-
     if (daysData && daysData.moneyByTheEndOfTheDay !== null) {
       const dataEncryptor = new DataEncryptor({ iv: daysData.iv, salt: daysData.salt });
 
       try {
-        const result = await (
+        await (
           await dataEncryptor.generateKey(passwordHash!)
         ).decodeText(daysData.moneyByTheEndOfTheDay);
-
-        console.log('encodedText', result);
       } catch (_) {
-        console.log('Unable to decode text', _);
         setError('Wrong Password');
         return;
       }
     }
 
-    const storage = process.env.NODE_ENV !== 'production' ? localStorage : sessionStorage;
+    const storage =
+      process.env.NODE_ENV !== 'production' || rememberProfile ? localStorage : sessionStorage;
 
     storage.setItem('profileId', `${profile?.id!}`);
     storage.setItem('passwordHash', passwordHash);
@@ -82,7 +89,9 @@ export const useEnterProfileFormContainer = () => {
     goBack,
     handleEnter,
     handlePasswordChange,
+    handleRememberProfileChange,
     password,
     profile,
+    rememberProfile,
   };
 };

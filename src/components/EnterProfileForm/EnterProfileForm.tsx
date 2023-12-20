@@ -10,8 +10,10 @@ interface EnterProfileFormProps {
   goBack: () => void;
   handleEnter: (event: FormEvent<HTMLFormElement>) => void;
   handlePasswordChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleRememberProfileChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   password: string;
   profile: { label?: string; hint?: string } | undefined;
+  rememberProfile?: boolean;
 }
 
 export const EnterProfileForm: FC<EnterProfileFormProps> = ({
@@ -20,8 +22,10 @@ export const EnterProfileForm: FC<EnterProfileFormProps> = ({
   goBack,
   handleEnter,
   handlePasswordChange,
+  handleRememberProfileChange,
   password,
   profile,
+  rememberProfile = false,
 }) => {
   if (!profile) return <div>Loading...</div>;
 
@@ -37,7 +41,7 @@ export const EnterProfileForm: FC<EnterProfileFormProps> = ({
 
       <div className={classes.hint}>{profile?.hint}</div>
       <div className={classes.fields}>
-        <div className={classes.fieldLabel}>Profile Key</div>
+        <div className={classes.fieldLabel}>Profile password</div>
 
         <input
           className={classes.password}
@@ -47,6 +51,17 @@ export const EnterProfileForm: FC<EnterProfileFormProps> = ({
           autoFocus
           onChange={handlePasswordChange}
         />
+
+        <label className={classes.rememberProfile}>
+          <input
+            type="checkbox"
+            className={classes.rememberProfileCheckBox}
+            onChange={handleRememberProfileChange}
+            checked={rememberProfile}
+          />
+
+          <span>Stay logged in</span>
+        </label>
 
         {error && <div className={classes.error}>{error}</div>}
 

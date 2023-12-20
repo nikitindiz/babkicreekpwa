@@ -3,18 +3,29 @@ import { EnterProfileForm } from 'components';
 import { useEnterProfileFormContainer } from './useEnterProfileFormContainer';
 
 export const EnterProfileFormContainer: FC = () => {
-  const { dirty, error, goBack, handleEnter, handlePasswordChange, password, profile } =
-    useEnterProfileFormContainer();
+  const {
+    dirty,
+    error,
+    goBack,
+    handleEnter,
+    handlePasswordChange,
+    handleRememberProfileChange,
+    password,
+    profile,
+    rememberProfile,
+  } = useEnterProfileFormContainer();
 
   return (
     <EnterProfileForm
-      error={error ? 'Wrong password' : undefined}
       dirty={dirty}
+      error={error ? 'Wrong password' : undefined}
       goBack={goBack}
       handleEnter={handleEnter}
       handlePasswordChange={handlePasswordChange}
+      handleRememberProfileChange={handleRememberProfileChange}
       password={password}
       profile={profile}
+      rememberProfile={rememberProfile}
     />
   );
 };
