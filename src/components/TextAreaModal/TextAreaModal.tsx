@@ -1,8 +1,8 @@
 import React, {
   ChangeEventHandler,
   FC,
-  HTMLAttributes,
   MouseEventHandler,
+  TextareaHTMLAttributes,
   useCallback,
   useState,
 } from 'react';
@@ -13,7 +13,7 @@ import classes from './TextAreaModal.module.scss';
 import { ArrowLeftIcon, DoneIcon, Modal, ModalLayout } from 'components';
 import { FormattedMessage } from 'react-intl';
 
-interface TextAreaModalProps extends Omit<HTMLAttributes<HTMLTextAreaElement>, 'onChange'> {
+interface TextAreaModalProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange'> {
   handleHide?: () => void;
   defaultValue: string;
   onChange: (text: string) => void;
