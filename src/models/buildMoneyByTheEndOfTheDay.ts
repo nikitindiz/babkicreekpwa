@@ -20,7 +20,6 @@ export const buildMoneyByTheEndOfTheDay = async ({
   passwordHash,
 }: BuildMoneyByTheEndOfTheDayArgs) => {
   const startingMoment = buildDate(starting);
-  console.log('start');
 
   const closestDate = moment(startingMoment).subtract(1, 'day');
 

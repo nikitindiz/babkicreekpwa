@@ -11,7 +11,9 @@ export const useNavigationContainer = () => {
   const dispatch = useAppDispatch();
 
   const lockScreen = useCallback<MouseEventHandler<HTMLButtonElement>>(() => {
-    const storage = process.env.NODE_ENV !== 'production' ? localStorage : sessionStorage;
+    const rememberProfile = localStorage.getItem('rememberProfile') === 'true';
+    const storage =
+      process.env.NODE_ENV !== 'production' || rememberProfile ? localStorage : sessionStorage;
 
     storage.removeItem('profileId');
     storage.removeItem('passwordHash');

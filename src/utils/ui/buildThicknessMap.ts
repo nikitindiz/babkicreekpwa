@@ -15,8 +15,6 @@ export const buildThicknessMap = ({ daysStats, maxMoneyValue }: BuildThicknessMa
     endOfTheDayThickness: number;
   }[];
 
-  console.log('buildThicknessMap dayStats', daysStats);
-
   if (!daysStats) {
     return undefined;
   }
@@ -40,11 +38,6 @@ export const buildThicknessMap = ({ daysStats, maxMoneyValue }: BuildThicknessMa
     const beginningOfTheDayValue =
       parseFloat(moneyByTheEndOfTheDay as any) - totalFromSources + totalLossFromDrains;
 
-    // if (beginningOfTheDayValue > 0) debugger;
-
-    console.log('beginningOfTheDayValue', beginningOfTheDayValue);
-    console.log('moneyByTheEndOfTheDay', moneyByTheEndOfTheDay);
-
     const map = {
       drains: [] as number[],
       sources: [] as number[],
@@ -58,12 +51,8 @@ export const buildThicknessMap = ({ daysStats, maxMoneyValue }: BuildThicknessMa
 
     let lastInteractedMoneyValue = beginningOfTheDayValue || 0;
 
-    console.log('sources', sources);
-    console.log('drains', drains);
-
     sources.forEach((source) => {
       lastInteractedMoneyValue += parseFloat(source?.incomes || ('0' as any));
-      console.log('sources lastInteractedMoneyValue', lastInteractedMoneyValue);
 
       map.sources.push(
         lastInteractedMoneyValue ? lastInteractedMoneyValue / (maxMoneyValue * 0.01) : 0,
@@ -72,7 +61,6 @@ export const buildThicknessMap = ({ daysStats, maxMoneyValue }: BuildThicknessMa
 
     drains.forEach((drain) => {
       lastInteractedMoneyValue -= parseFloat(drain?.expenses || ('0' as any));
-      console.log('drains lastInteractedMoneyValue', lastInteractedMoneyValue);
 
       map.drains.push(
         lastInteractedMoneyValue ? lastInteractedMoneyValue / (maxMoneyValue * 0.01) : 0,
@@ -81,8 +69,6 @@ export const buildThicknessMap = ({ daysStats, maxMoneyValue }: BuildThicknessMa
 
     thicknessMap.push(map);
   });
-
-  console.log('thicknessMap', thicknessMap);
 
   return thicknessMap;
 };

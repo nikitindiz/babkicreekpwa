@@ -12,14 +12,11 @@ export const useSources = () => {
         sources.thunk.saveSource({
           ...args,
           onDone: (sourceId) => {
-            console.log('source save done');
             dispatch(
               sources.thunk.loadSource({
                 sourceId: sourceId,
                 reFetch: true,
                 onDone: () => {
-                  console.log('source load done');
-                  console.log('source checking updated days');
                   dispatch(days.thunk.checkUpdatesDaysData(displayRange));
                 },
               }),

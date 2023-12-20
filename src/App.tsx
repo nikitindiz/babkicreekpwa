@@ -23,8 +23,6 @@ function App() {
   const { goTo, currentScreen } = useScreens();
   const { getState } = useStore();
 
-  console.log('getState', getState());
-
   useEffect(() => {
     if (activeProfile) {
       db.open().catch(console.error);

@@ -8,29 +8,6 @@ import { decodeText } from 'utils/encrypt/decodeText';
 import { importKeyData } from 'utils/encrypt/importKeyData';
 import { buildPasswordHash } from 'utils/encrypt/buildPasswordHash';
 
-const userSecretKey = 'MySecretPassword';
-
-// Text to encrypt
-const textToEncrypt = 'This is a secret message';
-
-// Generate a random salt
-const salt = crypto.getRandomValues(new Uint8Array(16));
-
-const iv = crypto.getRandomValues(new Uint8Array(12));
-
-export const tryMe = async () => {
-  const secretKeyData = await importKeyData({ userKey: userSecretKey });
-  const derivedKey = await buildDerivedKey({ secretKeyData, salt });
-
-  const encodedData = await encodeText({ text: textToEncrypt, derivedKey, iv });
-
-  console.log('encodedData', encodedData);
-
-  const decryptedText = await decodeText({ source: encodedData, decryptedKey: derivedKey, iv });
-
-  console.log('decryptedText', decryptedText);
-};
-
 export class DataEncryptor {
   iv!: Uint8Array;
   salt!: Uint8Array;
@@ -92,6 +69,5 @@ export const encrypt = {
   decodeText,
   encodeText,
   importKeyData,
-  tryMe,
   buildPasswordHash,
 };

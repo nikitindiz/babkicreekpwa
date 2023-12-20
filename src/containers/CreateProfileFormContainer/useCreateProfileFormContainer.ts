@@ -98,7 +98,9 @@ export const useCreateProfileFormContainer = () => {
 
     const profileId = await db.profiles.add(profile as Profile);
 
-    const storage = process.env.NODE_ENV !== 'production' ? localStorage : sessionStorage;
+    const rememberProfile = localStorage.getItem('rememberProfile') === 'true';
+    const storage =
+      process.env.NODE_ENV !== 'production' || rememberProfile ? localStorage : sessionStorage;
 
     storage.setItem('profileId', profileId.toString());
     storage.setItem('passwordHash', passwordHash);

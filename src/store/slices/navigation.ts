@@ -12,7 +12,9 @@ const selectors = {
   currentScreen: (state: RootState) => state.navigation.currentScreen,
 };
 
-const storage = process.env.NODE_ENV !== 'production' ? localStorage : sessionStorage;
+const rememberProfile = localStorage.getItem('rememberProfile') === 'true';
+const storage =
+  process.env.NODE_ENV !== 'production' || rememberProfile ? localStorage : sessionStorage;
 
 const activeProfile = parseInt(storage.getItem('profileId') || '0', 10) || null;
 const passwordHash = storage.getItem('passwordHash');
