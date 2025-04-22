@@ -21,14 +21,22 @@ export const buildMoneyByTheEndOfTheDay = async ({
     daysHash,
   } = await fetchInitialData(startingMoment, days, profileId, passwordHash);
 
-  // Process each day and update the balance
+  if (dates.length === 0) {
+    return { drains, sources, daysHash };
+  }
+
+  // Process days in sequential order (as balance depends on previous day)
+  // but parallelize operations within each day's processing
   const updatedDays: Record<string, DayUpdateData> = {};
+  const processingResults = [];
   let runningBalance = initialBalance;
 
+  // Prepare processing tasks
   for (const date of dates) {
     const isoDate = buildDate(date).toISOString();
 
-    const { updatedDay, newBalance } = await processDay(
+    // Process the day and collect the result
+    const result = await processDay(
       date,
       isoDate,
       sources,
@@ -39,12 +47,15 @@ export const buildMoneyByTheEndOfTheDay = async ({
       runningBalance,
     );
 
-    updatedDays[isoDate] = updatedDay;
-    runningBalance = newBalance;
+    updatedDays[isoDate] = result.updatedDay;
+    runningBalance = result.newBalance;
+    processingResults.push(result);
   }
 
-  // Save all updated days at once
-  await db.days.bulkPut(Object.values(updatedDays));
+  // Batch save all updated days at once
+  if (Object.keys(updatedDays).length > 0) {
+    await db.days.bulkPut(Object.values(updatedDays));
+  }
 
   return {
     drains,
