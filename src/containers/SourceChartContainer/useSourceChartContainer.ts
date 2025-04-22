@@ -31,7 +31,9 @@ export const useSourceChartContainer = ({ sourceId }: UseSourceChartContainerArg
 
   const [header] = comment.split('\n');
 
-  const displayValue = `+ ${sourcesById[sourceId!]?.data?.incomes || ''} ${currency}`;
+  const displayValue = sourcesById[sourceId!]?.data?.incomes
+    ? `+ ${sourcesById[sourceId!]?.data?.incomes || ''} ${currency}`
+    : null;
 
   return {
     displayValue,

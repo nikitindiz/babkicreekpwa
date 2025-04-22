@@ -18,4 +18,16 @@ export const selectors = {
       (state: RootState) => state.sources.byId[id],
       (source) => source?.loadingStarted && !source?.loadingEnded,
     ),
+
+  isAnySourcesLoading: createSelector(selectSourcesState, (sources) =>
+    Object.values(sources.byId).some((source) =>
+      source ? source.loadingStarted && !source.loadingEnded : false,
+    ),
+  ),
+
+  isAnySourceSaving: createSelector(selectSourcesState, (sources) =>
+    Object.values(sources.byId).some((source) =>
+      source ? source.savingStarted && !source.savingEnded : false,
+    ),
+  ),
 };

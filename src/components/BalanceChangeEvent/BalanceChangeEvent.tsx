@@ -9,9 +9,11 @@ interface BalanceChangeEventProps extends HTMLAttributes<HTMLDivElement> {
   flowThickness?: number;
   incomesSection?: ReactNode;
   lineStyles?: CSSProperties;
+  isLoading?: boolean;
 }
 
 export const BalanceChangeEvent: FC<BalanceChangeEventProps> = ({
+  isLoading,
   className,
   expensesSection,
   flowThickness,
@@ -27,14 +29,19 @@ export const BalanceChangeEvent: FC<BalanceChangeEventProps> = ({
 
   return (
     <div
-      className={cn(classes.container, className, { [classes.container_mobile]: mobile })}
+      className={cn(classes.container, className, {
+        [classes.container_mobile]: mobile,
+      })}
       {...restProps}>
       <div className={cn(classes.source, { [classes.source_mobile]: mobile })}>
         {incomesSection}
       </div>
 
       <div
-        className={cn(classes.chartLine, { [classes.chartLine_mobile]: mobile })}
+        className={cn(classes.chartLine, {
+          [classes.chartLine_mobile]: mobile,
+          [classes.chartLine_loading]: isLoading,
+        })}
         style={lineStyle}
       />
 

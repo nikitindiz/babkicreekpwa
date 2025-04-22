@@ -4,7 +4,7 @@ import { useDebouncedCallback } from 'use-debounce';
 
 import { Drain, LoadableEntity, Source } from 'types';
 import { buildDate } from 'utils';
-import { days, drains, settings, sources, thicknessMap, useAppDispatch } from 'store';
+import { days, drains, settings, sources, thicknessMap, useAppDispatch, daysStats } from 'store';
 import { loadSettings } from 'store/slices/settings/thunkActions';
 import { useIsMobile } from 'utils/hooks/useIsMobile';
 
@@ -19,6 +19,9 @@ export const useMoneyFlowChartContainer = () => {
   const dates = useMemo(() => Object.keys(daysByDate).sort(), [daysByDate]);
   const mobile = useIsMobile();
 
+  // Use Redux state instead of local state
+  const daysStatsData = useSelector(daysStats.selectors.daysStats);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -26,16 +29,6 @@ export const useMoneyFlowChartContainer = () => {
       dispatch(loadSettings({ profileId: activeProfile }));
     }
   }, [activeProfile, dispatch, profileSettings]);
-
-  const [daysStats, setDaysStats] = useState<
-    | {
-        date: string;
-        drains: Drain[];
-        sources: Source[];
-        moneyByTheEndOfTheDay: number;
-      }[]
-    | null
-  >(null);
 
   const datesParsingStarted = useRef(false);
   const balanceChangesRequested = useRef(false);
@@ -75,7 +68,7 @@ export const useMoneyFlowChartContainer = () => {
     datesParsingStarted.current = false;
   }, [hasRequiredDrains, hasRequiredDrains]);
 
-  const debouncedLoadThicknessMapData = useDebouncedCallback((stats: typeof daysStats) => {
+  const debouncedLoadThicknessMapData = useDebouncedCallback((stats: typeof daysStatsData) => {
     dispatch(
       thicknessMap.thunk.loadThicknessMapData({
         daysStats: stats!,
@@ -83,55 +76,77 @@ export const useMoneyFlowChartContainer = () => {
     );
   }, 300);
 
-  useEffect(() => {
+  const { notFoundDrainIds, notFoundSourceIds, stats } = useMemo(() => {
     let notFoundDrainIds: number[] = [];
     let notFoundSourceIds: number[] = [];
 
-    const stats = dates.map((day) => {
-      const {
-        sources: sourceIds = [],
-        drains: drainIds = [],
-        moneyByTheEndOfTheDay,
-      } = daysByDate[day];
+    return {
+      notFoundDrainIds: notFoundDrainIds,
+      notFoundSourceIds: notFoundSourceIds,
+      stats: dates.map((day) => {
+        const {
+          sources: sourceIds = [],
+          drains: drainIds = [],
+          moneyByTheEndOfTheDay,
+        } = daysByDate[day];
 
-      return {
-        date: day,
-        moneyByTheEndOfTheDay: moneyByTheEndOfTheDay || 0,
-        drains: drainIds.map((drainId) => {
-          if (
-            !requiredDrains[drainId]?.data &&
-            !requiredDrains[drainId]?.loadingError &&
-            !requiredDrainsIds.has(drainId)
-          ) {
-            notFoundDrainIds.push(drainId);
-          }
+        return {
+          date: day,
+          moneyByTheEndOfTheDay: moneyByTheEndOfTheDay || 0,
+          drains: drainIds.map((drainId) => {
+            if (
+              !requiredDrains[drainId]?.data &&
+              !requiredDrains[drainId]?.loadingError &&
+              !requiredDrainsIds.has(drainId)
+            ) {
+              notFoundDrainIds.push(drainId);
+            }
 
-          return requiredDrains[drainId]?.data!;
-        }),
-        sources: sourceIds.map((sourceId) => {
-          if (
-            !requiredSources[sourceId]?.data &&
-            !requiredSources[sourceId]?.loadingError &&
-            !requiredSourcesIds.has(sourceId)
-          ) {
-            notFoundSourceIds.push(sourceId);
-          }
+            return requiredDrains[drainId]?.data!;
+          }),
+          sources: sourceIds.map((sourceId) => {
+            if (
+              !requiredSources[sourceId]?.data &&
+              !requiredSources[sourceId]?.loadingError &&
+              !requiredSourcesIds.has(sourceId)
+            ) {
+              notFoundSourceIds.push(sourceId);
+            }
 
-          return requiredSources[sourceId]?.data!;
-        }),
-      };
-    });
+            return requiredSources[sourceId]?.data!;
+          }),
+        };
+      }),
+    };
+  }, [dates, daysByDate, requiredDrains, requiredDrainsIds, requiredSources, requiredSourcesIds]);
 
+  useEffect(() => {
     if (notFoundDrainIds.length === 0 && notFoundSourceIds.length === 0) {
-      setDaysStats(stats);
-      debouncedLoadThicknessMapData(stats);
+      // Use dispatch to update Redux instead of setState
+      dispatch(daysStats.setDaysStats(stats));
       return;
     }
 
     balanceChangesRequested.current = false;
     setRequiredDrainsIds((prevState) => new Set([...prevState, ...notFoundDrainIds]));
     setRequiredSourcesIds((prevState) => new Set([...prevState, ...notFoundSourceIds]));
-  }, [dates, daysByDate, debouncedLoadThicknessMapData, dispatch, requiredDrains, requiredSources]);
+  }, [
+    dates,
+    daysByDate,
+    debouncedLoadThicknessMapData,
+    dispatch,
+    notFoundDrainIds,
+    notFoundSourceIds,
+    requiredDrains,
+    requiredDrainsIds,
+    requiredSources,
+    requiredSourcesIds,
+    stats,
+  ]);
+
+  useEffect(() => {
+    debouncedLoadThicknessMapData(daysStatsData);
+  }, [daysStatsData, debouncedLoadThicknessMapData]);
 
   useEffect(() => {
     if (daysByDateLoadingEnded && !balanceChangesRequested.current) {

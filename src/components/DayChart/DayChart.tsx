@@ -5,10 +5,15 @@ import { FormattedNumber } from 'react-intl';
 
 import classes from './DayChart.module.scss';
 
-import { DateAndWeekContainer, DrainChartContainer, SourceChartContainer } from 'containers';
+import {
+  BalanceChangeEventContainer,
+  DateAndWeekContainer,
+  DrainChartContainer,
+  SourceChartContainer,
+} from 'containers';
 import { Day } from 'types';
 import { DayContextProvider } from 'context';
-import { FloatingAddButton, BalanceChangeEvent } from 'components';
+import { FloatingAddButton } from 'components';
 import { buildDate, formatDate } from 'utils';
 import { useIsMobile } from 'utils/hooks/useIsMobile';
 
@@ -91,12 +96,12 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
             <DateAndWeekContainer date={formatDate(moment.unix(day.date))} />
           </div>
 
-          <BalanceChangeEvent
+          <BalanceChangeEventContainer
             flowThickness={thicknessMapByDate[isoDate]?.beginningOfTheDayThickness}
           />
 
           {(day.sources || []).map((sourceId, idx) => (
-            <BalanceChangeEvent
+            <BalanceChangeEventContainer
               key={sourceId}
               flowThickness={thicknessMapByDate[isoDate]?.sources[idx]}
               incomesSection={<SourceChartContainer sourceId={sourceId} />}
@@ -104,7 +109,7 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
           ))}
 
           {(day.drains || []).map((drainId, idx) => (
-            <BalanceChangeEvent
+            <BalanceChangeEventContainer
               key={drainId}
               flowThickness={thicknessMapByDate[isoDate]?.drains[idx]}
               expensesSection={<DrainChartContainer drainId={drainId} />}
@@ -112,7 +117,7 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
             />
           ))}
 
-          <BalanceChangeEvent
+          <BalanceChangeEventContainer
             flowThickness={thicknessMapByDate[isoDate]?.endOfTheDayThickness}
             incomesSection={<div />}
             expensesSection={
