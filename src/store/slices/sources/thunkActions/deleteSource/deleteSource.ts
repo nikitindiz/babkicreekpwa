@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import moment from 'moment/moment';
 
-import { DataEncryptor, formatDate } from 'utils';
+import { DataEncryptor } from 'utils';
 import { days, RootState, settings } from 'store';
-import { buildMoneyByTheEndOfTheDay, db } from 'models';
+import { db } from 'models';
 import { selectors } from '../../selectors';
+import { findEarliestDateFromMetas, rebuildMoneyByDate } from 'utils/storeHelpers';
 
 interface DeleteSourceArgs {
   sourceId: number;
@@ -23,26 +23,25 @@ export const deleteSource = createAsyncThunk(
     const dataEncryptor = new DataEncryptor();
     await dataEncryptor.generateKey(passwordHash);
 
-    const metas = await Promise.all(sourceScheduleMeta.map((id) => db.sourceScheduleMetas.get(id)));
-
-    const earliest = metas.reduce(
-      (earliest, next) =>
-        earliest > (next?.repeat_start || 0) ? next?.repeat_start || 0 : earliest,
-      Infinity,
+    // Use shared function to find earliest date
+    const earliest = await findEarliestDateFromMetas(sourceScheduleMeta, (id) =>
+      db.sourceScheduleMetas.get(id),
     );
 
-    await Promise.all(sourceScheduleMeta?.map(db.deleteSourceScheduleMeta));
-    await db.sources.delete(sourceId);
+    // Combine database operations for better performance
+    await Promise.all([
+      ...sourceScheduleMeta.map(db.deleteSourceScheduleMeta),
+      db.sources.delete(sourceId),
+    ]);
 
+    // Reload days data
     dispatch(days.thunk.loadDaysData(displayRange));
 
-    await buildMoneyByTheEndOfTheDay({
-      starting: formatDate(moment.unix(earliest)),
-      days: 61,
-      profileId,
-      passwordHash,
-    });
+    // Use shared function to rebuild money
+    await rebuildMoneyByDate(earliest, profileId, passwordHash);
 
     onDone?.();
+
+    return { success: true };
   },
 );

@@ -4,6 +4,7 @@ import { DataEncryptor } from 'utils';
 import { RootState, settings } from 'store';
 import { db } from 'models';
 import { selectors } from '../../selectors';
+import { decryptDrainData } from 'utils/storeHelpers';
 
 interface LoadDrainArgs {
   drainId: number;
@@ -15,16 +16,24 @@ export const loadDrain = createAsyncThunk(
   `drains/load`,
   async ({ drainId, onDone }: LoadDrainArgs, { rejectWithValue, getState }) => {
     const storedDrain = await db.drains.get(drainId)!;
+    if (!storedDrain) {
+      return rejectWithValue('Drain not found');
+    }
+
     const { iv, salt, ...drain } = storedDrain!;
     const passwordHash = settings.selectors.passwordHash(getState() as RootState)!;
     const dataEncryptor = new DataEncryptor({ iv, salt });
 
     await dataEncryptor.generateKey(passwordHash);
+
     try {
+      // Use drain-specific decryption helper
+      const { expenses, commentary } = await decryptDrainData(dataEncryptor, drain);
+
       const result = {
         ...drain,
-        expenses: drain?.expenses ? await dataEncryptor.decodeText(drain?.expenses) : 0,
-        commentary: drain?.commentary ? await dataEncryptor.decodeText(drain?.commentary) : '',
+        expenses,
+        commentary,
       };
 
       onDone?.(drainId);

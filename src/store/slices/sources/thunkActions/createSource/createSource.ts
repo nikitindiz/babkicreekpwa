@@ -1,9 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { buildDate, DataEncryptor, formatDate } from 'utils';
+import { buildDate, DataEncryptor } from 'utils';
 import { days, RootState, settings } from 'store';
-import { buildMoneyByTheEndOfTheDay, buildSourceScheduleInterval, db } from 'models';
+import { buildSourceScheduleInterval, db } from 'models';
 import { Source } from 'types';
+import { encryptSourceData, rebuildMoneyByDate } from 'utils/storeHelpers';
 
 interface CreateSourceArgs {
   date: string;
@@ -37,8 +38,8 @@ export const createSource = createAsyncThunk(
 
     await dataEncryptor.generateKey(passwordHash);
 
-    const incomes = await dataEncryptor.encodeText(`${source.incomes || 0}`);
-    const commentary = await dataEncryptor.encodeText(`${source.commentary || ''}`);
+    // Use source-specific encryption helper
+    const { incomes, commentary } = await encryptSourceData(dataEncryptor, source);
 
     const createdSourceId = await db.sources.add({
       ...source,
@@ -53,45 +54,31 @@ export const createSource = createAsyncThunk(
     });
 
     if (otherDaySettings) {
-      await Promise.all(sourceScheduleMeta?.map(db.deleteSourceScheduleMeta));
-
       sourceScheduleMeta = await buildSourceScheduleInterval({
         otherDaySettings,
         date,
         sourceId: createdSourceId,
         profileId,
       });
+
+      await db.sources.update(createdSourceId, {
+        sourceScheduleMeta,
+        updatedAt: new Date().toISOString(),
+      });
     }
-
-    const changes = {
-      ...source,
-      iv,
-      salt,
-      incomes: await dataEncryptor.encodeText(`${source.incomes || 0}`),
-      commentary: await dataEncryptor.encodeText(`${source.commentary || ''}`),
-      updatedAt: new Date().toISOString(),
-      sourceScheduleMeta,
-      profileId,
-    };
-
-    await db.sources.update(createdSourceId, changes);
 
     dispatch(days.thunk.loadDaysData(displayRange));
 
-    await buildMoneyByTheEndOfTheDay({
-      starting: formatDate(buildDate(date).subtract(1, 'days')),
-      days: 61,
-      profileId,
-      passwordHash,
-    });
+    const rebuildDate = buildDate(date).subtract(1, 'days').unix();
+    await rebuildMoneyByDate(rebuildDate, profileId, passwordHash);
 
     onDone?.(createdSourceId);
 
     return {
-      id: changes.id,
+      id: createdSourceId,
       incomes: source.incomes,
       commentary: source.commentary,
-      updatedAt: changes.updatedAt,
+      updatedAt: new Date().toISOString(),
     };
   },
 );
