@@ -41,12 +41,15 @@ function App() {
         <FadeOnMountEvents show={currentScreen === ScreenEnum.welcome}>
           <LockScreen />
         </FadeOnMountEvents>
+
         <FadeOnMountEvents show={currentScreen === ScreenEnum.chart}>
           <ChartScreen />
         </FadeOnMountEvents>
+
         <FadeOnMountEvents show={currentScreen === ScreenEnum.createProfile}>
           <CreateProfileScreen />
         </FadeOnMountEvents>
+
         <FadeOnMountEvents show={currentScreen === ScreenEnum.enterProfile}>
           <EnterProfileScreen />
         </FadeOnMountEvents>
