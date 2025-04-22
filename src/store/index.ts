@@ -1,4 +1,10 @@
-import { Action, configureStore, ThunkAction, ThunkDispatch } from '@reduxjs/toolkit';
+import {
+  Action,
+  combineReducers,
+  configureStore,
+  ThunkAction,
+  ThunkDispatch,
+} from '@reduxjs/toolkit';
 
 // eslint-disable-next-line @typescript-eslint/no-restricted-imports
 import { useDispatch } from 'react-redux';
@@ -19,6 +25,8 @@ import {
   thicknessMap,
 } from './slices';
 
+import daysStatsReducer, * as daysStats from './slices/daysStats';
+
 export {
   days,
   drainEditor,
@@ -33,24 +41,28 @@ export {
   sourceScheduleMetas,
   sources,
   thicknessMap,
+  daysStats,
 };
 
+const rootReducer = combineReducers({
+  days: days.reducer,
+  drainEditor: drainEditor.reducer,
+  drainScheduleMetas: drainScheduleMetas.reducer,
+  drains: drains.reducer,
+  importExport: importExport.reducer,
+  modals: modals.reducer,
+  navigation: navigation.reducer,
+  popUpInputs: popUpInputs.reducer,
+  settings: settings.reducer,
+  sourceEditor: sourceEditor.reducer,
+  sourceScheduleMetas: sourceScheduleMetas.reducer,
+  sources: sources.reducer,
+  thicknessMap: thicknessMap.reducer,
+  daysStats: daysStatsReducer,
+});
+
 export const store = configureStore({
-  reducer: {
-    days: days.reducer,
-    drainEditor: drainEditor.reducer,
-    drainScheduleMetas: drainScheduleMetas.reducer,
-    drains: drains.reducer,
-    importExport: importExport.reducer,
-    modals: modals.reducer,
-    navigation: navigation.reducer,
-    popUpInputs: popUpInputs.reducer,
-    settings: settings.reducer,
-    sourceEditor: sourceEditor.reducer,
-    sourceScheduleMetas: sourceScheduleMetas.reducer,
-    sources: sources.reducer,
-    thicknessMap: thicknessMap.reducer,
-  },
+  reducer: rootReducer,
 });
 
 export type RootState = ReturnType<typeof store.getState>;

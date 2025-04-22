@@ -3,14 +3,10 @@ import moment from 'moment/moment';
 
 import { buildDate, DataEncryptor, formatDate } from 'utils';
 import { RootState, settings, sourceEditor } from 'store';
-import {
-  buildMoneyByTheEndOfTheDay,
-  buildSourceScheduleInterval,
-  db,
-  findOrCreateDate,
-} from 'models';
+import { buildSourceScheduleInterval, db, findOrCreateDate } from 'models';
 import { selectors } from '../../selectors';
 import { Source } from 'types';
+import { encryptSourceData, rebuildMoneyByDate } from 'utils/storeHelpers';
 
 interface SaveSourceArgs {
   date: string;
@@ -51,7 +47,9 @@ export const saveSource = createAsyncThunk(
 
     if (otherDaySettings) {
       try {
-        await Promise.all(sourceScheduleMeta?.map(db.deleteSourceScheduleMeta));
+        if (sourceScheduleMeta.length > 0) {
+          await Promise.all(sourceScheduleMeta?.map(db.deleteSourceScheduleMeta));
+        }
 
         sourceScheduleMeta = await buildSourceScheduleInterval({
           otherDaySettings,
@@ -67,52 +65,53 @@ export const saveSource = createAsyncThunk(
     let rebuildDate = buildDate(date).unix();
 
     if (editorDate !== buildDate(date).unix()) {
-      const initialDay = await findOrCreateDate({
-        date: formatDate(moment.unix(editorDate)),
-        profileId,
-        passwordHash,
-      });
+      const [initialDay, targetDay] = await Promise.all([
+        findOrCreateDate({
+          date: formatDate(moment.unix(editorDate)),
+          profileId,
+          passwordHash,
+        }),
+        findOrCreateDate({
+          date,
+          profileId,
+          passwordHash,
+        }),
+      ]);
 
       initialDay.sources.splice(initialDay.sources.indexOf(sourceId), 1);
 
-      await db.days.update(initialDay.id!, {
-        sources: initialDay.sources,
-      });
-
-      const targetDay = await findOrCreateDate({ date, profileId, passwordHash });
-
       const sourceIdIndex = targetDay.sources.indexOf(sourceId);
-
       if (sourceIdIndex < 0) {
         targetDay.sources.push(sourceId);
-
-        await db.days.update(targetDay.id, {
-          sources: targetDay.sources,
-        });
       }
+
+      await Promise.all([
+        db.days.update(initialDay.id!, { sources: initialDay.sources }),
+        sourceIdIndex < 0
+          ? db.days.update(targetDay.id, { sources: targetDay.sources })
+          : Promise.resolve(),
+      ]);
 
       rebuildDate = initialDay.date < targetDay.date ? initialDay.date : targetDay.date;
     }
+
+    // Use source-specific encryption helper
+    const { incomes, commentary } = await encryptSourceData(dataEncryptor, source);
 
     const result = await db.sources
       .update(sourceId, {
         ...source,
         iv,
         salt,
-        incomes: await dataEncryptor.encodeText(`${source.incomes || 0}`),
-        commentary: await dataEncryptor.encodeText(`${source.commentary || ''}`),
+        incomes,
+        commentary,
         updatedAt: new Date().toISOString(),
         sourceScheduleMeta,
         profileId,
       })
       .catch(rejectWithValue);
 
-    await buildMoneyByTheEndOfTheDay({
-      starting: formatDate(moment.unix(rebuildDate)),
-      days: 61,
-      profileId,
-      passwordHash,
-    });
+    await rebuildMoneyByDate(rebuildDate, profileId, passwordHash);
 
     onDone?.(sourceId);
 

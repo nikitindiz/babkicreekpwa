@@ -3,12 +3,28 @@ import { useDrainChartContainer } from 'containers/DrainChartContainer/useDrainC
 import { DrainChart } from 'components';
 
 interface DrainChartContainerProps {
+  balanceIsNegative?: boolean;
   drainId?: number;
 }
 
-export const DrainChartContainer: FC<DrainChartContainerProps> = ({ drainId }) => {
+export const DrainChartContainer: FC<DrainChartContainerProps> = ({
+  balanceIsNegative,
+  drainId,
+}) => {
   const { displayValue, header, openEdit } = useDrainChartContainer({
     drainId,
   });
-  return <DrainChart displayValue={displayValue} header={header} openEdit={openEdit} />;
+
+  if (!displayValue) {
+    return null;
+  }
+
+  return (
+    <DrainChart
+      displayValue={displayValue}
+      header={header}
+      openEdit={openEdit}
+      balanceIsNegative={balanceIsNegative}
+    />
+  );
 };

@@ -1,3 +1,4 @@
+export * from './BalanceChangeEventContainer';
 export * from './CreateProfileFormContainer';
 export * from './CurrencyEditorContainer';
 export * from './DateAndWeekContainer';

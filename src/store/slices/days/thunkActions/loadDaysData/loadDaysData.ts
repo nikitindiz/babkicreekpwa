@@ -16,7 +16,8 @@ interface LoadDaysDataArgs {
 export const loadDaysData = createAsyncThunk(
   `days/loadRange`,
   async ({ startDate, endDate }: LoadDaysDataArgs, { rejectWithValue, getState }) => {
-    const numberOfDays = Math.abs(buildDate(startDate).diff(buildDate(endDate), 'days'));
+    const endDay = buildDate(endDate).add(1, 'days');
+    const numberOfDays = Math.abs(buildDate(startDate).diff(endDay, 'days'));
     const passwordHash = settings.selectors.passwordHash(getState() as RootState)!;
     const profileId = settings.selectors.activeProfile(getState() as RootState)!;
 

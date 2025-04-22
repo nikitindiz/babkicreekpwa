@@ -1,9 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { buildDate, DataEncryptor, formatDate } from 'utils';
+import { buildDate, DataEncryptor } from 'utils';
 import { days, RootState, settings } from 'store';
-import { buildMoneyByTheEndOfTheDay, buildDrainScheduleInterval, db } from 'models';
+import { buildDrainScheduleInterval, db } from 'models';
 import { Drain } from 'types';
+import { encryptDrainData, rebuildMoneyByDate } from 'utils/storeHelpers';
 
 interface CreateDrainArgs {
   date: string;
@@ -37,8 +38,8 @@ export const createDrain = createAsyncThunk(
 
     await dataEncryptor.generateKey(passwordHash);
 
-    const expenses = await dataEncryptor.encodeText(`${drain.expenses || 0}`);
-    const commentary = await dataEncryptor.encodeText(`${drain.commentary || ''}`);
+    // Use drain-specific encryption helper
+    const { expenses, commentary } = await encryptDrainData(dataEncryptor, drain);
 
     const createdDrainId = await db.drains.add({
       ...drain,
@@ -53,45 +54,31 @@ export const createDrain = createAsyncThunk(
     });
 
     if (otherDaySettings) {
-      await Promise.all(drainScheduleMeta?.map(db.deleteDrainScheduleMeta));
-
       drainScheduleMeta = await buildDrainScheduleInterval({
         otherDaySettings,
         date,
         drainId: createdDrainId,
         profileId,
       });
+
+      await db.drains.update(createdDrainId, {
+        drainScheduleMeta,
+        updatedAt: new Date().toISOString(),
+      });
     }
-
-    const changes = {
-      ...drain,
-      iv,
-      salt,
-      expenses: await dataEncryptor.encodeText(`${drain.expenses || 0}`),
-      commentary: await dataEncryptor.encodeText(`${drain.commentary || ''}`),
-      updatedAt: new Date().toISOString(),
-      drainScheduleMeta,
-      profileId,
-    };
-
-    await db.drains.update(createdDrainId, changes);
 
     dispatch(days.thunk.loadDaysData(displayRange));
 
-    await buildMoneyByTheEndOfTheDay({
-      starting: formatDate(buildDate(date).subtract(1, 'days')),
-      days: 31 * 4,
-      profileId,
-      passwordHash,
-    });
+    const rebuildDate = buildDate(date).subtract(1, 'days').unix();
+    await rebuildMoneyByDate(rebuildDate, profileId, passwordHash);
 
     onDone?.(createdDrainId);
 
     return {
-      id: changes.id,
+      id: createdDrainId,
       expenses: drain.expenses,
       commentary: drain.commentary,
-      updatedAt: changes.updatedAt,
+      updatedAt: new Date().toISOString(),
     };
   },
 );

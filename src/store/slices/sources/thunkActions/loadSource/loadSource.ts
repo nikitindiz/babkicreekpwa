@@ -4,6 +4,7 @@ import { DataEncryptor } from 'utils';
 import { RootState, settings } from 'store';
 import { db } from 'models';
 import { selectors } from '../../selectors';
+import { decryptSourceData } from 'utils/storeHelpers';
 
 interface LoadSourceArgs {
   sourceId: number;
@@ -15,6 +16,10 @@ export const loadSource = createAsyncThunk(
   `sources/load`,
   async ({ sourceId, onDone }: LoadSourceArgs, { rejectWithValue, getState }) => {
     const storedSource = await db.sources.get(sourceId)!;
+    if (!storedSource) {
+      return rejectWithValue('Source not found');
+    }
+
     const { iv, salt, ...source } = storedSource!;
     const passwordHash = settings.selectors.passwordHash(getState() as RootState)!;
     const dataEncryptor = new DataEncryptor({ iv, salt });
@@ -22,10 +27,13 @@ export const loadSource = createAsyncThunk(
     await dataEncryptor.generateKey(passwordHash);
 
     try {
+      // Use our source-specific decryption helper
+      const { incomes, commentary } = await decryptSourceData(dataEncryptor, source);
+
       const result = {
         ...source,
-        incomes: source?.incomes ? await dataEncryptor.decodeText(source?.incomes) : 0,
-        commentary: source?.commentary ? await dataEncryptor.decodeText(source?.commentary) : '',
+        incomes,
+        commentary,
       };
 
       onDone?.(sourceId);

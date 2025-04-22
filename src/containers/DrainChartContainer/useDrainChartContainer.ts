@@ -31,7 +31,9 @@ export const useDrainChartContainer = ({ drainId }: UseDrainChartContainerArgs) 
 
   const [header] = comment.split('\n');
 
-  const displayValue = `- ${drainsById[drainId!]?.data?.expenses || ''} ${currency}`;
+  const displayValue = drainsById[drainId!]?.data?.expenses
+    ? `- ${drainsById[drainId!]?.data?.expenses || ''} ${currency}`
+    : null;
 
   return {
     displayValue,

@@ -3,14 +3,10 @@ import moment from 'moment/moment';
 
 import { buildDate, DataEncryptor, formatDate } from 'utils';
 import { RootState, settings, drainEditor } from 'store';
-import {
-  buildMoneyByTheEndOfTheDay,
-  buildDrainScheduleInterval,
-  db,
-  findOrCreateDate,
-} from 'models';
+import { buildDrainScheduleInterval, db, findOrCreateDate } from 'models';
 import { selectors } from '../../selectors';
 import { Drain } from 'types';
+import { encryptDrainData, rebuildMoneyByDate } from 'utils/storeHelpers';
 
 interface SaveDrainArgs {
   date: string;
@@ -51,7 +47,9 @@ export const saveDrain = createAsyncThunk(
 
     if (otherDaySettings) {
       try {
-        await Promise.all(drainScheduleMeta?.map(db.deleteDrainScheduleMeta));
+        if (drainScheduleMeta.length > 0) {
+          await Promise.all(drainScheduleMeta?.map(db.deleteDrainScheduleMeta));
+        }
 
         drainScheduleMeta = await buildDrainScheduleInterval({
           otherDaySettings,
@@ -67,52 +65,53 @@ export const saveDrain = createAsyncThunk(
     let rebuildDate = buildDate(date).unix();
 
     if (editorDate !== buildDate(date).unix()) {
-      const initialDay = await findOrCreateDate({
-        date: formatDate(moment.unix(editorDate)),
-        profileId,
-        passwordHash,
-      });
+      const [initialDay, targetDay] = await Promise.all([
+        findOrCreateDate({
+          date: formatDate(moment.unix(editorDate)),
+          profileId,
+          passwordHash,
+        }),
+        findOrCreateDate({
+          date,
+          profileId,
+          passwordHash,
+        }),
+      ]);
 
       initialDay.drains.splice(initialDay.drains.indexOf(drainId), 1);
 
-      await db.days.update(initialDay.id!, {
-        drains: initialDay.drains,
-      });
-
-      const targetDay = await findOrCreateDate({ date, profileId, passwordHash });
-
       const drainIdIndex = targetDay.drains.indexOf(drainId);
-
       if (drainIdIndex < 0) {
         targetDay.drains.push(drainId);
-
-        await db.days.update(targetDay.id, {
-          drains: targetDay.drains,
-        });
       }
+
+      await Promise.all([
+        db.days.update(initialDay.id!, { drains: initialDay.drains }),
+        drainIdIndex < 0
+          ? db.days.update(targetDay.id, { drains: targetDay.drains })
+          : Promise.resolve(),
+      ]);
 
       rebuildDate = initialDay.date < targetDay.date ? initialDay.date : targetDay.date;
     }
+
+    // Use drain-specific encryption helper
+    const { expenses, commentary } = await encryptDrainData(dataEncryptor, drain);
 
     const result = await db.drains
       .update(drainId, {
         ...drain,
         iv,
         salt,
-        expenses: await dataEncryptor.encodeText(`${drain.expenses || 0}`),
-        commentary: await dataEncryptor.encodeText(`${drain.commentary || ''}`),
+        expenses,
+        commentary,
         updatedAt: new Date().toISOString(),
         drainScheduleMeta,
         profileId,
       })
       .catch(rejectWithValue);
 
-    await buildMoneyByTheEndOfTheDay({
-      starting: formatDate(moment.unix(rebuildDate)),
-      days: 61,
-      profileId,
-      passwordHash,
-    });
+    await rebuildMoneyByDate(rebuildDate, profileId, passwordHash);
 
     onDone?.(drainId);
 

@@ -14,6 +14,21 @@
   }
 }
 
+.negativeBalanceWarning {
+  margin-top: 10px;
+  background-color: red;
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  font-size: 0.8em;
+
+  svg {
+    display: inline-block;
+    margin-bottom: -3px;
+  }
+}
+
 .editButton {
   cursor: pointer;
   font-size: 14px;

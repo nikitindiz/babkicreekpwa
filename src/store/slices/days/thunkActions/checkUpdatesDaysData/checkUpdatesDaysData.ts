@@ -5,7 +5,6 @@ import { Day } from 'types';
 import { RootState, settings } from 'store';
 import { buildDate, formatDate } from 'utils';
 import { findOrCreateDate, findSourcesInRange } from 'models';
-import { selectors } from '../../selectors';
 import { findDrainsInRange } from 'models/findDrainsInRange';
 
 interface CheckUpdatesDaysDataArgs {
@@ -16,7 +15,8 @@ interface CheckUpdatesDaysDataArgs {
 export const checkUpdatesDaysData = createAsyncThunk(
   `days/checkUpdates`,
   async ({ startDate, endDate }: CheckUpdatesDaysDataArgs, { rejectWithValue, getState }) => {
-    const numberOfDays = Math.abs(buildDate(startDate).diff(buildDate(endDate), 'days'));
+    const endDay = buildDate(endDate).add(1, 'days');
+    const numberOfDays = Math.abs(buildDate(startDate).diff(endDay, 'days'));
     const passwordHash = settings.selectors.passwordHash(getState() as RootState)!;
     const profileId = settings.selectors.activeProfile(getState() as RootState)!;
 

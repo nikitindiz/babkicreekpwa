@@ -3,16 +3,23 @@ import cn from 'classnames';
 
 import classes from './DrainChart.module.scss';
 
-import { ArrowDownIcon } from 'components';
+import { ArrowDownIcon, WarningIcon } from 'components';
 import { useIsMobile } from 'utils/hooks/useIsMobile';
+import { FormattedMessage } from 'react-intl';
 
 interface DrainChartVerticalProps {
+  balanceIsNegative?: boolean;
   displayValue: string;
   header: ReactNode;
   openEdit: () => void;
 }
 
-export const DrainChart: FC<DrainChartVerticalProps> = ({ displayValue, header, openEdit }) => {
+export const DrainChart: FC<DrainChartVerticalProps> = ({
+  balanceIsNegative,
+  displayValue,
+  header,
+  openEdit,
+}) => {
   const mobile = useIsMobile();
 
   return (
@@ -25,6 +32,16 @@ export const DrainChart: FC<DrainChartVerticalProps> = ({ displayValue, header, 
         </div>
 
         <div className={cn(classes.value, { [classes.value_mobile]: mobile })}>{displayValue}</div>
+
+        {balanceIsNegative && (
+          <div className={classes.negativeBalanceWarning}>
+            <WarningIcon />
+            <FormattedMessage
+              id="drainChart.negativeBalance"
+              defaultMessage="Warning! Your balance is negative after this spending."
+            />
+          </div>
+        )}
       </button>
 
       <div className={cn(classes.arrow, { [classes.arrow_mobile]: mobile })}>
