@@ -58,6 +58,10 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
     const isWeekend =
       moment.unix(day.date).isoWeekday() === 7 || moment.unix(day.date).isoWeekday() === 6;
 
+    const balanceIsNegative =
+      (thicknessMapByDate[isoDate]?.endOfTheDayThickness || 0) < 0 &&
+      (thicknessMapByDate[isoDate]?.beginningOfTheDayThickness || 0) < 0;
+
     return (
       <DayContextProvider date={day.date}>
         <div
@@ -67,6 +71,7 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
             [classes.container_emptyDay]: noSourcesOrDrains,
             [classes.container_today]: day.date === buildDate().unix(),
             [classes.container_mobile]: mobile,
+            [classes.container_negativeBalance]: balanceIsNegative,
           })}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}>
@@ -112,7 +117,16 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
             <BalanceChangeEventContainer
               key={drainId}
               flowThickness={thicknessMapByDate[isoDate]?.drains[idx]}
-              expensesSection={<DrainChartContainer drainId={drainId} />}
+              expensesSection={
+                <DrainChartContainer
+                  drainId={drainId}
+                  balanceIsNegative={
+                    thicknessMapByDate[isoDate]?.drains[idx]
+                      ? thicknessMapByDate[isoDate]?.drains[idx] < 0
+                      : false
+                  }
+                />
+              }
               lineStyles={{ backgroundColor: 'var(--drain-color)' }}
             />
           ))}
@@ -121,11 +135,21 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
             flowThickness={thicknessMapByDate[isoDate]?.endOfTheDayThickness}
             incomesSection={<div />}
             expensesSection={
-              <div className={cn(classes.total, { [classes.total_mobile]: mobile })}>
+              <div
+                className={cn(classes.total, {
+                  [classes.total_mobile]: mobile,
+                  [classes.total_negative]:
+                    thicknessMapByDate[isoDate]?.endOfTheDayThickness &&
+                    thicknessMapByDate[isoDate]?.endOfTheDayThickness < 0,
+                })}>
                 <FormattedNumber
                   value={day.moneyByTheEndOfTheDay || 0}
                   style="currency"
-                  currency={currency}
+                  currencySign="standard"
+                  minimumFractionDigits={2}
+                  maximumFractionDigits={2}
+                  // currency={currency}
+                  currency="GEL"
                 />
               </div>
             }

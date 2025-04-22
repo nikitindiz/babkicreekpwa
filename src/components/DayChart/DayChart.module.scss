@@ -30,6 +30,10 @@
     min-width: initial;
     min-height: calc(var(--timestamp-size) * 2);
   }
+
+  &_negativeBalance {
+    opacity: 0.5;
+  }
 }
 
 .timestamp {
@@ -91,7 +95,7 @@
   width: calc(var(--timestamp-size) * 1.5);
   height: calc(var(--timestamp-size) * 1.5);
   font-size: calc(var(--timestamp-size));
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   border: none;
   color: white;
   z-index: 500;
@@ -113,5 +117,9 @@
 
   &_mobile {
     padding: 0 0.5em;
+  }
+
+  &_negative {
+    color: var(--drain-color);
   }
 }

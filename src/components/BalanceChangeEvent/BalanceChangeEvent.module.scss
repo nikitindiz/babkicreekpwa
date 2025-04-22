@@ -45,6 +45,10 @@
   height: 0;
   background-color: var(--source-color);
 
+  &_isNegative {
+    background-color: var(--drain-color);
+  }
+
   &_loading {
     animation: fadeInOut 1s infinite alternate ease-in-out;
     background-color: var(--placeholder-color, #e0e0e0);

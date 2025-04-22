@@ -23,9 +23,14 @@ export const BalanceChangeEvent: FC<BalanceChangeEventProps> = ({
 }) => {
   const mobile = useIsMobile();
 
+  const resultLineWidth =
+    flowThickness && flowThickness > 0 ? flowThickness : flowThickness && flowThickness < 0 ? 4 : 0;
+
+  console.log('flowThickness', flowThickness && flowThickness < 0);
+
   const lineStyle = mobile
-    ? { ...lineStyles, width: flowThickness }
-    : { height: flowThickness, ...lineStyles };
+    ? { ...lineStyles, width: resultLineWidth }
+    : { height: resultLineWidth, ...lineStyles };
 
   return (
     <div
@@ -41,6 +46,7 @@ export const BalanceChangeEvent: FC<BalanceChangeEventProps> = ({
         className={cn(classes.chartLine, {
           [classes.chartLine_mobile]: mobile,
           [classes.chartLine_loading]: isLoading,
+          [classes.chartLine_isNegative]: flowThickness && flowThickness < 0,
         })}
         style={lineStyle}
       />

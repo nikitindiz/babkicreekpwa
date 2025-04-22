@@ -43,4 +43,5 @@ export * from './SyncOptionsForm';
 export * from './Tag';
 export * from './TextAreaModal';
 export * from './TextInput';
+export * from './WarningIcon';
 export * from './WeekDaysInput';
