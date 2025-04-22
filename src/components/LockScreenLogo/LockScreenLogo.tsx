@@ -13,7 +13,7 @@ export const LockScreenLogo: FC = () => {
         </div>
         <div className={classes.logoText}>
           Babki Creek
-          <div className={classes.version}>v0.0.8</div>
+          <div className={classes.version}>v0.0.9</div>
         </div>
       </div>
     </h1>
