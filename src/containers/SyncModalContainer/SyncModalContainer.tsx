@@ -13,7 +13,7 @@ export const SyncModalContainer: FC<NewSyncModalContainerProps> = ({ className, 
     <SyncModal
       caption={<FormattedMessage id="modal.caption.sync-modal" defaultMessage="Sync options" />}
       className={className}
-      closeModal={loading ? closeModal : undefined}
+      closeModal={!loading ? closeModal : undefined}
       isLoading={loading}
       {...restProps}
     />
