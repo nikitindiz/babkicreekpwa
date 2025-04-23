@@ -90,38 +90,44 @@ const issueNextVersion = () => {
   fs.writeFileSync(versionFilePath, fileContent);
   console.log(`Created version file: ${versionFilePath}`);
 
-  // Update changelog index.ts
-  const indexContent = fs.readFileSync(CHANGELOG_INDEX_PATH, 'utf8');
-  const lines = indexContent.split('\n');
+  // Rebuild changelog index.ts by scanning the versions directory
+  const versionFiles = fs
+    .readdirSync(CHANGELOG_VERSIONS_DIR)
+    .filter((file) => file.endsWith('.ts'))
+    .map((file) => file.replace('.ts', ''))
+    .sort((a, b) => {
+      const aParts = a.split('.').map(Number);
+      const bParts = b.split('.').map(Number);
 
-  // Create new import line
-  const importLine = `import * as v${nextVersion.replace(
-    /\./g,
-    '_',
-  )} from './versions/${nextVersion}';`;
+      for (let i = 0; i < Math.max(aParts.length, bParts.length); i++) {
+        const aVal = aParts[i] || 0;
+        const bVal = bParts[i] || 0;
 
-  // Find the last import line to insert after
-  let lastImportIndex = -1;
-  for (let i = 0; i < lines.length; i++) {
-    if (lines[i].startsWith('import ')) {
-      lastImportIndex = i;
-    }
-  }
+        if (aVal !== bVal) {
+          return bVal - aVal; // Descending order (newest first)
+        }
+      }
 
-  // Insert the new import after the last existing import
-  lines.splice(lastImportIndex + 1, 0, importLine);
+      return 0;
+    });
 
-  // Update the changeLog object
-  let changeLogIndex = lines.findIndex((line) => line.includes('export const changeLog = {'));
-  if (changeLogIndex !== -1) {
-    lines[changeLogIndex + 1] = `  '${nextVersion}': v${nextVersion.replace(/\./g, '_')},${
-      lines[changeLogIndex + 1].includes('//') ? ' ' + lines[changeLogIndex + 1].split('//')[1] : ''
-    }`;
-  }
+  // Generate import statements and changelog object entries
+  const imports = versionFiles.map(
+    (version) => `import * as v${version.replace(/\./g, '_')} from './versions/${version}';`,
+  );
 
-  // Write the updated content back to the file
-  fs.writeFileSync(CHANGELOG_INDEX_PATH, lines.join('\n'));
-  console.log(`Updated changelog index at: ${CHANGELOG_INDEX_PATH}`);
+  const changelogEntries = versionFiles.map(
+    (version) => `  '${version}': v${version.replace(/\./g, '_')},`,
+  );
+
+  // Create the complete file content
+  const indexFileContent = `${imports.join(
+    '\n',
+  )}\n\nexport const changeLog = {\n${changelogEntries.join('\n')}\n};\n`;
+
+  // Write the rebuilt content to the file
+  fs.writeFileSync(CHANGELOG_INDEX_PATH, indexFileContent);
+  console.log(`Rebuilt changelog index at: ${CHANGELOG_INDEX_PATH}`);
 
   // Create new version folder in changelogs
   const newVersionDir = path.resolve(__dirname, `../changelogs/${nextVersion}`);
