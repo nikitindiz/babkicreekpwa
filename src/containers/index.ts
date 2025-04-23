@@ -10,6 +10,7 @@ export * from './EditDrainModalContainer';
 export * from './EditSourceModalContainer';
 export * from './EnterProfileFormContainer';
 export * from './FileExchangeContainer';
+export * from './LeftSidebarContainer';
 export * from './ModalsContainer';
 export * from './MoneyFlowChartContainer';
 export * from './NavigationContainer';

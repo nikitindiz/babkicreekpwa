@@ -6,6 +6,7 @@ import { RootState } from 'store';
 
 export interface CounterState {
   currentScreen: ScreenEnum;
+  leftSidebarVisible: boolean;
 }
 
 const selectors = {
@@ -21,12 +22,28 @@ const passwordHash = storage.getItem('passwordHash');
 
 const initialState: CounterState = {
   currentScreen: activeProfile && passwordHash ? ScreenEnum.chart : ScreenEnum.welcome,
+  leftSidebarVisible: false,
 };
 
 export const navigationSlice = createSlice({
   name: 'navigation',
   initialState,
   reducers: {
+    hideLeftSidebar: (state) => {
+      state.leftSidebarVisible = false;
+      return state;
+    },
+
+    showLeftSidebar: (state) => {
+      state.leftSidebarVisible = true;
+      return state;
+    },
+
+    toggleLeftSidebar: (state) => {
+      state.leftSidebarVisible = !state.leftSidebarVisible;
+      return state;
+    },
+
     goTo: (state, action: PayloadAction<ScreenEnum>) => {
       state.currentScreen = action.payload;
 

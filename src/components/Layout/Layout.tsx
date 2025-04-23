@@ -7,6 +7,7 @@ import classes from './Layout.module.scss';
 import {
   EditDrainModalContainer,
   EditSourceModalContainer,
+  LeftSidebarContainer,
   ModalsContainer,
   NewDrainModalContainer,
   SyncModalContainer,
@@ -41,6 +42,8 @@ export const Layout = forwardRef<HTMLDivElement, LayoutProps>(
           settingsNode={<SettingsModal />}
           syncOptionsNode={<SyncModalContainer />}
         />
+
+        <LeftSidebarContainer />
       </div>
     );
   },

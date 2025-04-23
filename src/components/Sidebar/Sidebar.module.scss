@@ -1,0 +1,50 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+
+  &_visible {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.sidebar {
+  height: 100%;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+
+  &_left {
+    margin-right: auto;
+    transform: translateX(-100%);
+  }
+
+  &_right {
+    margin-left: auto;
+    transform: translateX(100%);
+  }
+
+  &_visible {
+    transform: translateX(0);
+  }
+}
+
+// Media query for mobile devices
+@media (max-width: 768px) {
+  .sidebar {
+    width: 80% !important; // Override any custom width on small screens
+  }
+}

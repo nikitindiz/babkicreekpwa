@@ -39,6 +39,7 @@ export * from './SourceChart';
 export * from './SourceModal';
 export * from './SyncIcon';
 export * from './SyncModal';
+export * from './Sidebar';
 export * from './SyncOptionsForm';
 export * from './Tag';
 export * from './TextAreaModal';
