@@ -6,4 +6,7 @@ export interface LoadableEntity<D> {
   savingError: unknown | null;
   savingStarted: boolean;
   data: D | null;
+  deletingStarted: boolean;
+  deletingEnded: boolean;
+  deletingError: unknown | null;
 }

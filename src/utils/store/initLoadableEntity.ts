@@ -6,6 +6,9 @@ export const initLoadableEntity = () => {
     savingEnded: false,
     savingError: null,
     savingStarted: false,
+    deletingStarted: false,
+    deletingEnded: false,
+    deletingError: null,
     data: null,
   };
 };

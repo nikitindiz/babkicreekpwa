@@ -10,11 +10,15 @@ interface NavigationStatusMessageContainerProps {
 export const NavigationStatusMessageContainer: FC<NavigationStatusMessageContainerProps> = () => {
   const {
     daysLoading,
-    newDrainCreating,
-    newSourceCreating,
-    someDrainsAreLoading,
-    someSourcesAreLoading,
     thicknessMapLoading,
+    newSourceCreating,
+    newDrainCreating,
+    someDrainIsLoading,
+    someDrainIsSaving,
+    someSourceIsLoading,
+    someSourceIsSaving,
+    someDrainIsDeleting,
+    someSourceIsDeleting,
   } = useAppStatus();
 
   return (
@@ -22,9 +26,13 @@ export const NavigationStatusMessageContainer: FC<NavigationStatusMessageContain
       daysLoading={daysLoading}
       newDrainCreating={newDrainCreating}
       newSourceCreating={newSourceCreating}
-      someDrainsAreLoading={someDrainsAreLoading}
-      someSourcesAreLoading={someSourcesAreLoading}
       thicknessMapLoading={thicknessMapLoading}
+      someDrainIsLoading={someDrainIsLoading}
+      someDrainIsSaving={someDrainIsSaving}
+      someSourceIsLoading={someSourceIsLoading}
+      someSourceIsSaving={someSourceIsSaving}
+      someDrainIsDeleting={someDrainIsDeleting}
+      someSourceIsDeleting={someSourceIsDeleting}
     />
   );
 };

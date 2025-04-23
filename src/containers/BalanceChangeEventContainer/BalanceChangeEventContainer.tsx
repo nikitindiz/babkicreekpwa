@@ -2,6 +2,7 @@ import React, { CSSProperties, HTMLAttributes, ReactNode } from 'react';
 import { BalanceChangeEvent } from 'components';
 import { useSelector } from 'react-redux';
 import { days, drains, sources } from 'store';
+import { useAppStatus } from 'utils/store/hooks';
 
 interface BalanceChangeEventContainerProps extends HTMLAttributes<HTMLDivElement> {
   expensesSection?: ReactNode;
@@ -11,22 +12,33 @@ interface BalanceChangeEventContainerProps extends HTMLAttributes<HTMLDivElement
 }
 
 export const BalanceChangeEventContainer: React.FC<BalanceChangeEventContainerProps> = (props) => {
-  const daysLoadingStarted = useSelector(days.selectors.loadingStarted);
-  const daysLoadingEnded = useSelector(days.selectors.loadingEnded);
-  const anyDrainIsLoading = useSelector(drains.selectors.isAnyDrainLoading);
-  const anyDrainIsSaving = useSelector(drains.selectors.isAnyDrainSaving);
-  const anySourceIsLoading = useSelector(sources.selectors.isAnySourcesLoading);
-  const anySourceIsSaving = useSelector(sources.selectors.isAnySourceSaving);
+  const {
+    daysLoading,
+    thicknessMapLoading,
+    newSourceCreating,
+    newDrainCreating,
+    someDrainIsLoading,
+    someDrainIsSaving,
+    someSourceIsLoading,
+    someSourceIsSaving,
+    someDrainIsDeleting,
+    someSourceIsDeleting,
+  } = useAppStatus();
 
   return (
     <BalanceChangeEvent
       {...props}
       isLoading={
-        (daysLoadingStarted && !daysLoadingEnded) ||
-        anyDrainIsLoading ||
-        anyDrainIsSaving ||
-        anySourceIsLoading ||
-        anySourceIsSaving
+        daysLoading ||
+        thicknessMapLoading ||
+        newSourceCreating ||
+        newDrainCreating ||
+        someDrainIsLoading ||
+        someDrainIsSaving ||
+        someSourceIsLoading ||
+        someSourceIsSaving ||
+        someDrainIsDeleting ||
+        someSourceIsDeleting
       }
     />
   );

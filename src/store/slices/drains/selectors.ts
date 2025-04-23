@@ -30,4 +30,10 @@ export const selectors = {
       drain ? drain.savingStarted && !drain.savingEnded : false,
     ),
   ),
+
+  isAnyDrainDeleting: createSelector(selectDrainsState, (drains) =>
+    Object.values(drains.byId).some((drain) =>
+      drain ? drain.deletingStarted && !drain.deletingEnded : false,
+    ),
+  ),
 };

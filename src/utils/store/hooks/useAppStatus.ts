@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
 import { days, drains, sources, thicknessMap } from 'store';
-import { useMemo } from 'react';
 
 export const useAppStatus = () => {
   const daysLoadingStarted = useSelector(days.selectors.loadingStarted);
@@ -11,25 +10,23 @@ export const useAppStatus = () => {
   const newSource = sourcesById['new'];
   const drainsById = useSelector(drains.selectors.byId);
   const newDrain = drainsById['new'];
-
-  const someSourcesAreLoading = useMemo(() => {
-    return Object.values(sourcesById).some(
-      (source) => source?.loadingStarted && !source?.loadingEnded,
-    );
-  }, [sourcesById]);
-
-  const someDrainsAreLoading = useMemo(() => {
-    return Object.values(sourcesById).some(
-      (source) => source?.loadingStarted && !source?.loadingEnded,
-    );
-  }, [sourcesById]);
+  const someDrainIsLoading = useSelector(drains.selectors.isAnyDrainLoading);
+  const someDrainIsSaving = useSelector(drains.selectors.isAnyDrainSaving);
+  const someSourceIsLoading = useSelector(sources.selectors.isAnySourcesLoading);
+  const someSourceIsSaving = useSelector(sources.selectors.isAnySourceSaving);
+  const someSourceIsDeleting = useSelector(sources.selectors.isAnySourceDeleting);
+  const someDrainIsDeleting = useSelector(drains.selectors.isAnyDrainDeleting);
 
   return {
     daysLoading: daysLoadingStarted && !daysLoadingEnded,
     thicknessMapLoading: thicknessMapLoadingStarted && !thicknessMapLoadingEnded,
     newSourceCreating: newSource?.savingStarted && !newSource?.savingEnded,
     newDrainCreating: newDrain?.savingStarted && !newDrain?.savingEnded,
-    someSourcesAreLoading,
-    someDrainsAreLoading,
+    someDrainIsLoading,
+    someDrainIsSaving,
+    someSourceIsLoading,
+    someSourceIsSaving,
+    someSourceIsDeleting,
+    someDrainIsDeleting,
   };
 };

@@ -30,4 +30,10 @@ export const selectors = {
       source ? source.savingStarted && !source.savingEnded : false,
     ),
   ),
+
+  isAnySourceDeleting: createSelector(selectSourcesState, (sources) =>
+    Object.values(sources.byId).some((source) =>
+      source ? source.deletingStarted && !source.deletingEnded : false,
+    ),
+  ),
 };

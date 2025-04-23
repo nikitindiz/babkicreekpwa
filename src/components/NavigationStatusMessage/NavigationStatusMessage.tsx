@@ -8,31 +8,66 @@ interface NavigationStatusMessageProps extends HTMLAttributes<HTMLDivElement> {
   daysLoading: any;
   newDrainCreating: any;
   newSourceCreating: any;
-  someDrainsAreLoading: boolean;
-  someSourcesAreLoading: boolean;
   thicknessMapLoading: any;
+  someDrainIsLoading?: boolean;
+  someDrainIsSaving?: boolean;
+  someSourceIsLoading?: boolean;
+  someSourceIsSaving?: boolean;
+  someDrainIsDeleting?: boolean;
+  someSourceIsDeleting?: boolean;
 }
 
 export const NavigationStatusMessage: FC<NavigationStatusMessageProps> = ({
   className,
   daysLoading,
-  newDrainCreating,
-  newSourceCreating,
-  someDrainsAreLoading,
-  someSourcesAreLoading,
   thicknessMapLoading,
+  newSourceCreating,
+  newDrainCreating,
+  someDrainIsLoading,
+  someDrainIsSaving,
+  someSourceIsLoading,
+  someSourceIsSaving,
+  someDrainIsDeleting,
+  someSourceIsDeleting,
   ...restProps
 }) => {
-  const inProgress = daysLoading || thicknessMapLoading || newSourceCreating || newDrainCreating;
+  const inProgress =
+    thicknessMapLoading ||
+    newSourceCreating ||
+    newDrainCreating ||
+    someDrainIsLoading ||
+    someDrainIsSaving ||
+    someSourceIsLoading ||
+    someSourceIsSaving ||
+    someDrainIsDeleting ||
+    someSourceIsDeleting;
 
   let message = <FormattedMessage id="navigation.header" defaultMessage="Finances Chart" />;
 
-  if (someSourcesAreLoading) {
+  if (someSourceIsLoading) {
     message = <FormattedMessage id="navigation.sources-loading" defaultMessage="Loading sources" />;
   }
 
-  if (someDrainsAreLoading) {
-    message = <FormattedMessage id="navigation.drains-loading" defaultMessage="Loading drains" />;
+  if (someDrainIsSaving) {
+    message = <FormattedMessage id="navigation.drains-saving" defaultMessage="Saving drains" />;
+  }
+
+  if (someDrainIsDeleting) {
+    message = <FormattedMessage id="navigation.drains-deleting" defaultMessage="Deleting drains" />;
+  }
+
+  if (someSourceIsLoading) {
+    message = <FormattedMessage id="navigation.sources-loading" defaultMessage="Loading sources" />;
+  }
+
+  if (someSourceIsSaving) {
+    message = <FormattedMessage id="navigation.sources-saving" defaultMessage="Saving sources" />;
+  }
+
+  if (someSourceIsDeleting) {
+    message = (
+      <FormattedMessage id="navigation.sources-deleting" defaultMessage="Deleting sources" />
+    );
   }
 
   if (newSourceCreating) {
