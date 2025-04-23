@@ -1,6 +1,6 @@
 {
   "name": "babki-creek-2",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "private": true,
   "homepage": "https://nikitindiz.github.io/babkicreekpwa",
   "dependencies": {
@@ -58,7 +58,8 @@
     "lint": "tsc --noEmit && eslint src/**/*.ts{,x}",
     "lint-n-fix": "eslint src/**/*.ts{,x} --fix",
     "extract-translations": "formatjs extract 'src/**/*.ts*' --ignore='**/*.d.ts' --out-file src/lang/en-extracted.json --id-interpolation-pattern '[sha512:contenthash:base64:6]'",
-    "compile-translations": "formatjs compile src/lang/en-extracted.json --out-file src/lang/en.json"
+    "compile-translations": "formatjs compile src/lang/en-extracted.json --out-file src/lang/en.json",
+    "version-upgrade": "node scripts/issue-next-app-version.js"
   },
   "jest": {
     "moduleNameMapper": {
@@ -99,6 +100,7 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "gh-pages": "^6.1.0",
+    "js-yaml": "^4.1.0",
     "prettier": "^3.0.3",
     "sass": "^1.69.3"
   }
