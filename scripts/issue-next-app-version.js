@@ -113,7 +113,7 @@ const issueNextVersion = () => {
 
   // Generate import statements and changelog object entries
   const imports = versionFiles.map(
-    (version) => `import * as v${version.replace(/\./g, '_')} from './versions/${version}';`,
+    (version) => `import v${version.replace(/\./g, '_')} from './versions/${version}';`,
   );
 
   const changelogEntries = versionFiles.map(
