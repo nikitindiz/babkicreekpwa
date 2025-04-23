@@ -33,6 +33,7 @@ export * from './MoneyFlowChart';
 export * from './Navigation';
 export * from './NavigationStatusMessage';
 export * from './ProfileSelector';
+export * from './ProfileSettingsForm';
 export * from './Select';
 export * from './SettingsModal';
 export * from './SourceChart';

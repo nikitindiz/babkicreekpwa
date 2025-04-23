@@ -3,7 +3,12 @@ import { ActionReducerMapBuilder, createSlice, PayloadAction } from '@reduxjs/to
 
 import { SettingsState } from './SettingsState';
 import { initLoadableEntity } from 'utils';
-import { loadSettings, loadSettingsExtraReducers } from 'store/slices/settings/thunkActions';
+import {
+  loadSettings,
+  loadSettingsExtraReducers,
+  saveSettings,
+  saveSettingsExtraReducers,
+} from 'store/slices/settings/thunkActions';
 import { selectors } from './selectors';
 
 const rememberProfile = localStorage.getItem('rememberProfile') === 'true';
@@ -42,6 +47,7 @@ export const settingsSlice = createSlice({
   },
   extraReducers: (builder: ActionReducerMapBuilder<SettingsState>) => {
     loadSettingsExtraReducers(builder);
+    saveSettingsExtraReducers(builder);
   },
 });
 
@@ -49,14 +55,17 @@ const { actions, reducer } = settingsSlice;
 
 interface SettingsSlice {
   actions: typeof actions;
-  thunk: { loadSettings: typeof loadSettings };
+  thunk: {
+    loadSettings: typeof loadSettings;
+    saveSettings: typeof saveSettings;
+  };
   reducer: typeof reducer;
   selectors: typeof selectors;
 }
 
 export const settings: SettingsSlice = {
   actions,
-  thunk: { loadSettings },
+  thunk: { loadSettings, saveSettings },
   reducer,
   selectors,
 };

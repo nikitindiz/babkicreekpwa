@@ -18,6 +18,7 @@ export * from './NavigationStatusMessageContainer';
 export * from './NewDrainModalContainer';
 export * from './NewSourceModalContainer';
 export * from './ProfileSelectorContainer';
+export * from './ProfileSettingsFormContainer';
 export * from './SourceChartContainer';
 export * from './SourceFormContainer';
 export * from './SyncModalContainer';
