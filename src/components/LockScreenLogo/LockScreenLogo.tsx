@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import classes from './LockScreenLogo.module.scss';
 
 import { Logo } from 'components';
+import { currentVersion } from 'src/currentVersion';
 
 export const LockScreenLogo: FC = () => {
   return (
@@ -13,7 +14,7 @@ export const LockScreenLogo: FC = () => {
         </div>
         <div className={classes.logoText}>
           Babki Creek
-          <div className={classes.version}>v0.0.10</div>
+          <div className={classes.version}>v{currentVersion}</div>
         </div>
       </div>
     </h1>

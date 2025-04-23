@@ -1,0 +1,4 @@
+type: improvement
+description: |
+  This is an example of a changelog entry.
+  For type following values can be used: improvement, bugfix, feature

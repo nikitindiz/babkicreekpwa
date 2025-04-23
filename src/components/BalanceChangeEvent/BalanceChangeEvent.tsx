@@ -26,8 +26,6 @@ export const BalanceChangeEvent: FC<BalanceChangeEventProps> = ({
   const resultLineWidth =
     flowThickness && flowThickness > 0 ? flowThickness : flowThickness && flowThickness < 0 ? 4 : 0;
 
-  console.log('flowThickness', flowThickness && flowThickness < 0);
-
   const lineStyle = mobile
     ? { ...lineStyles, width: resultLineWidth }
     : { height: resultLineWidth, ...lineStyles };
