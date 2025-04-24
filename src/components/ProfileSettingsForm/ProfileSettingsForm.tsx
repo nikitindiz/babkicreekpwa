@@ -2,25 +2,29 @@ import React, { FC } from 'react';
 import moment from 'moment-timezone';
 
 import classes from './ProfileSettingsForm.module.scss';
-import { Select } from 'components';
+import { Select, TextInput } from 'components';
 import { currencies } from '../CreateProfileForm/currencies';
 
 interface ProfileSettingsFormProps {
   currency: string;
   language: string;
   timezone: string;
+  maxMoneyValue: number;
   handleCurrencyChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   handleLanguageChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   handleTimeZoneChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleMaxMoneyValueChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const ProfileSettingsForm: FC<ProfileSettingsFormProps> = ({
   currency,
   language,
   timezone,
+  maxMoneyValue,
   handleCurrencyChange,
   handleLanguageChange,
   handleTimeZoneChange,
+  handleMaxMoneyValueChange,
 }) => {
   return (
     <div className={classes.formContainer}>
@@ -49,6 +53,15 @@ export const ProfileSettingsForm: FC<ProfileSettingsFormProps> = ({
           onChange={handleCurrencyChange}
           options={currencies}
           value={currency}
+        />
+
+        <TextInput
+          caption="Maximum expected volume of asset"
+          name="maxMoneyValue"
+          type="number"
+          value={maxMoneyValue.toString()}
+          onChange={handleMaxMoneyValueChange}
+          placeholder="1000"
         />
       </div>
     </div>

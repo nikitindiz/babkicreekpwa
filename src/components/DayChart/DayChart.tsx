@@ -148,8 +148,7 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
                   currencySign="standard"
                   minimumFractionDigits={2}
                   maximumFractionDigits={2}
-                  // currency={currency}
-                  currency="GEL"
+                  currency={currency}
                 />
               </div>
             }

@@ -19,6 +19,7 @@ interface CreateProfileFormProps {
   handlePasswordChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleRepeatPasswordChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleTimeZoneChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleMaxMoneyValueChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   hint?: string;
   label?: string;
   labelValidationError?: string;
@@ -27,6 +28,7 @@ interface CreateProfileFormProps {
   passwordValidationError?: string;
   repeatPassword?: string;
   timeZone?: string;
+  maxMoneyValue?: number;
 }
 
 export const CreateProfileForm: FC<CreateProfileFormProps> = ({
@@ -40,6 +42,7 @@ export const CreateProfileForm: FC<CreateProfileFormProps> = ({
   handlePasswordChange,
   handleRepeatPasswordChange,
   handleTimeZoneChange,
+  handleMaxMoneyValueChange,
   hint,
   label,
   labelValidationError,
@@ -48,6 +51,7 @@ export const CreateProfileForm: FC<CreateProfileFormProps> = ({
   passwordValidationError,
   repeatPassword,
   timeZone,
+  maxMoneyValue,
 }) => {
   const { goTo } = useScreens();
 
@@ -124,6 +128,15 @@ export const CreateProfileForm: FC<CreateProfileFormProps> = ({
           onChange={handleCurrencyChange}
           options={currencies}
           value={currency}
+        />
+
+        <TextInput
+          caption="Maximum asset value"
+          name="maxMoneyValue"
+          type="number"
+          placeholder="1000"
+          value={maxMoneyValue?.toString()}
+          onChange={handleMaxMoneyValueChange}
         />
 
         <button type="submit" onClick={handleCreate as any}>

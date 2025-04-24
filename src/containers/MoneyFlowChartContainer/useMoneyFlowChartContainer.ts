@@ -16,6 +16,7 @@ export const useMoneyFlowChartContainer = () => {
   const sourcesById = useSelector(sources.selectors.byId);
   const { data: profileSettings } = useSelector(settings.selectors.profileSettings);
   const activeProfile = useSelector(settings.selectors.activeProfile);
+  const maxMoneyValue = useSelector(settings.selectors.maxMoneyValue);
   const dates = useMemo(() => Object.keys(daysByDate).sort(), [daysByDate]);
   const mobile = useIsMobile();
 
@@ -72,6 +73,7 @@ export const useMoneyFlowChartContainer = () => {
     dispatch(
       thicknessMap.thunk.loadThicknessMapData({
         daysStats: stats!,
+        maxMoneyValue,
       }),
     );
   }, 300);

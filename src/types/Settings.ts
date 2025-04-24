@@ -6,4 +6,5 @@ export interface Settings {
   timezone: string; // 'Asia/Tbilisi'
   createdAt: string;
   updatedAt: string;
+  maxMoneyValue?: number; // default 1000
 }

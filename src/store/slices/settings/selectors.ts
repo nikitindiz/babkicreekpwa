@@ -13,6 +13,11 @@ export const selectors = {
     state.settings.profileSettings.data
       ? state.settings.profileSettings.data.timezone
       : state.settings.timezone,
+
+  maxMoneyValue: (state: RootState) =>
+    state.settings.profileSettings.data
+      ? state.settings.profileSettings.data.maxMoneyValue
+      : state.settings.maxMoneyValue,
   activeProfile: (state: RootState) => state.settings.activeProfile,
   passwordHash: (state: RootState) => state.settings.passwordHash,
   profileSettings: (state: RootState) => state.settings.profileSettings,

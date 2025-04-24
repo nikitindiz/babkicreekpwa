@@ -17,6 +17,7 @@ export const loadSettings = createAsyncThunk(
         currency: settings.currency,
         language: settings.language,
         timezone: settings.timezone,
+        maxMoneyValue: settings.maxMoneyValue,
       };
     } catch (e) {
       rejectWithValue(e);

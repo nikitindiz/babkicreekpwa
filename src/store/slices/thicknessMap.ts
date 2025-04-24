@@ -41,6 +41,7 @@ const loadThicknessMapData = createAsyncThunk(
   (
     {
       daysStats,
+      maxMoneyValue = 1000,
     }: {
       daysStats: {
         date: string;
@@ -48,6 +49,7 @@ const loadThicknessMapData = createAsyncThunk(
         sources: { incomes: number }[];
         moneyByTheEndOfTheDay: number;
       }[];
+      maxMoneyValue?: number;
     },
     { rejectWithValue },
   ) => {
@@ -61,7 +63,7 @@ const loadThicknessMapData = createAsyncThunk(
         }[];
 
     try {
-      data = buildThicknessMap({ daysStats, maxMoneyValue: 10000 });
+      data = buildThicknessMap({ daysStats, maxMoneyValue });
     } catch (err) {
       return rejectWithValue(err);
     }

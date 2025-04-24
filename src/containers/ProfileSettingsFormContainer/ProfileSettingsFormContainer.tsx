@@ -48,6 +48,19 @@ export const ProfileSettingsFormContainer: FC<ProfileSettingsFormContainerProps>
     [settings, saveSettings, onSaveSuccess],
   );
 
+  const handleMaxMoneyValueChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value = parseInt(event.target.value, 10) || 1000;
+      const newSettings: SettingsData = {
+        ...settings,
+        maxMoneyValue: value,
+      };
+      saveSettings(newSettings);
+      onSaveSuccess?.();
+    },
+    [settings, saveSettings, onSaveSuccess],
+  );
+
   if (isLoading) {
     return <div>Loading settings...</div>;
   }
@@ -57,9 +70,11 @@ export const ProfileSettingsFormContainer: FC<ProfileSettingsFormContainerProps>
       currency={settings.currency}
       language={settings.language}
       timezone={settings.timezone}
+      maxMoneyValue={settings.maxMoneyValue || 1000}
       handleCurrencyChange={handleCurrencyChange}
       handleLanguageChange={handleLanguageChange}
       handleTimeZoneChange={handleTimeZoneChange}
+      handleMaxMoneyValueChange={handleMaxMoneyValueChange}
     />
   );
 };

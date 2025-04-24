@@ -3,24 +3,27 @@ import cn from 'classnames';
 
 import classes from './Navigation.module.scss';
 
-import { LockIcon, SyncIcon } from 'components';
+import { LockIcon } from 'components';
 import { NavigationStatusMessageContainer } from 'containers';
+import { BurgerMenuIcon } from 'components/BurgerMenuIcon';
 
 interface NavigationProps extends HTMLAttributes<HTMLDivElement> {
   onLockClick?: MouseEventHandler<HTMLButtonElement>;
-  onSyncClick?: MouseEventHandler<HTMLButtonElement>;
+  hideLeftSidebar?: () => void;
+  showLeftSidebar?: () => void;
 }
 
 export const Navigation: FC<NavigationProps> = ({
   className,
   onLockClick,
-  onSyncClick,
+  hideLeftSidebar,
+  showLeftSidebar,
   ...restProps
 }) => {
   return (
     <div className={cn(className, classes.Navigation)} {...restProps}>
-      <button className={classes.Navigation__button} onClick={onSyncClick}>
-        <SyncIcon />
+      <button className={classes.Navigation__button} onClick={showLeftSidebar}>
+        <BurgerMenuIcon />
       </button>
 
       <NavigationStatusMessageContainer />

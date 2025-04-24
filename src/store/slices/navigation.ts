@@ -11,6 +11,7 @@ export interface CounterState {
 
 const selectors = {
   currentScreen: (state: RootState) => state.navigation.currentScreen,
+  leftSidebarVisible: (state: RootState) => state.navigation.leftSidebarVisible,
 };
 
 const rememberProfile = localStorage.getItem('rememberProfile') === 'true';

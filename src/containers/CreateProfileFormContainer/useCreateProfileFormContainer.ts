@@ -18,6 +18,7 @@ export const useCreateProfileFormContainer = () => {
   const [password, setPassword] = useState('');
   const [passwordValidationError, setPasswordValidationError] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [maxMoneyValue, setMaxMoneyValue] = useState<number>(1000);
 
   const handleLabelChange = useCallback<ChangeEventHandler<HTMLInputElement>>(({ target }) => {
     setDirty(true);
@@ -56,6 +57,11 @@ export const useCreateProfileFormContainer = () => {
     },
     [],
   );
+
+  const handleMaxMoneyValueChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(event.target.value, 10) || 1000;
+    setMaxMoneyValue(value);
+  }, []);
 
   const isValid = useCallback(() => {
     if (!dirty) return true;
@@ -141,10 +147,12 @@ export const useCreateProfileFormContainer = () => {
     handlePasswordChange,
     handleRepeatPasswordChange,
     handleTimeZoneChange,
+    handleMaxMoneyValueChange,
     hint,
     label,
     labelValidationError,
     language,
+    maxMoneyValue,
     password,
     passwordValidationError,
     repeatPassword,

@@ -18,6 +18,7 @@ export const CreateProfileFormContainer: FC<CreateProfileFormContainerProps> = (
     handlePasswordChange,
     handleRepeatPasswordChange,
     handleTimeZoneChange,
+    handleMaxMoneyValueChange,
     hint,
     label,
     labelValidationError,
@@ -26,6 +27,7 @@ export const CreateProfileFormContainer: FC<CreateProfileFormContainerProps> = (
     passwordValidationError,
     repeatPassword,
     timeZone,
+    maxMoneyValue,
   } = useCreateProfileFormContainer();
 
   return (
@@ -40,6 +42,7 @@ export const CreateProfileFormContainer: FC<CreateProfileFormContainerProps> = (
       handlePasswordChange={handlePasswordChange}
       handleRepeatPasswordChange={handleRepeatPasswordChange}
       handleTimeZoneChange={handleTimeZoneChange}
+      handleMaxMoneyValueChange={handleMaxMoneyValueChange}
       hint={hint}
       label={label}
       labelValidationError={labelValidationError}
@@ -48,6 +51,7 @@ export const CreateProfileFormContainer: FC<CreateProfileFormContainerProps> = (
       passwordValidationError={passwordValidationError}
       repeatPassword={repeatPassword}
       timeZone={timeZone}
+      maxMoneyValue={maxMoneyValue}
     />
   );
 };
