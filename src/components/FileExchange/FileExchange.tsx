@@ -23,7 +23,7 @@ export const FileExchange: FC<FileExchangeProps> = ({
   return (
     <div className={classes.formContainer}>
       <h2 className={classes.title}>
-        <FormattedMessage id="profile.settings.title" defaultMessage="Data exchange" />
+        <FormattedMessage id="data-exchange.title" defaultMessage="Data exchange" />
       </h2>
 
       {uploadValidationError && <div style={{ color: 'red' }}>{uploadValidationError}</div>}

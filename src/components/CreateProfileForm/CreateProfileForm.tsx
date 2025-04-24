@@ -28,7 +28,7 @@ interface CreateProfileFormProps {
   passwordValidationError?: string;
   repeatPassword?: string;
   timeZone?: string;
-  maxMoneyValue?: number;
+  maxMoneyValue?: number | string;
 }
 
 export const CreateProfileForm: FC<CreateProfileFormProps> = ({
@@ -53,11 +53,33 @@ export const CreateProfileForm: FC<CreateProfileFormProps> = ({
   timeZone,
   maxMoneyValue,
 }) => {
+  const [passwordAreNotEqual, setPasswordAreNotEqual] = React.useState(false);
+
+  const validatePassword = useCallback(() => {
+    if (password && repeatPassword && password !== repeatPassword) {
+      setPasswordAreNotEqual(true);
+    } else {
+      setPasswordAreNotEqual(false);
+    }
+  }, [password, repeatPassword]);
+
+  const onFocusLoss = useCallback(() => {
+    validatePassword();
+  }, [validatePassword]);
+
   const { goTo } = useScreens();
 
   const goBack = useCallback(() => {
     goTo(ScreenEnum.welcome);
   }, [goTo]);
+
+  const handleRepeatPasswordChangeWithValidation = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      handleRepeatPasswordChange?.(event);
+      passwordAreNotEqual && validatePassword();
+    },
+    [handleRepeatPasswordChange, passwordAreNotEqual, validatePassword],
+  );
 
   return (
     <form onSubmit={handleCreate}>
@@ -83,7 +105,7 @@ export const CreateProfileForm: FC<CreateProfileFormProps> = ({
           caption="Hint"
           name="profileHint"
           onChange={handleHintChange}
-          placeholder="Hint to remind the context"
+          placeholder="Hint to remind the password context"
           value={hint}
         />
 
@@ -98,9 +120,11 @@ export const CreateProfileForm: FC<CreateProfileFormProps> = ({
         />
 
         <TextInput
+          style={{ color: passwordAreNotEqual ? 'red' : 'black' }}
           caption="Re-enter password *"
           name="profilePasswordRepeat"
-          onChange={handleRepeatPasswordChange}
+          onChange={handleRepeatPasswordChangeWithValidation}
+          onBlur={onFocusLoss}
           placeholder="*****"
           type="password"
           value={repeatPassword}
@@ -139,7 +163,11 @@ export const CreateProfileForm: FC<CreateProfileFormProps> = ({
           onChange={handleMaxMoneyValueChange}
         />
 
-        <button style={{ marginTop: '0.5em' }} type="submit" onClick={handleCreate as any}>
+        <button
+          disabled={!label || !password || password !== repeatPassword}
+          style={{ marginTop: '0.5em' }}
+          type="submit"
+          onClick={handleCreate as any}>
           Create
         </button>
       </div>

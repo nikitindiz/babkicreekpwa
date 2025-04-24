@@ -1,4 +1,5 @@
-.container {}
+.container {
+}
 
 .dateSelect {
   display: flex;
@@ -6,6 +7,8 @@
   justify-content: center;
   height: 100%;
   margin: 0;
+
+  font-size: 0.8em;
 
   > * {
     min-height: 320px;

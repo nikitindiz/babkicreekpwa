@@ -16,7 +16,7 @@
   font-size: 0.8em;
   max-width: 250px;
   text-align: center;
-  z-index: 100;
+  z-index: 99999;
   white-space: normal;
   word-wrap: unset;
   pointer-events: none;
@@ -57,6 +57,24 @@
     border-width: 5px;
     border-style: solid;
     border-color: transparent transparent rgba(0, 0, 0, 0.8) transparent;
+  }
+}
+
+.tooltipLeft {
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: 8px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent rgba(0, 0, 0, 0.8);
   }
 }
 

@@ -27,7 +27,7 @@ export const ProfileSettingsFormContainer: FC = () => {
       currency={settings.currency}
       language={settings.language}
       timezone={settings.timezone}
-      maxMoneyValue={settings.maxMoneyValue || 1000}
+      maxMoneyValue={settings.maxMoneyValue || ''}
       handleCurrencyChange={handleCurrencyChange}
       handleLanguageChange={handleLanguageChange}
       handleTimeZoneChange={handleTimeZoneChange}

@@ -45,7 +45,7 @@ export const Tooltip: FC<TooltipProps> = ({ tooltipMessage, children, className 
         <div
           className={cn(classes.tooltip, {
             [classes.tooltipTop]: isMobile,
-            [classes.tooltipBottom]: !isMobile,
+            [classes.tooltipLeft]: !isMobile,
           })}>
           {tooltipMessage}
         </div>

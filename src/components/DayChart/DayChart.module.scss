@@ -112,14 +112,20 @@
 .total {
   font-size: 0.6em;
   padding: 0.2em 0.5em;
-  // opacity: 0.4;
   font-weight: 300;
-
-  text-align: right;
 
   color: var(--source-color);
 
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  text-align: right;
+
   &_mobile {
+    align-items: initial;
+    height: initial;
+    width: 100%;
+    justify-content: flex-end;
     padding: 0.2em 0.5em;
   }
 
@@ -132,11 +138,13 @@
 .spent {
   font-size: 0.6em;
   padding: 0.2em 0.5em;
-  // opacity: 0.4;
   font-weight: 300;
 
   &_mobile {
-    padding: 0 0.5em;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding: 0.2em 0.5em;
   }
 
   color: var(--drain-color);

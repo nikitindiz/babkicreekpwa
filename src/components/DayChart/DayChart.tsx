@@ -152,7 +152,7 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
                 })}>
                 <Tooltip
                   tooltipMessage={intl.formatMessage({
-                    id: 'tooltip.spent-in-total',
+                    id: 'tooltip.remaining-balance',
                     defaultMessage: 'Remaining balance',
                   })}>
                   <FormattedNumber
@@ -169,15 +169,15 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
             expensesSection={
               <div
                 className={cn(classes.spent, {
-                  [classes.total_mobile]: mobile,
-                  [classes.total_negative]:
+                  [classes.spent_mobile]: mobile,
+                  [classes.spent_negative]:
                     thicknessMapByDate[isoDate]?.endOfTheDayThickness &&
                     thicknessMapByDate[isoDate]?.endOfTheDayThickness < 0,
                 })}>
                 <Tooltip
                   tooltipMessage={intl.formatMessage({
                     id: 'tooltip.spent-in-total',
-                    defaultMessage: 'Total spent',
+                    defaultMessage: 'Spent for the day',
                   })}>
                   <FormattedNumber
                     value={

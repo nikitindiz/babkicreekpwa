@@ -30,9 +30,13 @@
 .drain,
 .source {
   height: 100%;
-  overflow: hidden;
+
+  display: flex;
+  justify-content: flex-end;
 
   &_mobile {
+    display: initial;
+    justify-content: initial;
     height: initial;
     width: 100%;
     overflow: initial;

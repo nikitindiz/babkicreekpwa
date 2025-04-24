@@ -6,7 +6,7 @@ export interface SettingsData {
   currency: string;
   language: string;
   timezone: string;
-  maxMoneyValue?: number;
+  maxMoneyValue?: number | '';
 }
 
 export const useSettings = () => {
@@ -62,7 +62,12 @@ export const useSettings = () => {
         dispatch(
           settings.thunk.saveSettings({
             profileId: activeProfile,
-            settings: data,
+            settings: {
+              ...data,
+              maxMoneyValue: data.maxMoneyValue
+                ? parseInt(data.maxMoneyValue.toString(), 10)
+                : 1000,
+            },
           }),
         );
       }
@@ -97,7 +102,7 @@ export const useSettings = () => {
   }, []);
 
   const handleMaxMoneyValueChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(event.target.value, 10) || 1000;
+    const value = event.target.value ? parseInt(event.target.value, 10) : '';
     setLocalSettings((prev) => ({
       ...prev,
       maxMoneyValue: value,

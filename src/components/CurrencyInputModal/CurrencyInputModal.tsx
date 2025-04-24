@@ -13,6 +13,7 @@ import cn from 'classnames';
 import classes from './CurrencyInputModal.module.scss';
 
 import { ArrowLeftIcon, DoneIcon, Modal, ModalLayout } from 'components';
+import { FormattedMessage } from 'react-intl';
 
 interface CurrencyInputModalProps
   extends Omit<HTMLAttributes<HTMLInputElement>, 'onChange' | 'defaultValue'> {
@@ -71,9 +72,15 @@ export const CurrencyInputModal: FC<CurrencyInputModalProps> = ({
           caption={
             <>
               <button className={classes.iconButton} onClick={handleHide}>
-                <ArrowLeftIcon style={{ height: '1em' }} />
+                <ArrowLeftIcon style={{ height: '1em', width: '100%' }} />
               </button>
-              <span>Edit Income</span>
+              {/* TODO: Replace with valid income/spending title */}
+              <span>
+                <FormattedMessage
+                  id="currency-editor.modal.default-caption"
+                  defaultMessage="Enter asset volume"
+                />
+              </span>
             </>
           }
           footer={
@@ -87,6 +94,7 @@ export const CurrencyInputModal: FC<CurrencyInputModalProps> = ({
             </>
           }>
           <input
+            inputMode="decimal"
             autoFocus
             className={classes.input}
             onChange={handleChange}
