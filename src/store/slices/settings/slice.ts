@@ -22,7 +22,7 @@ const initialState: SettingsState = {
   activeProfile,
   passwordHash,
   currency: 'USD',
-  language: navigator.language.split('-')[0].toLowerCase(),
+  language: null,
   timezone: moment.tz.guess(),
 
   profileSettings: initLoadableEntity(),

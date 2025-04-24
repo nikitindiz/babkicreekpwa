@@ -1,15 +1,14 @@
-import React, { FC } from 'react';
-import { useSelector } from 'react-redux';
+import { FC } from 'react';
 
-import { settings } from 'store';
 import { DateAndWeek } from 'components';
+import { useLanguage } from 'utils';
 
 interface DateAndWeekContainerProps {
   date?: string;
 }
 
 export const DateAndWeekContainer: FC<DateAndWeekContainerProps> = ({ date }) => {
-  const language = useSelector(settings.selectors.language);
+  const { language } = useLanguage();
 
   if (!date) return null;
 

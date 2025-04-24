@@ -1,8 +1,7 @@
-import React, { FC, HTMLAttributes } from 'react';
-import { useSelector } from 'react-redux';
+import { FC, HTMLAttributes } from 'react';
 
 import { WeekDaysInput } from 'components';
-import { settings } from 'store';
+import { useLanguage } from 'utils/ui/useLanguage';
 
 interface WeekDaysInputContainerProps extends HTMLAttributes<HTMLDivElement> {
   captions?: Record<string, string[]>;
@@ -11,7 +10,7 @@ interface WeekDaysInputContainerProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const WeekDaysInputContainer: FC<WeekDaysInputContainerProps> = (props) => {
-  const language = useSelector(settings.selectors.language);
+  const { language } = useLanguage();
 
   return <WeekDaysInput {...props} language={language} />;
 };

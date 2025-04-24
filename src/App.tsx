@@ -14,6 +14,7 @@ import { settings } from 'store';
 import { useScreens } from 'utils/store/hooks';
 import { currentVersion } from './currentVersion';
 import { changeLog } from './changelog';
+import { useLanguage } from 'utils';
 
 const localizations: Record<string, typeof enMessages> = {
   en: enMessages,
@@ -35,11 +36,15 @@ function App() {
     goTo(ScreenEnum.welcome);
   }, [activeProfile, goTo]);
 
-  const language = useSelector(settings.selectors.language);
+  const { language, setWebsiteLanguage } = useLanguage();
+
+  (window as any).setWebsiteLanguage = setWebsiteLanguage;
+
+  const messages = localizations[language] || localizations.en;
 
   return (
     <>
-      <IntlProvider messages={localizations[language]} locale={language} defaultLocale="en">
+      <IntlProvider messages={messages} locale={language} defaultLocale="en">
         <FadeOnMountEvents show={currentScreen === ScreenEnum.welcome}>
           <LockScreen />
         </FadeOnMountEvents>

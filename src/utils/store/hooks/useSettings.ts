@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState, useMemo } from 'react';
 import { settings, useAppDispatch } from 'store';
 import { useSelector } from 'react-redux';
+import { useLanguage } from 'utils';
 
 export interface SettingsData {
   currency: string;
@@ -13,7 +14,7 @@ export const useSettings = () => {
   const dispatch = useAppDispatch();
   const activeProfile = useSelector(settings.selectors.activeProfile);
   const currency = useSelector(settings.selectors.currency);
-  const language = useSelector(settings.selectors.language);
+  const { language } = useLanguage();
   const timezone = useSelector(settings.selectors.timezone);
   const maxMoneyValue = useSelector(settings.selectors.maxMoneyValue);
   const profileSettings = useSelector(settings.selectors.profileSettings);
