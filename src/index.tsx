@@ -26,7 +26,7 @@ if (navigator.storage && navigator.storage.persist) {
 
 if (navigator.storage && navigator.storage.estimate) {
   navigator.storage.estimate().then((estimate) => {
-    console.log(`Используется: ${estimate.usage} из ${estimate.quota} байт`);
+    console.log(`Used: ${estimate.usage} from ${estimate.quota} bytes`);
   });
 }
 
