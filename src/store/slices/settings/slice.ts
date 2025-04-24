@@ -18,11 +18,26 @@ const storage =
 const activeProfile = parseInt(storage.getItem('profileId') || '0', 10) || null;
 const passwordHash = storage.getItem('passwordHash');
 
+const navLanguage = navigator.language.split('-')[0].toLowerCase();
+const localStoreLanguage = localStorage.getItem('lang');
+
+const defLangs = ['en', 'ru'];
+
+let initialLang = '';
+
+if (localStoreLanguage) {
+  initialLang = defLangs.includes(localStoreLanguage) ? localStoreLanguage : initialLang;
+}
+
+if (!initialLang && defLangs.includes(navLanguage)) {
+  initialLang = navLanguage;
+}
+
 const initialState: SettingsState = {
   activeProfile,
   passwordHash,
   currency: 'USD',
-  language: null,
+  language: initialLang || 'en',
   timezone: moment.tz.guess(),
 
   profileSettings: initLoadableEntity(),
@@ -34,6 +49,12 @@ export const settingsSlice = createSlice({
   reducers: {
     reset: () => {
       return initialState;
+    },
+    setLanguage: (state, action: PayloadAction<string>) => {
+      state.language = action.payload;
+      localStorage.setItem('lang', action.payload);
+
+      return state;
     },
     selectProfile: (
       state,

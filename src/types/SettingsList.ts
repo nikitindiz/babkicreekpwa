@@ -1,6 +1,6 @@
 export interface SettingsList {
   currency: string;
-  language: string | null;
+  language: string;
   timezone: string;
   maxMoneyValue?: number;
 }

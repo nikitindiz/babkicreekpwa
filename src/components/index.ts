@@ -49,3 +49,4 @@ export * from './WarningIcon';
 export * from './WeekDaysInput';
 export * from './LeftSidebar';
 export * from './FileExchange';
+export * from './LanguageSelector';

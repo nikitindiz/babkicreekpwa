@@ -1,19 +1,18 @@
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { settings } from 'store';
+import { settings, useAppDispatch } from 'store';
 
 export const useLanguage = () => {
-  const profileLanguage = useSelector(settings.selectors.language);
-  const websiteLanguage = localStorage.getItem('lang') || 'en';
+  const language = useSelector(settings.selectors.language);
+  const dispatch = useAppDispatch();
 
-  const [language, setLanguage] = useState<string>(
-    profileLanguage || websiteLanguage || navigator.language.split('-')[0].toLowerCase(),
-  );
+  const availableLanguages = [
+    { code: 'en', name: 'English' },
+    { code: 'ru', name: 'Russian' },
+  ];
 
   const setWebsiteLanguage = (lang: string) => {
-    localStorage.setItem('lang', lang);
-    setLanguage(lang);
+    dispatch(settings.actions.setLanguage(lang));
   };
 
-  return { language, setWebsiteLanguage };
+  return { language: language || 'en', setWebsiteLanguage, availableLanguages };
 };
