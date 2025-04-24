@@ -4,6 +4,7 @@ import { EditSettingsForm, ModalLayout } from '..';
 
 interface SettingsModalProps extends HTMLAttributes<HTMLDivElement> {}
 
+// TODO: Remove this component
 export const SettingsModal: FC<SettingsModalProps> = ({ className, ...restProps }) => {
   return (
     <ModalLayout

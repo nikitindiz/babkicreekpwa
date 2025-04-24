@@ -148,7 +148,7 @@ export const useMoneyFlowChartContainer = () => {
 
   useEffect(() => {
     debouncedLoadThicknessMapData(daysStatsData);
-  }, [daysStatsData, debouncedLoadThicknessMapData]);
+  }, [daysStatsData, debouncedLoadThicknessMapData, profileSettings?.maxMoneyValue]);
 
   useEffect(() => {
     if (daysByDateLoadingEnded && !balanceChangesRequested.current) {

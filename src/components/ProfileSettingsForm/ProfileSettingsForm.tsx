@@ -4,6 +4,7 @@ import moment from 'moment-timezone';
 import classes from './ProfileSettingsForm.module.scss';
 import { Select, TextInput } from 'components';
 import { currencies } from '../CreateProfileForm/currencies';
+import { FormattedMessage } from 'react-intl';
 
 interface ProfileSettingsFormProps {
   currency: string;
@@ -14,6 +15,9 @@ interface ProfileSettingsFormProps {
   handleLanguageChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   handleTimeZoneChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   handleMaxMoneyValueChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSave: () => void;
+  isLoading?: boolean;
+  isDirty?: boolean;
 }
 
 export const ProfileSettingsForm: FC<ProfileSettingsFormProps> = ({
@@ -25,6 +29,9 @@ export const ProfileSettingsForm: FC<ProfileSettingsFormProps> = ({
   handleLanguageChange,
   handleTimeZoneChange,
   handleMaxMoneyValueChange,
+  handleSave,
+  isLoading = false,
+  isDirty = false,
 }) => {
   return (
     <div className={classes.formContainer}>
@@ -64,6 +71,10 @@ export const ProfileSettingsForm: FC<ProfileSettingsFormProps> = ({
           placeholder="1000"
         />
       </div>
+
+      <button onClick={handleSave} disabled={isLoading || !isDirty}>
+        <FormattedMessage id="modal.button.save" defaultMessage="Save" />
+      </button>
     </div>
   );
 };
