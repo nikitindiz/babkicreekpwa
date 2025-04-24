@@ -7,6 +7,7 @@ interface MoneyFlowChartProps {
   currentDayNodeRef: React.MutableRefObject<HTMLDivElement | null>;
   dates: string[];
   daysByDate: any;
+  scrollToday: () => void;
   scrollRef: React.MutableRefObject<HTMLDivElement | null>;
   today: string;
 }
@@ -16,10 +17,11 @@ export const MoneyFlowChart: FC<MoneyFlowChartProps> = ({
   dates,
   today,
   currentDayNodeRef,
+  scrollToday,
   daysByDate,
 }) => {
   return (
-    <Layout ref={scrollRef} navigation={<NavigationContainer />}>
+    <Layout ref={scrollRef} navigation={<NavigationContainer />} scrollToday={scrollToday}>
       {dates.map((date, idx) => (
         <DayChartContainer
           ref={today === date ? currentDayNodeRef : null}

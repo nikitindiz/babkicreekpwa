@@ -8,6 +8,9 @@ import { days, drains, settings, sources, thicknessMap, useAppDispatch, daysStat
 import { loadSettings } from 'store/slices/settings/thunkActions';
 import { useIsMobile } from 'utils/hooks/useIsMobile';
 
+const mobileOffset = 100;
+const desktopOffset = 200;
+
 export const useMoneyFlowChartContainer = () => {
   const daysByDate = useSelector(days.selectors.byDate)!;
   const displayRange = useSelector(days.selectors.displayRange)!;
@@ -190,22 +193,33 @@ export const useMoneyFlowChartContainer = () => {
   const currentDayNodeRef = useRef<HTMLDivElement | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const scrolled = useRef(false);
-  const today = buildDate().toISOString();
+  const today = buildDate(true).toISOString();
 
   const { current: currentScrollable } = scrollRef;
   const { current: currentTarget } = currentDayNodeRef;
 
-  useEffect(() => {
+  const scrollToday = useCallback(() => {
     if (currentScrollable === null || currentTarget === null || scrolled.current) return;
 
     if (!mobile) {
-      currentScrollable.scrollLeft = currentTarget.getBoundingClientRect().left!;
+      currentScrollable.scrollLeft =
+        currentTarget.getBoundingClientRect().left! + currentScrollable.scrollLeft - desktopOffset;
     } else {
-      currentScrollable.scrollTop = currentTarget.getBoundingClientRect().top!;
+      currentScrollable.scrollTop =
+        currentTarget.getBoundingClientRect().top! + currentScrollable.scrollTop - mobileOffset;
     }
 
     scrolled.current = true;
   }, [currentScrollable, currentTarget, mobile]);
+
+  const reScrollToday = useCallback(() => {
+    scrolled.current = false;
+    scrollToday();
+  }, [scrollToday]);
+
+  useEffect(() => {
+    scrollToday();
+  }, [currentScrollable, currentTarget, mobile, scrollToday]);
 
   return {
     scrollRef,
@@ -214,5 +228,6 @@ export const useMoneyFlowChartContainer = () => {
     currentDayNodeRef,
     daysByDate,
     isLoading: !daysByDateLoadingEnded,
+    scrollToday: reScrollToday,
   };
 };

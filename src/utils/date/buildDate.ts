@@ -1,6 +1,9 @@
-import moment from 'moment';
+import moment from 'moment-timezone';
 
-export const buildDate = (date?: string | Date, resetClocks = true) => {
+export const buildDate = (dateOrReset?: string | Date | boolean, resetClocks = true) => {
+  const date = typeof dateOrReset === 'boolean' ? undefined : dateOrReset;
+  const reset = typeof dateOrReset === 'boolean' ? dateOrReset : resetClocks;
+
   const isStandardRx = /\d+\.\d\d\.\d\d\d\d/;
   const isStandard = typeof date === 'string' && isStandardRx.test(date);
 
@@ -8,10 +11,9 @@ export const buildDate = (date?: string | Date, resetClocks = true) => {
 
   if (date) {
     if (isStandard) {
-      const realDate = moment(date, 'DD.MM.YYYY');
+      const realDate = moment(date, 'DD.MM.YYYY').tz(moment.tz.guess());
 
-      // dateMoment = moment().zone(0).utcOffset(0);
-      dateMoment = moment().utcOffset(0);
+      dateMoment = moment().tz(moment.tz.guess());
 
       dateMoment.set({
         date: realDate.date(),
@@ -30,11 +32,10 @@ export const buildDate = (date?: string | Date, resetClocks = true) => {
       });
     }
   } else {
-    // dateMoment = moment().zone(0).utcOffset(0);
-    dateMoment = moment().utcOffset(0);
+    dateMoment = moment().tz(moment.tz.guess());
   }
 
-  if (resetClocks) {
+  if (reset) {
     dateMoment.set({
       hour: 0,
       minute: 0,

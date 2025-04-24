@@ -15,14 +15,16 @@ import {
 import { NewSourceModalContainer } from 'src/containers/NewSourceModalContainer';
 import { SettingsModal } from 'components';
 import { useIsMobile } from 'utils/hooks/useIsMobile';
+import { TodayButton } from 'components/TodayButton/TodayButton';
 
 interface LayoutProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
   navigation?: ReactNode;
+  scrollToday?: () => void;
 }
 
 export const Layout = forwardRef<HTMLDivElement, LayoutProps>(
-  ({ className, children, navigation, ...restProps }, ref) => {
+  ({ className, children, navigation, scrollToday, ...restProps }, ref) => {
     const mobile = useIsMobile();
 
     return (
@@ -44,6 +46,10 @@ export const Layout = forwardRef<HTMLDivElement, LayoutProps>(
         />
 
         <LeftSidebarContainer />
+
+        <div>
+          <TodayButton onClick={scrollToday}>1</TodayButton>
+        </div>
       </div>
     );
   },

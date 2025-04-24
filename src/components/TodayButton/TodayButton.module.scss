@@ -1,0 +1,14 @@
+.button {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  position: fixed;
+  bottom: 15px;
+  right: 10px;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: 0.1s all;
+
+  &:hover {
+    opacity: 1;
+  }
+}

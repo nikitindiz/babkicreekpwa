@@ -8,7 +8,7 @@ interface MoneyFlowChartProps {
 }
 
 export const MoneyFlowChartContainer: FC<MoneyFlowChartProps> = ({ children }) => {
-  const { scrollRef, dates, today, currentDayNodeRef, daysByDate, isLoading } =
+  const { scrollRef, dates, today, currentDayNodeRef, daysByDate, isLoading, scrollToday } =
     useMoneyFlowChartContainer();
 
   if (isLoading && !Object.keys(daysByDate).length) {
@@ -22,6 +22,7 @@ export const MoneyFlowChartContainer: FC<MoneyFlowChartProps> = ({ children }) =
       today={today}
       currentDayNodeRef={currentDayNodeRef}
       daysByDate={daysByDate}
+      scrollToday={scrollToday}
     />
   );
 };
