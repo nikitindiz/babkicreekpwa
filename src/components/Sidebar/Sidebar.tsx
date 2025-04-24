@@ -53,6 +53,14 @@ export const Sidebar: FC<SidebarProps> = ({
         )}
         style={{ width }}
         {...restProps}>
+        {onClose && (
+          <button
+            className={cn(classes.closeButton, classes[`closeButton_${position}`])}
+            onClick={onClose}
+            aria-label="Close sidebar">
+            &times;
+          </button>
+        )}
         {children}
       </div>
     </div>
