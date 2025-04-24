@@ -1,5 +1,6 @@
 import React, { FC, FormEventHandler, useCallback } from 'react';
 import moment from 'moment-timezone';
+import { useIntl } from 'react-intl';
 
 import classes from './CreateProfileForm.module.scss';
 
@@ -53,6 +54,7 @@ export const CreateProfileForm: FC<CreateProfileFormProps> = ({
   timeZone,
   maxMoneyValue,
 }) => {
+  const intl = useIntl();
   const [passwordAreNotEqual, setPasswordAreNotEqual] = React.useState(false);
 
   const validatePassword = useCallback(() => {
@@ -88,29 +90,43 @@ export const CreateProfileForm: FC<CreateProfileFormProps> = ({
           <ArrowLeftIcon />
         </button>
 
-        <h2 className={classes.label}>Create new profile</h2>
+        <h2 className={classes.label}>
+          {intl.formatMessage({ id: 'createProfile.title', defaultMessage: 'Create new profile' })}
+        </h2>
       </div>
 
       <div className={classes.formFields}>
         <TextInput
-          caption="Profile caption *"
+          caption={intl.formatMessage({
+            id: 'createProfile.profileCaption',
+            defaultMessage: 'Profile caption *',
+          })}
           name="profileLabel"
           onChange={handleLabelChange}
-          placeholder="Name to display"
+          placeholder={intl.formatMessage({
+            id: 'createProfile.profileCaption.placeholder',
+            defaultMessage: 'Name to display',
+          })}
           validationError={labelValidationError}
           value={label}
         />
 
         <TextInput
-          caption="Hint"
+          caption={intl.formatMessage({ id: 'createProfile.hint', defaultMessage: 'Hint' })}
           name="profileHint"
           onChange={handleHintChange}
-          placeholder="Hint to remind the password context"
+          placeholder={intl.formatMessage({
+            id: 'createProfile.hint.placeholder',
+            defaultMessage: 'Hint to remind the password context',
+          })}
           value={hint}
         />
 
         <TextInput
-          caption="Password *"
+          caption={intl.formatMessage({
+            id: 'createProfile.password',
+            defaultMessage: 'Password *',
+          })}
           name="profilePassword"
           onChange={handlePasswordChange}
           placeholder="*****"
@@ -121,7 +137,10 @@ export const CreateProfileForm: FC<CreateProfileFormProps> = ({
 
         <TextInput
           style={{ color: passwordAreNotEqual ? 'red' : 'black' }}
-          caption="Re-enter password *"
+          caption={intl.formatMessage({
+            id: 'createProfile.reenterPassword',
+            defaultMessage: 'Re-enter password *',
+          })}
           name="profilePasswordRepeat"
           onChange={handleRepeatPasswordChangeWithValidation}
           onBlur={onFocusLoss}
@@ -131,7 +150,10 @@ export const CreateProfileForm: FC<CreateProfileFormProps> = ({
         />
 
         <Select
-          caption="Time Zone"
+          caption={intl.formatMessage({
+            id: 'createProfile.timeZone',
+            defaultMessage: 'Time Zone',
+          })}
           options={moment.tz.names().map((value) => ({ value, label: value }))}
           name="timeZon"
           value={timeZone}
@@ -139,7 +161,7 @@ export const CreateProfileForm: FC<CreateProfileFormProps> = ({
         />
 
         <Select
-          caption="Language"
+          caption={intl.formatMessage({ id: 'createProfile.language', defaultMessage: 'Language' })}
           options={['en', 'ru'].map((value) => ({ value, label: value.toUpperCase() }))}
           name="language"
           value={language}
@@ -147,7 +169,7 @@ export const CreateProfileForm: FC<CreateProfileFormProps> = ({
         />
 
         <Select
-          caption="Currency"
+          caption={intl.formatMessage({ id: 'createProfile.currency', defaultMessage: 'Currency' })}
           name="currency"
           onChange={handleCurrencyChange}
           options={currencies}
@@ -155,7 +177,10 @@ export const CreateProfileForm: FC<CreateProfileFormProps> = ({
         />
 
         <TextInput
-          caption="Maximum asset value"
+          caption={intl.formatMessage({
+            id: 'createProfile.maxAssetValue',
+            defaultMessage: 'Maximum asset value',
+          })}
           name="maxMoneyValue"
           type="number"
           placeholder="1000"
@@ -168,7 +193,7 @@ export const CreateProfileForm: FC<CreateProfileFormProps> = ({
           style={{ marginTop: '0.5em' }}
           type="submit"
           onClick={handleCreate as any}>
-          Create
+          {intl.formatMessage({ id: 'createProfile.create', defaultMessage: 'Create' })}
         </button>
       </div>
     </form>
