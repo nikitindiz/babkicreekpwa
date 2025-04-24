@@ -35,7 +35,9 @@ export const ProfileSettingsForm: FC<ProfileSettingsFormProps> = ({
 }) => {
   return (
     <div className={classes.formContainer}>
-      <h2 className={classes.title}>Profile Settings</h2>
+      <h2 className={classes.title}>
+        <FormattedMessage id="profile.settings.title" defaultMessage="Profile Settings" />
+      </h2>
 
       <div className={classes.formFields}>
         <Select

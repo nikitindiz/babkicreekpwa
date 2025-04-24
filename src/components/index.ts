@@ -47,3 +47,5 @@ export * from './TextAreaModal';
 export * from './TextInput';
 export * from './WarningIcon';
 export * from './WeekDaysInput';
+export * from './LeftSidebar';
+export * from './FileExchange';
