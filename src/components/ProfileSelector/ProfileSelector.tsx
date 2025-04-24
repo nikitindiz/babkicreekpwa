@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import classes from './ProfileSelector.module.scss';
 
 import { Profile } from 'types';
+import { FormattedMessage } from 'react-intl';
 
 interface ProfileSelectorProps {
   goToPassword: (id: number) => void;
@@ -14,7 +15,9 @@ export const ProfileSelector: FC<ProfileSelectorProps> = ({ goToPassword, profil
 
   return (
     <div className={classes.container}>
-      <h2 className={classes.header}>Select Profile:</h2>
+      <h2 className={classes.header}>
+        <FormattedMessage id="lock-screen.select-profile.caption" defaultMessage="Select profile" />
+      </h2>
 
       <div className={classes.profiles}>
         {profiles.map((item) => (

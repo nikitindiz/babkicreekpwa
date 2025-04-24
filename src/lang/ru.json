@@ -45,5 +45,20 @@
   "profile.settings.currency": "Валюта",
   "profile.settings.language": "Язык",
   "profile.settings.maxMoneyValue": "Максимальный ожидаемый баланс",
-  "profile.settings.timezone": "Timezone"
+  "profile.settings.timezone": "Часовой пояс",
+  "createProfile.create": "Создать",
+  "createProfile.currency": "Валюта",
+  "createProfile.hint": "Подсказка",
+  "createProfile.hint.placeholder": "Подсказка для пароля",
+  "createProfile.language": "Язык",
+  "createProfile.maxAssetValue": "Максимальный ожидаемый баланс",
+  "createProfile.password": "Пароль *",
+  "createProfile.profileCaption": "Заголовок профиля *",
+  "createProfile.profileCaption.placeholder": "Отображаемое нзвание профиля",
+  "createProfile.reenterPassword": "Повторите пароль *",
+  "createProfile.timeZone": "Часовой пояс",
+  "createProfile.title": "Создать профиль",
+  "enterProfile.enterAutomatically": "Входить автоматически",
+  "enterProfile.password": "Пароль профиля",
+  "lock-screen.select-profile.caption": "Выберите профиль"
 }

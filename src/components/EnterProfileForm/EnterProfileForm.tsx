@@ -3,6 +3,7 @@ import React, { ChangeEvent, FC, FormEvent, ReactNode } from 'react';
 import classes from './EnterProfileForm.module.scss';
 
 import { ArrowLeftIcon } from 'components';
+import { FormattedMessage } from 'react-intl';
 
 interface EnterProfileFormProps {
   dirty: boolean;
@@ -41,7 +42,9 @@ export const EnterProfileForm: FC<EnterProfileFormProps> = ({
 
       <div className={classes.hint}>{profile?.hint}</div>
       <div className={classes.fields}>
-        <div className={classes.fieldLabel}>Profile password</div>
+        <div className={classes.fieldLabel}>
+          <FormattedMessage id="enterProfile.password" defaultMessage="Profile password" />
+        </div>
 
         <input
           className={classes.password}
@@ -60,7 +63,12 @@ export const EnterProfileForm: FC<EnterProfileFormProps> = ({
             checked={rememberProfile}
           />
 
-          <span>Stay logged in</span>
+          <span>
+            <FormattedMessage
+              id="enterProfile.enterAutomatically"
+              defaultMessage="Stay signed in"
+            />
+          </span>
         </label>
 
         {error && <div className={classes.error}>{error}</div>}
