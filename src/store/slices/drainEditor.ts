@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from 'store';
 import { Drain, DrainScheduleMeta } from 'types';
+import { disable, enable } from 'workbox-navigation-preload';
 
 interface DrainFormFields
   extends Partial<Omit<Drain, 'id' | 'createdAt' | 'updatedAt' | 'drainScheduleMeta'>> {
@@ -11,7 +12,7 @@ interface DrainFormFields
 export interface DrainEditorState {
   date?: number;
   formFields: DrainFormFields;
-  isDirty: boolean;
+  canSave: boolean;
   drainId: number | 'new';
 }
 
@@ -20,13 +21,14 @@ const initialState: DrainEditorState = {
   formFields: {
     drainScheduleMeta: {},
   },
-  isDirty: false,
+  canSave: false,
   drainId: 'new',
 };
 
 const selectors = {
   drainId: (state: RootState) => state.drainEditor.drainId,
   date: (state: RootState) => state.drainEditor.date,
+  canSave: (state: RootState) => state.drainEditor.canSave,
 };
 
 const { reducer, actions } = createSlice({
@@ -38,6 +40,14 @@ const { reducer, actions } = createSlice({
 
       state.drainId = drainId;
       state.date = date;
+    },
+
+    enableSave: (state) => {
+      state.canSave = true;
+    },
+
+    disableSave: (state) => {
+      state.canSave = false;
     },
   },
 });

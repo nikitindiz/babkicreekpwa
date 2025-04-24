@@ -43,3 +43,8 @@
   }
 }
 
+.saveButton {
+  &_disabled {
+    opacity: 0.2;
+  }
+}

@@ -2,6 +2,8 @@ import { ChangeEventHandler, useCallback, useEffect, useMemo, useState } from 'r
 
 import { buildDate, formatDate } from 'utils';
 import { Drain, DrainScheduleMeta } from 'types';
+import { useDispatch, useSelector } from 'react-redux';
+import { drainEditor } from 'store';
 
 interface UseEditDrainFormContainerArgs {
   initialDate?: string;
@@ -27,6 +29,9 @@ export const useDrainFormContainer = ({
   initialDrain,
   onChange,
 }: UseEditDrainFormContainerArgs) => {
+  const dispatch = useDispatch();
+  const canSave = useSelector(drainEditor.selectors.canSave);
+
   const [repeatable, setRepeatable] = useState(initialRepeatable);
 
   const [date, setDate] = useState(initialDate);
@@ -35,7 +40,17 @@ export const useDrainFormContainer = ({
 
   const [commentary, setCommentary] = useState(initialDrain?.commentary || '');
 
-  const [expenses, setExpenses] = useState(initialDrain?.expenses || 0);
+  const [expenses, setExpenses] = useState(initialDrain?.expenses || null);
+
+  useEffect(() => {
+    if (!expenses && canSave) {
+      dispatch(drainEditor.actions.disableSave());
+    }
+
+    if (expenses && !canSave) {
+      dispatch(drainEditor.actions.enableSave());
+    }
+  }, [canSave, dispatch, expenses]);
 
   const [selectedWeekDays, setSelectedWeekDays] = useState(initialSelectedWeekDays);
 
@@ -60,7 +75,10 @@ export const useDrainFormContainer = ({
     }
   }, []);
 
-  const updatedDrain = useMemo(() => ({ commentary, expenses }), [commentary, expenses]);
+  const updatedDrain = useMemo(
+    () => ({ commentary, expenses: expenses || 0 }),
+    [commentary, expenses],
+  );
 
   useEffect(() => {
     onChange?.({

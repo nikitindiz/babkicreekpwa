@@ -11,7 +11,7 @@ interface SourceFormFields
 export interface SourceEditorState {
   date?: number;
   formFields: SourceFormFields;
-  isDirty: boolean;
+  canSave: boolean;
   sourceId: number | 'new';
 }
 
@@ -20,13 +20,14 @@ const initialState: SourceEditorState = {
   formFields: {
     sourceScheduleMeta: {},
   },
-  isDirty: false,
+  canSave: false,
   sourceId: 'new',
 };
 
 const selectors = {
   sourceId: (state: RootState) => state.sourceEditor.sourceId,
   date: (state: RootState) => state.sourceEditor.date,
+  canSave: (state: RootState) => state.sourceEditor.canSave,
 };
 
 const { reducer, actions } = createSlice({
@@ -38,6 +39,14 @@ const { reducer, actions } = createSlice({
 
       state.sourceId = sourceId;
       state.date = date;
+    },
+
+    enableSave: (state) => {
+      state.canSave = true;
+    },
+
+    disableSave: (state) => {
+      state.canSave = false;
     },
   },
 });

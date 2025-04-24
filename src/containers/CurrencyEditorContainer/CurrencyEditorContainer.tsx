@@ -4,10 +4,11 @@ import { useSelector } from 'react-redux';
 import { CurrencyEditor } from 'components';
 import { settings } from 'store';
 
-interface CurrencyEditorContainerProps extends Omit<HTMLAttributes<HTMLInputElement>, 'onChange'> {
-  defaultValue?: number;
+interface CurrencyEditorContainerProps
+  extends Omit<HTMLAttributes<HTMLInputElement>, 'onChange' | 'defaultValue'> {
+  defaultValue: number | null;
   label?: ReactNode;
-  onChange?: (value: number) => void;
+  onChange?: (value: number | null) => void;
 }
 
 export const CurrencyEditorContainer: FC<CurrencyEditorContainerProps> = (props) => {

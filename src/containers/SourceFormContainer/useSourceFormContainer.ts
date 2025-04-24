@@ -2,6 +2,8 @@ import { ChangeEventHandler, useCallback, useEffect, useMemo, useState } from 'r
 
 import { buildDate, formatDate } from 'utils';
 import { Source, SourceScheduleMeta } from 'types';
+import { useDispatch, useSelector } from 'react-redux';
+import { sourceEditor } from 'store';
 
 interface UseEditSourceFormContainerArgs {
   initialDate?: string;
@@ -27,6 +29,9 @@ export const useSourceFormContainer = ({
   initialSource,
   onChange,
 }: UseEditSourceFormContainerArgs) => {
+  const dispatch = useDispatch();
+  const canSave = useSelector(sourceEditor.selectors.canSave);
+
   const [repeatable, setRepeatable] = useState(initialRepeatable);
 
   const [date, setDate] = useState(initialDate);
@@ -35,7 +40,17 @@ export const useSourceFormContainer = ({
 
   const [commentary, setCommentary] = useState(initialSource?.commentary || '');
 
-  const [incomes, setIncomes] = useState(initialSource?.incomes || 0);
+  const [incomes, setIncomes] = useState(initialSource?.incomes || null);
+
+  useEffect(() => {
+    if (!incomes && canSave) {
+      dispatch(sourceEditor.actions.disableSave());
+    }
+
+    if (incomes && !canSave) {
+      dispatch(sourceEditor.actions.enableSave());
+    }
+  }, [canSave, dispatch, incomes]);
 
   const [selectedWeekDays, setSelectedWeekDays] = useState(initialSelectedWeekDays);
 
@@ -60,7 +75,10 @@ export const useSourceFormContainer = ({
     }
   }, []);
 
-  const updatedSource = useMemo(() => ({ commentary, incomes }), [commentary, incomes]);
+  const updatedSource = useMemo(
+    () => ({ commentary, incomes: incomes || 0 }),
+    [commentary, incomes],
+  );
 
   useEffect(() => {
     onChange?.({

@@ -17,7 +17,7 @@ interface EditBalanceChangeEventFormProps extends Omit<HTMLAttributes<HTMLDivEle
   changeDateTab: (index: number) => void;
   changeRepeatable: (event: React.ChangeEvent<HTMLInputElement>) => void;
   commentary: string;
-  currencyValue: number;
+  currencyValue: number | null;
   date?: string;
   initialDateTab: number;
   onWeekDayCheckboxChange: (index: number, value: boolean) => void;
@@ -25,7 +25,7 @@ interface EditBalanceChangeEventFormProps extends Omit<HTMLAttributes<HTMLDivEle
   repeatable: boolean;
   selectedWeekDays: boolean[];
   setCommentary: (value: string) => void;
-  setCurrencyValue: (value: number) => void;
+  setCurrencyValue: (value: number | null) => void;
   setDate: (value: string) => void;
   setRepeatCycleTab: (value: number) => void;
   setRepeatable: (value: boolean) => void;

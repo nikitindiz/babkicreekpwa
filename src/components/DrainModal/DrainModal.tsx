@@ -4,6 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import { ModalLayout } from '../ModalLayout';
 import { Drain, DrainScheduleMeta } from 'types';
 import { DrainFormContainer } from 'containers';
+import { useSelector } from 'react-redux';
+import { drainEditor } from 'store';
 
 interface DrainModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   caption: ReactNode;
@@ -42,6 +44,8 @@ export const DrainModal: FC<DrainModalProps> = ({
   saveDrain,
   ...restProps
 }) => {
+  const canSave = useSelector(drainEditor.selectors.canSave);
+
   return (
     <ModalLayout
       className={className}
@@ -53,7 +57,7 @@ export const DrainModal: FC<DrainModalProps> = ({
               <FormattedMessage id="modal.button.delete" defaultMessage="Delete" />
             </button>
           )}
-          <button onClick={saveDrain} disabled={isLoading}>
+          <button onClick={saveDrain} disabled={isLoading || !canSave}>
             <FormattedMessage id="modal.button.save" defaultMessage="Save" />
           </button>
           <button onClick={closeModal} disabled={isLoading}>

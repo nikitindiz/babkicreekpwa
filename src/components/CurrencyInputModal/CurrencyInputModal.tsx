@@ -14,16 +14,17 @@ import classes from './CurrencyInputModal.module.scss';
 
 import { ArrowLeftIcon, DoneIcon, Modal, ModalLayout } from 'components';
 
-interface CurrencyInputModalProps extends Omit<HTMLAttributes<HTMLInputElement>, 'onChange'> {
-  defaultValue?: number;
+interface CurrencyInputModalProps
+  extends Omit<HTMLAttributes<HTMLInputElement>, 'onChange' | 'defaultValue'> {
+  defaultValue: number | null;
   handleHide?: () => void;
-  onChange?: (value: number) => void;
+  onChange?: (value: number | null) => void;
   visible?: boolean;
 }
 
 export const CurrencyInputModal: FC<CurrencyInputModalProps> = ({
   className,
-  defaultValue,
+  defaultValue = null,
   handleHide,
   onChange,
   visible = false,
@@ -31,19 +32,19 @@ export const CurrencyInputModal: FC<CurrencyInputModalProps> = ({
 }) => {
   const inputsRootElement = document.getElementById('inputs');
 
-  const [value, setValue] = useState<number | undefined>(defaultValue ? defaultValue : 0);
+  const [value, setValue] = useState(defaultValue || '');
 
   const handleChange = useCallback<ChangeEventHandler<HTMLInputElement>>(({ target }) => {
-    let value: number | undefined = parseFloat(target.value);
+    let value: number | string = parseFloat(target.value);
 
-    if (!value || isNaN(value)) value = undefined;
+    if (!value || isNaN(value)) value = '';
 
     setValue(value);
   }, []);
 
   const handleSave = useCallback<MouseEventHandler<HTMLButtonElement>>(
     ({ target }) => {
-      onChange?.(value || 0);
+      onChange?.(+value || null);
       handleHide?.();
     },
     [handleHide, onChange, value],
@@ -51,8 +52,10 @@ export const CurrencyInputModal: FC<CurrencyInputModalProps> = ({
 
   const handleKeyDown = useCallback<KeyboardEventHandler<HTMLInputElement>>(
     (event) => {
+      if (!value) return;
+
       if (event.key === 'Enter') {
-        onChange?.(value || 0);
+        onChange?.(+value || null);
         handleHide?.();
       }
     },
@@ -75,7 +78,10 @@ export const CurrencyInputModal: FC<CurrencyInputModalProps> = ({
           }
           footer={
             <>
-              <button onClick={handleSave}>
+              <button
+                onClick={handleSave}
+                disabled={!value}
+                className={cn(classes.saveButton, { [classes.saveButton_disabled]: !value })}>
                 <DoneIcon style={{ width: '1em' }} />
               </button>
             </>
@@ -85,11 +91,11 @@ export const CurrencyInputModal: FC<CurrencyInputModalProps> = ({
             className={classes.input}
             onChange={handleChange}
             onKeyDown={handleKeyDown}
-            value={value}
+            value={value as any}
             {...restProps}
             max="9999999.00"
             min="0.00"
-            step="0.01"
+            step="10"
             type="number"
           />
         </ModalLayout>

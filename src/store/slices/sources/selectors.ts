@@ -36,4 +36,16 @@ export const selectors = {
       source ? source.deletingStarted && !source.deletingEnded : false,
     ),
   ),
+
+  sourcesTotal: (sourcesIdList: number[]) =>
+    createSelector(selectSourcesState, (sources) => {
+      const total = sourcesIdList.reduce((acc, id) => {
+        const source = sources.byId[id];
+        if (source && source.data?.incomes) {
+          return acc + +source.data?.incomes;
+        }
+        return acc;
+      }, 0);
+      return total;
+    }),
 };

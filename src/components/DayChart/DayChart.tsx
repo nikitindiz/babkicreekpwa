@@ -16,6 +16,8 @@ import { DayContextProvider } from 'context';
 import { FloatingAddButton } from 'components';
 import { buildDate, formatDate } from 'utils';
 import { useIsMobile } from 'utils/hooks/useIsMobile';
+import { useSelector } from 'react-redux';
+import { sources } from 'store';
 
 interface DayChartProps extends HTMLAttributes<HTMLDivElement> {
   currency: string;
@@ -63,6 +65,8 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
     const balanceIsNegative =
       (thicknessMapByDate[isoDate]?.endOfTheDayThickness || 0) < 0 &&
       (thicknessMapByDate[isoDate]?.beginningOfTheDayThickness || 0) < 0;
+
+    const sourcesTotal = useSelector(sources.selectors.sourcesTotal(day.sources || []));
 
     return (
       <DayContextProvider date={day.date}>
@@ -156,13 +160,16 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
             expensesSection={
               <div
                 className={cn(classes.spent, {
-                  [classes.spent_mobile]: mobile,
-                  [classes.spent_negative]:
+                  [classes.total_mobile]: mobile,
+                  [classes.total_negative]:
                     thicknessMapByDate[isoDate]?.endOfTheDayThickness &&
                     thicknessMapByDate[isoDate]?.endOfTheDayThickness < 0,
                 })}>
                 <FormattedNumber
-                  value={(day.moneyByTheEndOfTheDay || 0) - (prevDay?.moneyByTheEndOfTheDay || 0)}
+                  value={
+                    (day.moneyByTheEndOfTheDay || 0) -
+                    (prevDay?.moneyByTheEndOfTheDay ? prevDay?.moneyByTheEndOfTheDay : sourcesTotal)
+                  }
                   style="currency"
                   currencySign="standard"
                   minimumFractionDigits={2}

@@ -63,6 +63,11 @@
     border-radius: 0.5em;
     transition: 0.5s all;
 
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
     &:nth-child(2) {
       background-color: var(--alt-trigger);
     }
@@ -72,5 +77,3 @@
     }
   }
 }
-
-

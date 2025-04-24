@@ -1,13 +1,14 @@
-import React, { FC, HTMLAttributes, ReactNode, useCallback, useState } from 'react';
-import { FormattedMessage, FormattedNumber } from 'react-intl';
+import { FC, HTMLAttributes, ReactNode, useCallback, useState } from 'react';
+import { FormattedNumber } from 'react-intl';
 
 import { CurrencyInputModal, ButtonWithPreviewHintAndLabel } from 'components';
 
-interface CurrencyEditorProps extends Omit<HTMLAttributes<HTMLInputElement>, 'onChange'> {
+interface CurrencyEditorProps
+  extends Omit<HTMLAttributes<HTMLInputElement>, 'onChange' | 'defaultValue'> {
   currency?: string;
-  defaultValue?: number;
+  defaultValue: number | null;
   label?: ReactNode;
-  onChange?: (value: number) => void;
+  onChange?: (value: number | null) => void;
 }
 
 export const CurrencyEditor: FC<CurrencyEditorProps> = ({
@@ -28,7 +29,7 @@ export const CurrencyEditor: FC<CurrencyEditorProps> = ({
   }, []);
 
   const handleChange = useCallback(
-    (value: number) => {
+    (value: number | null) => {
       if (onChange) {
         onChange(value);
       }

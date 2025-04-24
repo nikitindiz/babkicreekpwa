@@ -4,6 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import { ModalLayout } from '../ModalLayout';
 import { Source, SourceScheduleMeta } from 'types';
 import { SourceFormContainer } from 'containers';
+import { useSelector } from 'react-redux';
+import { sourceEditor } from 'store';
 
 interface SourceModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   caption: ReactNode;
@@ -42,6 +44,8 @@ export const SourceModal: FC<SourceModalProps> = ({
   saveSource,
   ...restProps
 }) => {
+  const canSave = useSelector(sourceEditor.selectors.canSave);
+
   return (
     <ModalLayout
       className={className}
@@ -53,7 +57,7 @@ export const SourceModal: FC<SourceModalProps> = ({
               <FormattedMessage id="modal.button.delete" defaultMessage="Delete" />
             </button>
           )}
-          <button onClick={saveSource} disabled={isLoading}>
+          <button onClick={saveSource} disabled={isLoading || !canSave}>
             <FormattedMessage id="modal.button.save" defaultMessage="Save" />
           </button>
           <button onClick={closeModal} disabled={isLoading}>
