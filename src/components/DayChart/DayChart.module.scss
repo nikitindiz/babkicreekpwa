@@ -112,12 +112,16 @@
 .total {
   font-size: 0.6em;
   padding: 0.2em 0.5em;
-  opacity: 0.4;
-  font-weight: 700;
+  // opacity: 0.4;
+  font-weight: 300;
 
   text-align: right;
 
   color: var(--source-color);
+
+  &_mobile {
+    padding: 0.2em 0.5em;
+  }
 
   &_negative {
     font-size: 0.7em;
@@ -128,8 +132,8 @@
 .spent {
   font-size: 0.6em;
   padding: 0.2em 0.5em;
-  opacity: 0.4;
-  font-weight: 700;
+  // opacity: 0.4;
+  font-weight: 300;
 
   &_mobile {
     padding: 0 0.5em;

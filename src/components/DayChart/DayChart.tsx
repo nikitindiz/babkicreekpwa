@@ -1,7 +1,7 @@
 import React, { forwardRef, HTMLAttributes } from 'react';
 import cn from 'classnames';
 import moment from 'moment';
-import { FormattedNumber } from 'react-intl';
+import { FormattedNumber, useIntl } from 'react-intl';
 
 import classes from './DayChart.module.scss';
 
@@ -18,6 +18,7 @@ import { buildDate, formatDate } from 'utils';
 import { useIsMobile } from 'utils/hooks/useIsMobile';
 import { useSelector } from 'react-redux';
 import { sources } from 'store';
+import { Tooltip } from 'components/Tooltip';
 
 interface DayChartProps extends HTMLAttributes<HTMLDivElement> {
   currency: string;
@@ -67,6 +68,8 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
       (thicknessMapByDate[isoDate]?.beginningOfTheDayThickness || 0) < 0;
 
     const sourcesTotal = useSelector(sources.selectors.sourcesTotal(day.sources || []));
+
+    const intl = useIntl();
 
     return (
       <DayContextProvider date={day.date}>
@@ -147,14 +150,20 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
                     thicknessMapByDate[isoDate]?.endOfTheDayThickness &&
                     thicknessMapByDate[isoDate]?.endOfTheDayThickness < 0,
                 })}>
-                <FormattedNumber
-                  value={day.moneyByTheEndOfTheDay || 0}
-                  style="currency"
-                  currencySign="standard"
-                  minimumFractionDigits={2}
-                  maximumFractionDigits={2}
-                  currency={currency}
-                />
+                <Tooltip
+                  tooltipMessage={intl.formatMessage({
+                    id: 'tooltip.spent-in-total',
+                    defaultMessage: 'Remaining balance',
+                  })}>
+                  <FormattedNumber
+                    value={day.moneyByTheEndOfTheDay || 0}
+                    style="currency"
+                    currencySign="standard"
+                    minimumFractionDigits={2}
+                    maximumFractionDigits={2}
+                    currency={currency}
+                  />
+                </Tooltip>
               </div>
             }
             expensesSection={
@@ -165,17 +174,25 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
                     thicknessMapByDate[isoDate]?.endOfTheDayThickness &&
                     thicknessMapByDate[isoDate]?.endOfTheDayThickness < 0,
                 })}>
-                <FormattedNumber
-                  value={
-                    (day.moneyByTheEndOfTheDay || 0) -
-                    (prevDay?.moneyByTheEndOfTheDay ? prevDay?.moneyByTheEndOfTheDay : sourcesTotal)
-                  }
-                  style="currency"
-                  currencySign="standard"
-                  minimumFractionDigits={2}
-                  maximumFractionDigits={2}
-                  currency={currency}
-                />
+                <Tooltip
+                  tooltipMessage={intl.formatMessage({
+                    id: 'tooltip.spent-in-total',
+                    defaultMessage: 'Total spent',
+                  })}>
+                  <FormattedNumber
+                    value={
+                      (day.moneyByTheEndOfTheDay || 0) -
+                      (prevDay?.moneyByTheEndOfTheDay
+                        ? prevDay?.moneyByTheEndOfTheDay
+                        : sourcesTotal)
+                    }
+                    style="currency"
+                    currencySign="standard"
+                    minimumFractionDigits={2}
+                    maximumFractionDigits={2}
+                    currency={currency}
+                  />
+                </Tooltip>
               </div>
             }
           />
