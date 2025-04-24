@@ -2,6 +2,7 @@ import React, {
   ChangeEventHandler,
   FC,
   HTMLAttributes,
+  KeyboardEventHandler,
   MouseEventHandler,
   useCallback,
   useState,
@@ -48,6 +49,16 @@ export const CurrencyInputModal: FC<CurrencyInputModalProps> = ({
     [handleHide, onChange, value],
   );
 
+  const handleKeyDown = useCallback<KeyboardEventHandler<HTMLInputElement>>(
+    (event) => {
+      if (event.key === 'Enter') {
+        onChange?.(value || 0);
+        handleHide?.();
+      }
+    },
+    [handleHide, onChange, value],
+  );
+
   return (
     inputsRootElement &&
     createPortal(
@@ -73,6 +84,7 @@ export const CurrencyInputModal: FC<CurrencyInputModalProps> = ({
             autoFocus
             className={classes.input}
             onChange={handleChange}
+            onKeyDown={handleKeyDown}
             value={value}
             {...restProps}
             max="9999999.00"
