@@ -21,6 +21,7 @@ interface DayChartProps extends HTMLAttributes<HTMLDivElement> {
   currency: string;
   addButtonsVisible: boolean;
   day: Day;
+  prevDay?: Day | null;
   isoDate: string;
   noSourcesOrDrains: boolean;
   openAddDrain: () => void;
@@ -50,6 +51,7 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
       openAddSource,
       thicknessMapByDate,
       currency,
+      prevDay,
       ...restProps
     },
     ref,
@@ -133,8 +135,7 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
 
           <BalanceChangeEventContainer
             flowThickness={thicknessMapByDate[isoDate]?.endOfTheDayThickness}
-            incomesSection={<div />}
-            expensesSection={
+            incomesSection={
               <div
                 className={cn(classes.total, {
                   [classes.total_mobile]: mobile,
@@ -144,6 +145,24 @@ export const DayChart = forwardRef<HTMLDivElement, DayChartProps>(
                 })}>
                 <FormattedNumber
                   value={day.moneyByTheEndOfTheDay || 0}
+                  style="currency"
+                  currencySign="standard"
+                  minimumFractionDigits={2}
+                  maximumFractionDigits={2}
+                  currency={currency}
+                />
+              </div>
+            }
+            expensesSection={
+              <div
+                className={cn(classes.spent, {
+                  [classes.spent_mobile]: mobile,
+                  [classes.spent_negative]:
+                    thicknessMapByDate[isoDate]?.endOfTheDayThickness &&
+                    thicknessMapByDate[isoDate]?.endOfTheDayThickness < 0,
+                })}>
+                <FormattedNumber
+                  value={(day.moneyByTheEndOfTheDay || 0) - (prevDay?.moneyByTheEndOfTheDay || 0)}
                   style="currency"
                   currencySign="standard"
                   minimumFractionDigits={2}

@@ -58,7 +58,7 @@ export class BrowserDataBase extends Dexie {
   constructor() {
     super('BrowserDataBase');
 
-    this.version(3).stores({
+    this.version(4).stores({
       profiles: '++id',
       settings: '++id,profileId',
       days: '++id,date,profileId',

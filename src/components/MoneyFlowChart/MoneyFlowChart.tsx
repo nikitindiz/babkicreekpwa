@@ -20,11 +20,12 @@ export const MoneyFlowChart: FC<MoneyFlowChartProps> = ({
 }) => {
   return (
     <Layout ref={scrollRef} navigation={<NavigationContainer />}>
-      {dates.map((date) => (
+      {dates.map((date, idx) => (
         <DayChartContainer
           ref={today === date ? currentDayNodeRef : null}
           key={date}
           day={daysByDate[date]}
+          prevDay={idx > 0 ? daysByDate[dates[idx - 1]] : null}
         />
       ))}
     </Layout>

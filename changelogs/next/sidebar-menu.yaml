@@ -1,3 +1,5 @@
 type: feature
 description: |
-  Implemented a sidebar menu with export/import and user settings.
+  Sidebar menu added with export/import and user settings.
+
+  Now you can change language, time zone, currency, and adjust maximum expected volume of asset value to change chart width..

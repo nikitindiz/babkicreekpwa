@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector, useStore } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 import enMessages from './lang/en.json';
 import ruMessages from './lang/ru.json';
@@ -10,7 +10,7 @@ import { ChartScreen, CreateProfileScreen, EnterProfileScreen, LockScreen } from
 import { FadeOnMountEvents } from 'components';
 import { ScreenEnum } from 'types';
 import { db } from 'models';
-import { settings, useAppDispatch } from 'store';
+import { settings } from 'store';
 import { useScreens } from 'utils/store/hooks';
 import { currentVersion } from './currentVersion';
 import { changeLog } from './changelog';
@@ -21,7 +21,6 @@ const localizations: Record<string, typeof enMessages> = {
 };
 
 function App() {
-  const dispatch = useAppDispatch();
   const activeProfile = useSelector(settings.selectors.activeProfile);
   const { goTo, currentScreen } = useScreens();
   console.log(`BabkiCreek v${currentVersion} changlog:`, changeLog);
@@ -35,17 +34,6 @@ function App() {
 
     goTo(ScreenEnum.welcome);
   }, [activeProfile, goTo]);
-
-  (window as any).__test = () =>
-    activeProfile &&
-    dispatch(
-      settings.thunk.saveSettings({
-        profileId: activeProfile,
-        settings: {
-          language: 'en',
-        },
-      }),
-    );
 
   const language = useSelector(settings.selectors.language);
 

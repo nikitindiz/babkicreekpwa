@@ -1,0 +1,7 @@
+type: feature
+description: |
+  Implemented a total spent display for day.
+
+  Now you can see the total spent at the bottom of the right side of the chart.
+
+  Remaining balance is now displayed at the left bottom side of the chart.

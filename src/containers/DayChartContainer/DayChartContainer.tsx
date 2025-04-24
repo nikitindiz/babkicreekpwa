@@ -6,6 +6,7 @@ import { useDayChartContainer } from './useDayChartContainer';
 
 interface DayChartContainerProps extends HTMLAttributes<HTMLDivElement> {
   day: Day;
+  prevDay?: Day | null;
 }
 
 export const DayChartContainer = forwardRef<HTMLDivElement, DayChartContainerProps>(

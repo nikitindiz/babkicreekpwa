@@ -115,11 +115,33 @@
   opacity: 0.4;
   font-weight: 700;
 
+  text-align: right;
+
   &_mobile {
     padding: 0 0.5em;
   }
 
+  color: var(--source-color);
+
   &_negative {
+    font-size: 0.7em;
     color: var(--drain-color);
+  }
+}
+
+.spent {
+  font-size: 0.6em;
+  padding: 0.2em 0.5em;
+  opacity: 0.4;
+  font-weight: 700;
+
+  &_mobile {
+    padding: 0 0.5em;
+  }
+
+  color: var(--drain-color);
+
+  &_negative {
+    font-size: 0.7em;
   }
 }
