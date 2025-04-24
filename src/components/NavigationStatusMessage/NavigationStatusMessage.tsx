@@ -3,12 +3,13 @@ import { FormattedMessage } from 'react-intl';
 import cn from 'classnames';
 
 import classes from './NavigationStatusMessage.module.scss';
+import { Spinner } from '../Spinner';
 
 interface NavigationStatusMessageProps extends HTMLAttributes<HTMLDivElement> {
-  daysLoading: any;
-  newDrainCreating: any;
-  newSourceCreating: any;
-  thicknessMapLoading: any;
+  daysLoading?: boolean;
+  newDrainCreating?: boolean;
+  newSourceCreating?: boolean;
+  thicknessMapLoading?: boolean;
   someDrainIsLoading?: boolean;
   someDrainIsSaving?: boolean;
   someSourceIsLoading?: boolean;
@@ -32,6 +33,7 @@ export const NavigationStatusMessage: FC<NavigationStatusMessageProps> = ({
   ...restProps
 }) => {
   const inProgress =
+    daysLoading ||
     thicknessMapLoading ||
     newSourceCreating ||
     newDrainCreating ||
@@ -56,8 +58,8 @@ export const NavigationStatusMessage: FC<NavigationStatusMessageProps> = ({
     message = <FormattedMessage id="navigation.drains-deleting" defaultMessage="Deleting drains" />;
   }
 
-  if (someSourceIsLoading) {
-    message = <FormattedMessage id="navigation.sources-loading" defaultMessage="Loading sources" />;
+  if (someDrainIsLoading) {
+    message = <FormattedMessage id="navigation.drains-loading" defaultMessage="Loading drains" />;
   }
 
   if (someSourceIsSaving) {
@@ -98,6 +100,7 @@ export const NavigationStatusMessage: FC<NavigationStatusMessageProps> = ({
   return (
     <div
       className={cn(className, classes.container, { [classes.container_inProgress]: inProgress })}>
+      {inProgress && <Spinner size="small" className={classes.spinner} />}
       {message}
     </div>
   );

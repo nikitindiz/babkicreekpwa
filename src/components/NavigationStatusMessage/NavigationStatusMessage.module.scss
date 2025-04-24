@@ -1,17 +1,26 @@
-
 @keyframes fadeEffect {
-    0% {
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 .container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
   &_inProgress {
     animation: fadeEffect 2s linear infinite;
+    color: #ffffff;
   }
+}
+
+.spinner {
+  margin-right: 8px;
 }

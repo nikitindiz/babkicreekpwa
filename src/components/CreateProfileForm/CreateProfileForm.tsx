@@ -139,7 +139,7 @@ export const CreateProfileForm: FC<CreateProfileFormProps> = ({
           onChange={handleMaxMoneyValueChange}
         />
 
-        <button type="submit" onClick={handleCreate as any}>
+        <button style={{ marginTop: '0.5em' }} type="submit" onClick={handleCreate as any}>
           Create
         </button>
       </div>

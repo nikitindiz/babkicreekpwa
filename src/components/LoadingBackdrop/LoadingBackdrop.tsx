@@ -1,6 +1,7 @@
 import React, { FC, ReactNode, useEffect } from 'react';
 import cn from 'classnames';
 import { FormattedMessage } from 'react-intl';
+import { currentVersion } from 'src/currentVersion';
 
 import classes from './LoadingBackdrop.module.scss';
 
@@ -30,9 +31,15 @@ export const LoadingBackdrop: FC<LoadingBackdropProps> = ({ children }) => {
   return (
     <div className={cn(classes.container)}>
       <div className={classes.logo}>
-        <Logo className={classes.logoImage} />
+        <div className={classes.logoImage}>
+          <Logo />
+        </div>
+        <div className={classes.logoText}>
+          Babki Creek
+          <div className={classes.version}>v{currentVersion}</div>
+        </div>
       </div>
-      <div>
+      <div className={classes.loading}>
         <FormattedMessage id="loading-backdrop.loading-label" defaultMessage="Loading" />
         {dots}
       </div>
