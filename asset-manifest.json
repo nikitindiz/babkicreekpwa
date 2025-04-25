@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/babkicreekpwa/static/css/main.65414937.css",
-    "main.js": "/babkicreekpwa/static/js/main.5e0615af.js",
+    "main.css": "/babkicreekpwa/static/css/main.ce901fb9.css",
+    "main.js": "/babkicreekpwa/static/js/main.891c6ae3.js",
     "static/js/787.1d5dabed.chunk.js": "/babkicreekpwa/static/js/787.1d5dabed.chunk.js",
     "service-worker.js": "/babkicreekpwa/service-worker.js",
     "index.html": "/babkicreekpwa/index.html",
-    "main.65414937.css.map": "/babkicreekpwa/static/css/main.65414937.css.map",
-    "main.5e0615af.js.map": "/babkicreekpwa/static/js/main.5e0615af.js.map",
+    "main.ce901fb9.css.map": "/babkicreekpwa/static/css/main.ce901fb9.css.map",
+    "main.891c6ae3.js.map": "/babkicreekpwa/static/js/main.891c6ae3.js.map",
     "787.1d5dabed.chunk.js.map": "/babkicreekpwa/static/js/787.1d5dabed.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.65414937.css",
-    "static/js/main.5e0615af.js"
+    "static/css/main.ce901fb9.css",
+    "static/js/main.891c6ae3.js"
   ]
 }
