@@ -13,6 +13,10 @@ export const loadSettings = createAsyncThunk(
     try {
       const [settings] = await db.settings.where('profileId').equals(profileId).toArray();
 
+      if (settings.timezone) {
+        localStorage.setItem('timeZone', settings.timezone);
+      }
+
       return {
         currency: settings.currency,
         language: settings.language,

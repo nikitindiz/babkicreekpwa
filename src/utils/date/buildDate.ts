@@ -9,11 +9,13 @@ export const buildDate = (dateOrReset?: string | Date | boolean, resetClocks = t
 
   let dateMoment: moment.Moment;
 
+  let timezone = localStorage.getItem('timeZone') || moment.tz.guess();
+
   if (date) {
     if (isStandard) {
-      const realDate = moment(date, 'DD.MM.YYYY').tz(moment.tz.guess());
+      const realDate = moment(date, 'DD.MM.YYYY').tz(timezone);
 
-      dateMoment = moment().tz(moment.tz.guess());
+      dateMoment = moment().tz(timezone);
 
       dateMoment.set({
         date: realDate.date(),

@@ -22,6 +22,10 @@ export const saveSettings = createAsyncThunk(
         });
       }
 
+      if (settings.timezone) {
+        localStorage.setItem('timeZone', settings.timezone);
+      }
+
       return settings;
     } catch (e) {
       return rejectWithValue(e);
