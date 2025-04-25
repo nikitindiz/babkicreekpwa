@@ -1,7 +1,57 @@
+@property --st1-degree {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 177deg;
+}
+@property --st2-degree {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 31deg;
+}
+@property --st3-degree {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: -23deg;
+}
+
 .container {
+  --st1-degree: 177deg;
+  --st2-degree: 31deg;
+  --st3-degree: -23deg;
+
+  background: linear-gradient(white 0%, white 100%),
+    linear-gradient(var(--st1-degree), #091f00 20%, white 100%),
+    linear-gradient(var(--st2-degree), #1b2f00 20%, #abff40 100%),
+    linear-gradient(var(--st3-degree), #2f0019 28%, #ff346c 100%);
+
+  transition:
+    --st1-degree 0.5s 0.1s,
+    --st2-degree 0.5s,
+    --st3-degree 0.8s;
+
+  @keyframes gradientAnimation {
+    0% {
+      --st1-degree: 177deg;
+      --st2-degree: 31deg;
+      --st3-degree: -23deg;
+    }
+    50% {
+      --st1-degree: 100deg;
+      --st2-degree: 80deg;
+      --st3-degree: -100deg;
+    }
+    100% {
+      --st1-degree: 177deg;
+      --st2-degree: 31deg;
+      --st3-degree: -23deg;
+    }
+  }
+
   align-items: center;
   background-blend-mode: darken;
-  background: var(--lock-screen-gradient);
+  // background: var(--lock-screen-gradient);
+  animation: gradientAnimation 180s linear infinite;
+  // background-size: 200% 200%;
   bottom: 0;
   color: white;
   display: flex;

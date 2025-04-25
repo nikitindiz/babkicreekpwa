@@ -37,6 +37,11 @@
     linear-gradient(31deg, #1b2f00 20%, #abff40 100%),
     linear-gradient(-23deg, #2f0019 28%, #ff346c 100%);
 
+  --lock-screen-animated-gradient: linear-gradient(white 0%, white 100%),
+    linear-gradient(177deg, #091f00 20%, white 100%),
+    linear-gradient(31deg, #1b2f00 20%, #abff40 100%),
+    linear-gradient(-23deg, #2f0019 28%, #ff346c 100%);
+
   --lock-scree-input-label-size: 0.7em;
 }
 
