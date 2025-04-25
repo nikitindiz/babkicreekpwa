@@ -1,3 +1,4 @@
+import { da } from 'date-fns/locale';
 import moment from 'moment-timezone';
 
 export const buildDate = (dateOrReset?: string | Date | boolean, resetClocks = true) => {
@@ -9,13 +10,11 @@ export const buildDate = (dateOrReset?: string | Date | boolean, resetClocks = t
 
   let dateMoment: moment.Moment;
 
-  let timezone = localStorage.getItem('timeZone') || moment.tz.guess();
-
   if (date) {
     if (isStandard) {
-      const realDate = moment(date, 'DD.MM.YYYY').tz(timezone);
+      const realDate = moment(date, 'DD.MM.YYYY').tz(moment.tz.guess());
 
-      dateMoment = moment().tz(timezone);
+      dateMoment = moment().tz(moment.tz.guess());
 
       dateMoment.set({
         date: realDate.date(),
@@ -45,6 +44,8 @@ export const buildDate = (dateOrReset?: string | Date | boolean, resetClocks = t
       millisecond: 0,
     });
   }
+
+  dateMoment = dateMoment.add(4, 'hours');
 
   return dateMoment;
 };
