@@ -38,7 +38,7 @@ const initialState: SettingsState = {
   passwordHash,
   currency: 'USD',
   language: initialLang || 'en',
-  timezone: moment.tz.guess(),
+  timezone: null,
 
   profileSettings: initLoadableEntity(),
 };

@@ -26,7 +26,7 @@ export const findDrainsInRange = async ({
       const iteratedMoment = moment(startDateMoment).add(extraDays, 'days');
 
       acc[formatDate(iteratedMoment)] = {
-        moment: iteratedMoment,
+        moment: iteratedMoment.utc(false).startOf('day'),
       };
 
       return acc;
@@ -39,7 +39,7 @@ export const findDrainsInRange = async ({
       meta || {};
 
     return datesList.filter((today) => {
-      const todayMoment = buildDate(today);
+      const todayMoment = buildDate(today).utc(false).startOf('day');
 
       if ((todayMoment.unix() - (repeat_start || 0)) % (repeat_interval || 0) === 0) return true;
 
@@ -59,7 +59,7 @@ export const findDrainsInRange = async ({
 
   const drainMetasFromDb = await db.drainScheduleMetas
     .where('repeat_start')
-    .between(startDateMoment.unix(), Infinity)
+    .between(startDateMoment.subtract(2, 'day').unix(), Infinity)
     .and(({ profileId: dayProfileId }) => profileId === dayProfileId)
     .toArray();
 

@@ -35,7 +35,7 @@ const createSchedule = ({
   id,
   createdAt: new Date().toISOString(),
   updatedAt: '',
-  repeat_start: buildDate().unix(),
+  repeat_start: buildDate().utc().startOf('day').unix(),
   repeat_interval: null,
   repeat_year: null,
   repeat_month: null,
@@ -52,7 +52,7 @@ export const buildDrainScheduleInterval = async ({
   profileId,
   drainId,
 }: BuildDrainScheduleIntervalArgs) => {
-  const startDate = buildDate(date);
+  const startDate = buildDate(date).utc().startOf('day');
 
   const scheduleMetaStartDate = await db.drainScheduleMetas.add(
     createSchedule({

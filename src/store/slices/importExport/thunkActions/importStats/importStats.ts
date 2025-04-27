@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { RootState, settings } from 'store';
+import { RootState, settings, days as daysSlice } from 'store';
 import { db } from 'models';
 
 import { DataEncryptor } from 'utils';
@@ -12,7 +12,7 @@ interface ImportStatsArgs {
 
 export const importStats = createAsyncThunk(
   `importExport/import`,
-  async ({ exchangeDto, onDone }: ImportStatsArgs, { getState, rejectWithValue }) => {
+  async ({ exchangeDto, onDone }: ImportStatsArgs, { getState, rejectWithValue, dispatch }) => {
     const profileId = settings.selectors.activeProfile(getState() as RootState)!;
     const passwordHash = settings.selectors.passwordHash(getState() as RootState)!;
 

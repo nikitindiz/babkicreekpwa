@@ -66,11 +66,17 @@ export const useFileExchangeContainer = () => {
             importExport.thunk.importStats({
               exchangeDto: parsedFile,
               onDone: () => {
-                hide();
-                dispatch(days.actions.reset());
-                dispatch(drains.actions.reset());
-                dispatch(sources.actions.reset());
-                dispatch(days.thunk.loadDaysData(displayRange));
+                dispatch(
+                  days.thunk.fixDays({
+                    onDone: () => {
+                      hide();
+                      dispatch(days.actions.reset());
+                      dispatch(drains.actions.reset());
+                      dispatch(sources.actions.reset());
+                      dispatch(days.thunk.loadDaysData(displayRange));
+                    },
+                  }),
+                );
               },
             }),
           );

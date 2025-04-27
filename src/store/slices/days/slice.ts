@@ -6,6 +6,8 @@ import {
   checkUpdatesDaysDataReducers,
   loadDaysData,
   loadDaysDataExtraReducers,
+  fixDays,
+  fixDaysReducers,
 } from './thunkActions';
 import { selectors } from './selectors';
 import { buildDate, formatDate } from 'utils';
@@ -21,6 +23,9 @@ const initialState: DaysState = {
   },
 
   byDate: {},
+  fixDaysStarted: false,
+  fixDaysEnded: false,
+  fixDaysError: null,
 };
 
 const { reducer, actions } = createSlice({
@@ -39,6 +44,7 @@ const { reducer, actions } = createSlice({
   extraReducers: (builder: ActionReducerMapBuilder<DaysState>) => {
     loadDaysDataExtraReducers(builder);
     checkUpdatesDaysDataReducers(builder);
+    fixDaysReducers(builder);
   },
 });
 
@@ -47,6 +53,7 @@ interface DaysSlice {
   thunk: {
     loadDaysData: typeof loadDaysData;
     checkUpdatesDaysData: typeof checkUpdatesDaysData;
+    fixDays: typeof fixDays;
   };
   reducer: typeof reducer;
   selectors: typeof selectors;
@@ -57,6 +64,7 @@ export const days: DaysSlice = {
   thunk: {
     loadDaysData,
     checkUpdatesDaysData,
+    fixDays,
   },
   reducer,
   selectors,

@@ -6,7 +6,7 @@ import { useLanguage } from 'utils';
 export interface SettingsData {
   currency: string;
   language: string;
-  timezone: string;
+  timezone: string | '';
   maxMoneyValue?: number | '';
 }
 
@@ -23,7 +23,7 @@ export const useSettings = () => {
   const [localSettings, setLocalSettings] = useState<SettingsData>({
     currency,
     language,
-    timezone,
+    timezone: timezone || '',
     maxMoneyValue,
   });
 
@@ -32,7 +32,7 @@ export const useSettings = () => {
     setLocalSettings({
       currency,
       language,
-      timezone,
+      timezone: timezone || '',
       maxMoneyValue,
     });
   }, [currency, language, timezone, maxMoneyValue]);

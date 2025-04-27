@@ -42,7 +42,7 @@ export const ProfileSettingsForm: FC<ProfileSettingsFormProps> = ({
       </h2>
 
       <div className={classes.formFields}>
-        <Select
+        {/* <Select
           caption={intl.formatMessage({
             id: 'profile.settings.timezone',
             defaultMessage: 'Timezone',
@@ -51,7 +51,7 @@ export const ProfileSettingsForm: FC<ProfileSettingsFormProps> = ({
           name="timezone"
           value={timezone}
           onChange={handleTimeZoneChange}
-        />
+        /> */}
 
         <Select
           caption={intl.formatMessage({

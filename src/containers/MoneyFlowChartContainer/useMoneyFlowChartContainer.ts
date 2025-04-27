@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDebouncedCallback } from 'use-debounce';
+import moment from 'moment-timezone';
 
 import { Drain, LoadableEntity, Source } from 'types';
 import { buildDate } from 'utils';
@@ -13,6 +14,8 @@ const desktopOffset = 200;
 
 export const useMoneyFlowChartContainer = () => {
   const daysByDate = useSelector(days.selectors.byDate)!;
+  const fixDaysStarted = useSelector(days.selectors.fixDaysStarted)!;
+  const fixDaysEnded = useSelector(days.selectors.fixDaysStarted)!;
   const displayRange = useSelector(days.selectors.displayRange)!;
   const daysByDateLoadingEnded = useSelector(days.selectors.loadingEnded)!;
   const drainsById = useSelector(drains.selectors.byId);
@@ -20,6 +23,7 @@ export const useMoneyFlowChartContainer = () => {
   const { data: profileSettings } = useSelector(settings.selectors.profileSettings);
   const activeProfile = useSelector(settings.selectors.activeProfile);
   const maxMoneyValue = useSelector(settings.selectors.maxMoneyValue);
+  const timezone = useSelector(settings.selectors.timezone);
   const dates = useMemo(() => Object.keys(daysByDate).sort(), [daysByDate]);
   const mobile = useIsMobile();
 
@@ -181,10 +185,28 @@ export const useMoneyFlowChartContainer = () => {
     }
   }, [dates, daysByDate, daysByDateLoadingEnded, dispatch, drainsById, sourcesById]);
 
-  const loadDays = useCallback(
-    () => dispatch(days.thunk.loadDaysData(displayRange)),
-    [dispatch, displayRange],
-  );
+  const loadDays = useCallback(() => {
+    if (timezone && timezone === moment.tz.guess() && activeProfile) {
+      dispatch(days.thunk.loadDaysData(displayRange));
+    }
+  }, [activeProfile, dispatch, displayRange, timezone]);
+
+  const startedFix = useRef(false);
+
+  useEffect(() => {
+    if (
+      timezone &&
+      timezone !== moment.tz.guess() &&
+      activeProfile &&
+      !fixDaysStarted &&
+      !startedFix.current
+    ) {
+      startedFix.current = true;
+      console.log('Dates rebuild required', moment.tz.guess(), timezone);
+
+      dispatch(days.thunk.fixDays());
+    }
+  }, [activeProfile, dispatch, displayRange, fixDaysStarted, timezone]);
 
   useEffect(() => {
     loadDays();

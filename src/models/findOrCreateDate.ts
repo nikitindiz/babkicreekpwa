@@ -11,9 +11,6 @@ interface FindOrCreateDateArgs {
 
 export const findOrCreateDate = async ({ date, profileId, passwordHash }: FindOrCreateDateArgs) => {
   if (!date) throw new Error('No date!');
-
-  console.log('date', date, buildDate(date).unix());
-
   let [day] = await db.days
     .where('date')
     .equals(buildDate(date).unix())

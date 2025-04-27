@@ -1,4 +1,3 @@
-import { da } from 'date-fns/locale';
 import moment from 'moment-timezone';
 
 export const buildDate = (dateOrReset?: string | Date | boolean, resetClocks = true) => {
@@ -44,8 +43,6 @@ export const buildDate = (dateOrReset?: string | Date | boolean, resetClocks = t
       millisecond: 0,
     });
   }
-
-  dateMoment = dateMoment.add(4, 'hours');
 
   return dateMoment;
 };

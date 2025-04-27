@@ -149,7 +149,7 @@ export const CreateProfileForm: FC<CreateProfileFormProps> = ({
           value={repeatPassword}
         />
 
-        <Select
+        {/* <Select
           caption={intl.formatMessage({
             id: 'createProfile.timeZone',
             defaultMessage: 'Time Zone',
@@ -158,7 +158,7 @@ export const CreateProfileForm: FC<CreateProfileFormProps> = ({
           name="timeZon"
           value={timeZone}
           onChange={handleTimeZoneChange}
-        />
+        /> */}
 
         <Select
           caption={intl.formatMessage({ id: 'createProfile.language', defaultMessage: 'Language' })}

@@ -5,6 +5,10 @@ export interface DaysState {
   loadingError: unknown;
   loadingStarted: boolean;
 
+  fixDaysStarted: boolean;
+  fixDaysEnded: boolean;
+  fixDaysError: unknown;
+
   displayRange: {
     startDate: string;
     endDate: string;
