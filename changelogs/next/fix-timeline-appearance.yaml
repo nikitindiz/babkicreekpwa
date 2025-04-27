@@ -1,0 +1,3 @@
+type: improvement
+description: |
+  Timeline now don't break with import anymore. Timezone converted no automatically.
