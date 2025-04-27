@@ -50,3 +50,4 @@ export * from './WeekDaysInput';
 export * from './LeftSidebar';
 export * from './FileExchange';
 export * from './LanguageSelector';
+export * from './DeleteProfile';

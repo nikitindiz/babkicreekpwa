@@ -13,10 +13,12 @@ export const EnterProfileFormContainer: FC = () => {
     password,
     profile,
     rememberProfile,
+    retry,
   } = useEnterProfileFormContainer();
 
   return (
     <EnterProfileForm
+      retry={retry}
       dirty={dirty}
       error={error ? 'Wrong password' : undefined}
       goBack={goBack}

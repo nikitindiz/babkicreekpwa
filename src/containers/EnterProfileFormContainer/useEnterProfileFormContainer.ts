@@ -45,26 +45,27 @@ export const useEnterProfileFormContainer = () => {
     const daysData = await db.days.where({ profileId }).last();
 
     if (daysData && daysData.moneyByTheEndOfTheDay !== null) {
+      debugger;
       const dataEncryptor = new DataEncryptor({ iv: daysData.iv, salt: daysData.salt });
 
       try {
         await (
           await dataEncryptor.generateKey(passwordHash!)
         ).decodeText(daysData.moneyByTheEndOfTheDay);
+
+        const storage =
+          process.env.NODE_ENV !== 'production' || rememberProfile ? localStorage : sessionStorage;
+
+        storage.setItem('profileId', `${profile?.id!}`);
+        storage.setItem('passwordHash', passwordHash);
+
+        dispatch(settings.actions.selectProfile({ activeProfile: profile?.id!, passwordHash }));
+        goTo(ScreenEnum.chart);
       } catch (_) {
         setError('Wrong Password');
         return;
       }
     }
-
-    const storage =
-      process.env.NODE_ENV !== 'production' || rememberProfile ? localStorage : sessionStorage;
-
-    storage.setItem('profileId', `${profile?.id!}`);
-    storage.setItem('passwordHash', passwordHash);
-
-    dispatch(settings.actions.selectProfile({ activeProfile: profile?.id!, passwordHash }));
-    goTo(ScreenEnum.chart);
   };
 
   const handleEnter: FormEventHandler<HTMLFormElement> = (event) => {
@@ -72,6 +73,12 @@ export const useEnterProfileFormContainer = () => {
 
     event.preventDefault();
   };
+
+  const retry = useCallback(() => {
+    setDirty(true);
+    setError(null);
+    setPassword('');
+  }, []);
 
   useEffect(() => {
     if (!profile) {
@@ -93,5 +100,6 @@ export const useEnterProfileFormContainer = () => {
     password,
     profile,
     rememberProfile,
+    retry,
   };
 };

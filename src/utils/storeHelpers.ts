@@ -87,9 +87,21 @@ export async function rebuildMoneyByDate(
   profileId: number,
   passwordHash: string,
 ) {
+  const rebuildMoment = moment.unix(rebuildDate).startOf('day');
+  const endDate = moment().add(2, 'months').endOf('day');
+
+  // Calculate days between rebuildDate and endDate (current date + 2 months)
+  const days = endDate.diff(rebuildMoment, 'days') + 1;
+
+  console.log(
+    `Rebuilding money from ${rebuildMoment.format('YYYY-MM-DD')} to ${endDate.format(
+      'YYYY-MM-DD',
+    )} (${days} days)`,
+  );
+
   return buildMoneyByTheEndOfTheDay({
-    starting: formatDate(moment.unix(rebuildDate)),
-    days: 61,
+    starting: formatDate(rebuildMoment),
+    days,
     profileId,
     passwordHash,
   });

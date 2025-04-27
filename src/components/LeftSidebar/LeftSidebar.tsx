@@ -1,6 +1,7 @@
 import { Sidebar } from 'components';
 import { FileExchangeContainer } from 'containers/FileExchangeContainer';
 import { ProfileSettingsFormContainer } from 'containers/ProfileSettingsFormContainer';
+import { DeleteProfileContainer } from 'containers/DeleteProfileContainer';
 import { FC } from 'react';
 
 interface LeftSidebarProps {
@@ -14,6 +15,8 @@ export const LeftSidebar: FC<LeftSidebarProps> = ({ visible, onClose }) => {
       <ProfileSettingsFormContainer />
       <hr />
       <FileExchangeContainer />
+      <hr />
+      <DeleteProfileContainer />
     </Sidebar>
   );
 };
