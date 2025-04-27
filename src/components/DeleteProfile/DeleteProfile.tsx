@@ -1,6 +1,6 @@
 import { WarningIcon } from 'components/WarningIcon';
 import { FC, useState, ChangeEvent } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import classes from './DeleteProfile.module.scss';
 
@@ -13,6 +13,7 @@ export const DeleteProfile: FC<DeleteProfileProps> = ({ profileLabel, handleDele
   const [inputValue, setInputValue] = useState('');
   const expectedValue = `I want to delete ${profileLabel}`;
   const isButtonActive = inputValue === expectedValue;
+  const intl = useIntl();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -32,7 +33,10 @@ export const DeleteProfile: FC<DeleteProfileProps> = ({ profileLabel, handleDele
         <WarningIcon style={{ maxWidth: 20 }} />
       </h2>
       <p>
-        If you want to delete your profile, please type the following text in the input field:
+        <FormattedMessage
+          id="settings.delete-profile-description"
+          defaultMessage="To delete the profile, please type the following text:"
+        />
         <br />
         <br />
         <i>
@@ -43,10 +47,13 @@ export const DeleteProfile: FC<DeleteProfileProps> = ({ profileLabel, handleDele
         type="text"
         value={inputValue}
         onChange={handleInputChange}
-        placeholder="Type confirmation text here"
+        placeholder={intl.formatMessage({
+          id: 'settings.delete-profile-input-placeholder',
+          defaultMessage: 'Type the text above',
+        })}
       />
       <button onClick={handleDeleteClick} disabled={!isButtonActive}>
-        Delete
+        <FormattedMessage id="settings.delete-profile-button" defaultMessage="Delete profile" />
       </button>
     </div>
   );

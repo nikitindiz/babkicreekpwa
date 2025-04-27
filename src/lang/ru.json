@@ -60,5 +60,16 @@
   "createProfile.title": "Создать профиль",
   "enterProfile.enterAutomatically": "Входить автоматически",
   "enterProfile.password": "Пароль профиля",
-  "lock-screen.select-profile.caption": "Выберите профиль"
+  "lock-screen.select-profile.caption": "Выберите профиль",
+
+  "enterProfile.error": "Очень жаль, но пароль неверный. Попробуйте еще раз.",
+  "enterProfile.retry": "Ещё раз",
+  "enterProfile.retryWithCountdown": "Новая попытка через ({seconds}с)",
+  "profile.settings.label": "Имя профиля",
+  "profile.settings.label.placeholder": "Введите имя профиля",
+  "settings.delete-profile-caption": "Опасная зона",
+  "settings.delete-profile-description": "Чтобы удалить профиль, введите его имя в поле ниже и нажмите кнопку \"Удалить\".",
+  "settings.delete-profile-input-placeholder": "Введите текст здесь",
+  "settings.delete-profile-button": "Удалить профиль",
+  "enterProfile.enter": "Войти в профиль"
 }

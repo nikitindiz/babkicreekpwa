@@ -42,10 +42,23 @@ export const useEnterProfileFormContainer = () => {
 
     const passwordHash = await DataEncryptor.buildPasswordHash({ plainPassword: password });
 
-    const daysData = await db.days.where({ profileId }).last();
+    const daysData = await db.days
+      .where({ profileId })
+      .filter((item) => item.moneyByTheEndOfTheDay !== null)
+      .first();
+
+    const enter = () => {
+      const storage =
+        process.env.NODE_ENV !== 'production' || rememberProfile ? localStorage : sessionStorage;
+
+      storage.setItem('profileId', `${profile?.id!}`);
+      storage.setItem('passwordHash', passwordHash);
+
+      dispatch(settings.actions.selectProfile({ activeProfile: profile?.id!, passwordHash }));
+      goTo(ScreenEnum.chart);
+    };
 
     if (daysData && daysData.moneyByTheEndOfTheDay !== null) {
-      debugger;
       const dataEncryptor = new DataEncryptor({ iv: daysData.iv, salt: daysData.salt });
 
       try {
@@ -53,18 +66,14 @@ export const useEnterProfileFormContainer = () => {
           await dataEncryptor.generateKey(passwordHash!)
         ).decodeText(daysData.moneyByTheEndOfTheDay);
 
-        const storage =
-          process.env.NODE_ENV !== 'production' || rememberProfile ? localStorage : sessionStorage;
-
-        storage.setItem('profileId', `${profile?.id!}`);
-        storage.setItem('passwordHash', passwordHash);
-
-        dispatch(settings.actions.selectProfile({ activeProfile: profile?.id!, passwordHash }));
-        goTo(ScreenEnum.chart);
+        enter();
       } catch (_) {
         setError('Wrong Password');
         return;
       }
+    } else {
+      // User never entered any data
+      enter();
     }
   };
 

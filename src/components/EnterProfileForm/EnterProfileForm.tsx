@@ -87,10 +87,15 @@ export const EnterProfileForm: FC<EnterProfileFormProps> = ({
               type="button"
               onClick={retry}
               disabled={retryCountdown > 0}>
-              <FormattedMessage
-                id="enterProfile.retry"
-                defaultMessage={retryCountdown > 0 ? `Retry (${retryCountdown}s)` : 'Retry'}
-              />
+              {retryCountdown > 0 ? (
+                <FormattedMessage
+                  id="enterProfile.retryWithCountdown"
+                  defaultMessage="Retry ({seconds}s)"
+                  values={{ seconds: retryCountdown }}
+                />
+              ) : (
+                <FormattedMessage id="enterProfile.retry" defaultMessage="Retry" />
+              )}
             </button>
           </div>
         </div>
@@ -127,7 +132,7 @@ export const EnterProfileForm: FC<EnterProfileFormProps> = ({
           </label>
 
           <button className={classes.enterButton} type="submit" disabled={!dirty}>
-            Enter
+            <FormattedMessage id="enterProfile.enter" defaultMessage="Enter profile" />
           </button>
         </div>
       )}
