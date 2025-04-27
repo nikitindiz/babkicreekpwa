@@ -11,10 +11,12 @@ interface ProfileSettingsFormProps {
   language: string;
   timezone: string;
   maxMoneyValue: number | string;
+  label?: string; // Add profile label property
   handleCurrencyChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   handleLanguageChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   handleTimeZoneChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   handleMaxMoneyValueChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleLabelChange?: (event: React.ChangeEvent<HTMLInputElement>) => void; // Add label change handler
   handleSave: () => void;
   isLoading?: boolean;
   isDirty?: boolean;
@@ -25,10 +27,12 @@ export const ProfileSettingsForm: FC<ProfileSettingsFormProps> = ({
   language,
   timezone,
   maxMoneyValue,
+  label = '',
   handleCurrencyChange,
   handleLanguageChange,
   handleTimeZoneChange,
   handleMaxMoneyValueChange,
+  handleLabelChange,
   handleSave,
   isLoading = false,
   isDirty = false,
@@ -42,6 +46,24 @@ export const ProfileSettingsForm: FC<ProfileSettingsFormProps> = ({
       </h2>
 
       <div className={classes.formFields}>
+        {/* Profile label input */}
+        {handleLabelChange && (
+          <TextInput
+            caption={intl.formatMessage({
+              id: 'profile.settings.label',
+              defaultMessage: 'Profile Name',
+            })}
+            name="label"
+            type="text"
+            value={label}
+            onChange={handleLabelChange}
+            placeholder={intl.formatMessage({
+              id: 'profile.settings.label.placeholder',
+              defaultMessage: 'Enter profile name',
+            })}
+          />
+        )}
+
         {/* <Select
           caption={intl.formatMessage({
             id: 'profile.settings.timezone',
@@ -89,7 +111,7 @@ export const ProfileSettingsForm: FC<ProfileSettingsFormProps> = ({
         />
       </div>
 
-      <button onClick={handleSave} disabled={isLoading || !isDirty}>
+      <button onClick={handleSave} disabled={isLoading || !isDirty || !label}>
         <FormattedMessage id="modal.button.save" defaultMessage="Save" />
       </button>
     </div>
