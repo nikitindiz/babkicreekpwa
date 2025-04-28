@@ -12,6 +12,8 @@ import { useIsMobile } from 'utils/hooks/useIsMobile';
 const mobileOffset = 100;
 const desktopOffset = 200;
 
+const isDevelopment = process.env.NODE_ENV !== 'production';
+
 export const useMoneyFlowChartContainer = () => {
   const daysByDate = useSelector(days.selectors.byDate)!;
   const fixDaysStarted = useSelector(days.selectors.fixDaysStarted)!;
@@ -21,7 +23,11 @@ export const useMoneyFlowChartContainer = () => {
   const drainsById = useSelector(drains.selectors.byId);
   const sourcesById = useSelector(sources.selectors.byId);
   const { data: profileSettings } = useSelector(settings.selectors.profileSettings);
-  const activeProfile = useSelector(settings.selectors.activeProfile);
+
+  const rememberProfile = localStorage.getItem('rememberProfile') === 'true';
+  const storage = isDevelopment || rememberProfile ? localStorage : sessionStorage;
+  const activeProfile = parseInt(storage.getItem('profileId') || '0', 10) || null;
+
   const maxMoneyValue = useSelector(settings.selectors.maxMoneyValue);
   const timezone = useSelector(settings.selectors.timezone);
   const dates = useMemo(() => Object.keys(daysByDate).sort(), [daysByDate]);

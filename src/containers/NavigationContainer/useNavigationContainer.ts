@@ -17,6 +17,8 @@ export const useNavigationContainer = () => {
 
     storage.removeItem('profileId');
     storage.removeItem('passwordHash');
+    storage.removeItem('rememberProfile');
+    storage.removeItem('timeZone');
 
     dispatch(settingsSlice.actions.reset());
     dispatch(days.actions.reset());

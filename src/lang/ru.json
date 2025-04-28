@@ -24,7 +24,7 @@
   "loading-backdrop.loading-label": "Загрузка",
   "navigation.header": "График финансов",
   "data-exchange.title": "Обмен данными",
-  "drainChart.negativeBalance": "Внимание! Ваш баланс отрицательным после этого\u00a0расхода.",
+  "drainChart.negativeBalance": "Баланс уходит\u00a0в\u00a0минус!",
   "fileExchange.confirmImport": "Вы уверены, что хотите импортировать данные? Это перезапишет все имеющиеся в профиле записи!",
   "navigation.days-loading": "Загрузка статистики за дни",
   "navigation.drains-deleting": "Удаление расходов",

@@ -24,7 +24,7 @@
   "currency-editor.income.label": "Income",
   "currency-editor.modal.default-caption": "Enter asset volume",
   "data-exchange.title": "Data exchange",
-  "drainChart.negativeBalance": "Warning! Your balance is negative after this spending.",
+  "drainChart.negativeBalance": "Balance is going negative!",
   "enterProfile.enter": "Enter profile",
   "enterProfile.enterAutomatically": "Stay signed in",
   "enterProfile.error": "Sorry, but the password you have entered is wrong",
