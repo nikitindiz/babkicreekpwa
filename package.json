@@ -2,7 +2,12 @@
   "name": "babki-creek-2",
   "version": "0.0.14",
   "private": true,
-  "homepage": "https://nikitindiz.github.io/babkicreekpwa",
+  "homepage": "https://github.com/nikitindiz/babkicreekpwa",
+  "author": {
+    "name": "Aleksandr Nikitin",
+    "email": "nikitindiz@gmail.com"
+  },
+  "license": "SEE LICENSE IN LICENSE.md",
   "dependencies": {
     "@craco/craco": "^7.1.0",
     "@reduxjs/toolkit": "^1.9.7",
