@@ -1,4 +1,6 @@
-# Babki Creek PWA
+# <img src="assets/babki-creek-logo.svg" width="55" style="display: inline-block; position: relative; bottom: -12px; margin: 0 -5px 0 -10px"/> Babki Creek PWA
+
+App available at https://nikitindiz.github.io/babkicreekpwa/
 
 A Progressive Web Application for personal finance management that visualizes your money flow over time, making budget tracking intuitive and simple.
 
