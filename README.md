@@ -89,7 +89,7 @@ description: |
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License with UI elements disclaimer - see the LICENSE file for details.
 
 ## About Babki Creek
 

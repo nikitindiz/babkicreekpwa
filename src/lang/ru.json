@@ -68,7 +68,7 @@
   "profile.settings.label": "Имя профиля",
   "profile.settings.label.placeholder": "Введите имя профиля",
   "settings.delete-profile-caption": "Опасная зона",
-  "settings.delete-profile-description": "Чтобы удалить профиль, введите его имя в поле ниже и нажмите кнопку \"Удалить\".",
+  "settings.delete-profile-description": "Чтобы удалить профиль, введите данную строку в поле ниже:",
   "settings.delete-profile-input-placeholder": "Введите текст здесь",
   "settings.delete-profile-button": "Удалить профиль",
   "enterProfile.enter": "Войти в профиль"

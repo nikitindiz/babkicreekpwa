@@ -94,7 +94,7 @@ export const useCreateProfileFormContainer = () => {
 
   const createProfile = async () => {
     const profile: Partial<Profile> = {
-      label,
+      label: label.trim(),
       createdAt: new Date().toISOString(),
       updatedAt: '',
       hint,

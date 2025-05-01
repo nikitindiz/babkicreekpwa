@@ -12,7 +12,7 @@ interface DeleteProfileProps {
 export const DeleteProfile: FC<DeleteProfileProps> = ({ profileLabel, handleDeleteProfile }) => {
   const [inputValue, setInputValue] = useState('');
   const expectedValue = `I want to delete ${profileLabel}`;
-  const isButtonActive = inputValue === expectedValue;
+  const isButtonActive = inputValue.trim() === expectedValue.trim();
   const intl = useIntl();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
