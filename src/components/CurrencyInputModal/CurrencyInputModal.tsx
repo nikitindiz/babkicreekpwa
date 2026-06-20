@@ -33,30 +33,30 @@ export const CurrencyInputModal: FC<CurrencyInputModalProps> = ({
 }) => {
   const inputsRootElement = document.getElementById('inputs');
 
-  const [value, setValue] = useState(defaultValue || '');
+  const [value, setValue] = useState<string>(
+    defaultValue != null && defaultValue !== 0 ? String(defaultValue) : '',
+  );
 
   const handleChange = useCallback<ChangeEventHandler<HTMLInputElement>>(({ target }) => {
-    let value: number | string = parseFloat(target.value);
-
-    if (!value || isNaN(value)) value = '';
-
-    setValue(value);
+    const raw = target.value.replace(/,/g, '.');
+    if (raw === '' || /^\d*\.?\d*$/.test(raw)) {
+      setValue(raw);
+    }
   }, []);
 
-  const handleSave = useCallback<MouseEventHandler<HTMLButtonElement>>(
-    ({ target }) => {
-      onChange?.(+value || null);
-      handleHide?.();
-    },
-    [handleHide, onChange, value],
-  );
+  const handleSave = useCallback<MouseEventHandler<HTMLButtonElement>>(() => {
+    const num = parseFloat(value);
+    onChange?.(isNaN(num) ? null : num);
+    handleHide?.();
+  }, [handleHide, onChange, value]);
 
   const handleKeyDown = useCallback<KeyboardEventHandler<HTMLInputElement>>(
     (event) => {
       if (!value) return;
 
       if (event.key === 'Enter') {
-        onChange?.(+value || null);
+        const num = parseFloat(value);
+        onChange?.(isNaN(num) ? null : num);
         handleHide?.();
       }
     },
@@ -104,7 +104,7 @@ export const CurrencyInputModal: FC<CurrencyInputModalProps> = ({
             max="9999999.00"
             min="0.00"
             step="10"
-            type="number"
+            type="text"
           />
         </ModalLayout>
       </Modal>,
