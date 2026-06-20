@@ -1,0 +1,8 @@
+const changes = [
+  {
+    "type": "bugfix",
+    "description": "Fixed decimal separator input in Safari: comma is now accepted as a decimal separator in the currency input field.\n"
+  }
+];
+
+export default changes;
